@@ -1,0 +1,1 @@
+import{a as r,b as i}from"./chunk-MNCRUE4M.js";function u(o){let t=[...o];for(let n=t.length-1;n>0;n--){let e=Math.floor(Math.random()*(n+1));[t[n],t[e]]=[t[e],t[n]]}return t}function s(o){return o.target.value}function p(o){let t=u(o.options.map((n,e)=>e));return i(r({},o),{options:t.map(n=>o.options[n]),correct:t.indexOf(o.correct)})}export{u as a,s as b,p as c};

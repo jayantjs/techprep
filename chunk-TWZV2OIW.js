@@ -1,0 +1,1 @@
+var n=[{id:"hi",label:"\u0939\u093F\u0928\u094D\u0926\u0940",boxTitle:"Aasaan bhasha mein",htmlLang:"hi-Latn"},{id:"en",label:"English",boxTitle:"In simple words",htmlLang:"en"},{id:"bn",label:"\u09AC\u09BE\u0982\u09B2\u09BE",boxTitle:"\u09B8\u09B9\u099C \u09AD\u09BE\u09B7\u09BE\u09AF\u09BC",htmlLang:"bn"}],e=Object.fromEntries(n.map(a=>[a.id,a]));export{n as a,e as b};
