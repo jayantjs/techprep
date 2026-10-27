@@ -1,0 +1,67 @@
+<header class="page-head">
+  <div>
+    <h1>Flashcards</h1>
+    <p class="muted">Answer out loud first, then flip. Keys: <kbd>Space</kbd> flip · <kbd>1</kbd> knew it · <kbd>2</kbd> revise · <kbd>→</kbd> skip</p>
+  </div>
+</header>
+
+<div class="filters">
+  <select class="input" [value]="topic()" (change)="topic.set(inputValue($event)); build()" aria-label="Topic">
+    <option value="all" [selected]="topic() === 'all'">All topics</option>
+    @for (t of topics(); track t.id) {
+      <option [value]="t.id" [selected]="topic() === t.id">{{ t.title }}</option>
+    }
+  </select>
+  <label class="check">
+    <input type="checkbox" [checked]="onlyUnknown()" (change)="onlyUnknown.set(!onlyUnknown()); build()" />
+    Skip questions I already know
+  </label>
+  <button type="button" class="btn" (click)="build()">↻ Shuffle</button>
+</div>
+
+@if (deck().length === 0) {
+  <div class="empty">
+    <p>No cards here — you know them all! 🎉</p>
+    <a class="btn btn-primary" routerLink="/quiz">Try the quiz</a>
+  </div>
+} @else if (done()) {
+  <div class="result-card">
+    <p class="eyebrow">Deck complete</p>
+    <p class="result-score">{{ knewCount() }} / {{ deck().length }}</p>
+    <p class="muted">cards you knew</p>
+    <div class="hero-actions">
+      <button type="button" class="btn btn-primary" (click)="build()">Go again</button>
+      <a class="btn" routerLink="/practice" >Review answers</a>
+    </div>
+  </div>
+} @else if (current(); as card) {
+  <div class="deck-progress">
+    <span>Card {{ index() + 1 }} of {{ deck().length }}</span>
+    <div class="bar"><div class="bar-fill" [style.width.%]="pct()"></div></div>
+  </div>
+
+  <div class="flashcard" [class.is-flipped]="flipped()" (click)="flipped.set(true)">
+    <div class="fc-meta">
+      <span class="badge" [attr.data-level]="card.difficulty">{{ card.difficulty }}</span>
+      <span class="q-topic">{{ topicMap[card.topic].title }}</span>
+    </div>
+    <h2 class="fc-question">{{ card.question }}</h2>
+    @if (flipped()) {
+      <div class="q-body fc-answer">
+        <app-answer [question]="card" />
+      </div>
+    } @else {
+      <p class="fc-hint">Tap to reveal the answer</p>
+    }
+  </div>
+
+  <div class="fc-actions">
+    @if (flipped()) {
+      <button type="button" class="btn btn-known" (click)="answer('known')">✓ I knew it</button>
+      <button type="button" class="btn btn-review" (click)="answer('review')">↻ Revise later</button>
+    } @else {
+      <button type="button" class="btn btn-primary" (click)="flipped.set(true)">Show answer</button>
+    }
+    <button type="button" class="btn btn-ghost" (click)="answer()">Skip →</button>
+  </div>
+}

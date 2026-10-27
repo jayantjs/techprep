@@ -1,0 +1,135 @@
+@switch (phase()) {
+  @case ('setup') {
+    <header class="page-head">
+      <div>
+        <h1>Quiz</h1>
+        <p class="muted">
+          Multiple-choice questions with explanations for <strong>{{ levelName(progress.experience()) }}</strong>.
+          Options are shuffled every time.
+        </p>
+      </div>
+    </header>
+
+    <a class="kbc-promo" routerLink="/kbc">
+      <span class="kbc-promo-icon">🏆</span>
+      <span>
+        <strong>Play KBC mode</strong>
+        <small>Who Will Be a Crorepati? Climb from ₹1,000 to ₹1 Crore with lifelines and a timer.</small>
+      </span>
+      <span class="kbc-promo-cta">Play ▶</span>
+    </a>
+
+    <div class="panel">
+      <label class="field">
+        <span>Topic</span>
+        <select class="input" [value]="topic()" (change)="topic.set(inputValue($event))">
+          <option value="all" [selected]="topic() === 'all'">All {{ trackTitle() }} topics ({{ pool().length }})</option>
+          @for (t of topics(); track t.id) {
+            <option [value]="t.id" [selected]="topic() === t.id">{{ t.title }}</option>
+          }
+        </select>
+      </label>
+      <div class="field">
+        <span>Number of questions</span>
+        <div class="chips">
+          @for (c of counts; track c) {
+            <button type="button" class="chip" [class.is-active]="count() === c" (click)="count.set(c)">
+              {{ c || 'All' }}
+            </button>
+          }
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" [disabled]="!quizSize()" (click)="start()">
+        Start quiz · {{ quizSize() }} questions
+      </button>
+    </div>
+
+    @if (progress.quizHistory().length) {
+      <h2>Recent attempts</h2>
+      <ul class="history">
+        @for (r of progress.quizHistory().slice(0, 5); track r.date) {
+          <li>
+            <span>{{ topicName(r.topic, r.track) }} <small class="muted">· {{ levelName(r.experience) }}</small></span>
+            <span class="muted">{{ r.date | date: 'd MMM, h:mm a' }}</span>
+            <strong>{{ r.score }}/{{ r.total }}</strong>
+          </li>
+        }
+      </ul>
+    }
+  }
+
+  @case ('play') {
+    @if (current(); as q) {
+      <div class="deck-progress">
+        <span>Question {{ index() + 1 }} of {{ questions().length }}</span>
+        <span class="muted">Score: {{ score() }}</span>
+        <div class="bar"><div class="bar-fill" [style.width.%]="((index() + 1) / questions().length) * 100"></div></div>
+      </div>
+
+      <div class="panel">
+        <span class="q-topic">{{ topicMap[q.topic].title }}</span>
+        <h2 class="quiz-question">{{ q.question }}</h2>
+        <div class="options">
+          @for (option of q.options; track $index; let i = $index) {
+            <button
+              type="button"
+              class="option"
+              [class.is-correct]="selected() !== undefined && i === q.correct"
+              [class.is-wrong]="selected() === i && i !== q.correct"
+              [disabled]="selected() !== undefined"
+              (click)="choose(i)"
+            >
+              <span class="option-letter">{{ letters[i] }}</span>
+              {{ option }}
+            </button>
+          }
+        </div>
+
+        @if (selected() !== undefined) {
+          <div class="explanation" [class.is-correct]="selected() === q.correct">
+            <strong>{{ selected() === q.correct ? 'Correct!' : 'Not quite.' }}</strong>
+            {{ q.explanation }}
+          </div>
+          <button type="button" class="btn btn-primary" (click)="next()">
+            {{ isLast() ? 'See result' : 'Next question →' }}
+          </button>
+        }
+      </div>
+    }
+  }
+
+  @case ('result') {
+    <div class="result-card">
+      <p class="eyebrow">{{ topicName(topic(), progress.track()) }} · {{ levelName(progress.experience()) }}</p>
+      <p class="result-score">{{ score() }} / {{ questions().length }}</p>
+      <p class="muted">
+        {{ pct() }}% —
+        @if (pct() >= 80) {
+          Interview ready! 🚀
+        } @else if (pct() >= 50) {
+          Good, revise the mistakes below.
+        } @else {
+          Keep practicing — read the topics again.
+        }
+      </p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" (click)="start()">Retry</button>
+        <button type="button" class="btn" (click)="phase.set('setup')">New quiz</button>
+      </div>
+    </div>
+
+    @if (mistakes().length) {
+      <h2>Review your mistakes</h2>
+      <div class="q-list">
+        @for (m of mistakes(); track m.q.id) {
+          <div class="panel mistake">
+            <h3>{{ m.q.question }}</h3>
+            <p class="text-wrong">Your answer: {{ m.q.options[m.chosen] }}</p>
+            <p class="text-known">Correct: {{ m.q.options[m.q.correct] }}</p>
+            <p class="muted">{{ m.q.explanation }}</p>
+          </div>
+        }
+      </div>
+    }
+  }
+}

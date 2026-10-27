@@ -1,0 +1,2138 @@
+import { Question } from './models';
+
+/** Questions transcribed from the handwritten DocScanner notes, in their original order. */
+export const NOTES_QUESTIONS: Question[] = [
+  {
+    id: 'nt-p1-1',
+    level: 'fresher',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 1,
+    notePage: 1,
+    simple: {
+      hi: 'Pehle har cheez haath se karni padti thi, jaise ghar ki har light ka switch alag-alag jaake dabana. Framework ek smart remote jaisa hai jo data badalte hi screen ko apne aap update kar deta hai. Isse badi app bhi saaf-suthri aur aasaan rehti hai.',
+      en: 'Earlier, developers did everything by hand, like walking to every light switch in the house one by one. A framework is like a smart remote that updates the screen by itself whenever the data changes. This keeps even a big app neat and easy to manage.',
+      bn: 'আগে সব কাজ হাতে করতে হতো, যেন বাড়ির প্রতিটা লাইটের সুইচ আলাদা আলাদা গিয়ে টিপতে হচ্ছে। Framework হলো একটা স্মার্ট রিমোটের মতো, যা data বদলালেই স্ক্রিন নিজে থেকে আপডেট করে দেয়। এতে বড় অ্যাপও গোছানো আর সহজ থাকে।',
+    },
+    question: 'Why were client-side frameworks introduced?',
+    answer: 'Client-side frameworks were introduced to handle the growing complexity of modern web applications. Earlier, with plain JavaScript or jQuery, developers had to manually update the DOM, which became messy and hard to maintain as applications grew. Frameworks like Angular and React solved this by:',
+    points: [
+      'Supporting Single Page Applications (SPAs) for smooth, fast user experiences without full page reloads.',
+      'Providing features like two-way data binding (Angular) or virtual DOM (React) to keep UI and data in sync automatically.',
+      'Offering a component-based architecture so code is reusable, organized and easier to maintain.',
+    ],
+  },
+  {
+    id: 'nt-p1-2',
+    level: 'fresher',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 2,
+    notePage: 1,
+    simple: {
+      hi: 'SPA ek magic notebook jaisa hai jisme sirf ek hi page hai. Naya kuch dekhna ho to page palatna nahi padta, usi page par likha hua badal jaata hai. Isliye sab kuch jaldi aur smooth lagta hai.',
+      en: 'An SPA is like a magic notebook with only one page. To see something new you don\'t turn the page; the writing on the same page simply changes. That is why everything feels fast and smooth.',
+      bn: 'SPA হলো একটা জাদুর খাতার মতো, যেখানে শুধু একটাই পাতা আছে। নতুন কিছু দেখতে পাতা উল্টাতে হয় না, একই পাতার লেখা বদলে যায়। তাই সবকিছু দ্রুত আর মসৃণ লাগে।',
+    },
+    question: 'What are Single Page Applications (SPAs)?',
+    answer: 'Single Page Applications (SPAs) are web applications that load a single HTML page once and dynamically update the content using JavaScript. This approach enables faster interactions and a smoother, more consistent user experience.',
+    points: [
+      'Dynamically updates content without reloading the entire page.',
+      'Provides faster performance and a seamless user experience.',
+    ],
+  },
+  {
+    id: 'nt-p2-3',
+    level: 'fresher',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 3,
+    notePage: 2,
+    simple: {
+      hi: 'Template ek drawing ka outline jaisa hai jo batata hai ki screen par kya aur kahan dikhega. Ye outline ya to component ke andar hi likh sakte ho (inline) ya alag HTML file mein (templateUrl). Angular is outline ko dekh kar asli screen bana deta hai.',
+      en: 'A template is like the outline of a drawing that says what will appear on the screen and where. You can write this outline inside the component itself (inline) or in a separate HTML file (templateUrl). Angular looks at the outline and draws the real screen.',
+      bn: 'Template হলো একটা ছবির আউটলাইনের মতো, যা বলে দেয় স্ক্রিনে কী আর কোথায় দেখা যাবে। এই আউটলাইন component-এর ভেতরেই লেখা যায় (inline) অথবা আলাদা HTML ফাইলে (templateUrl)। Angular এই আউটলাইন দেখে আসল স্ক্রিন বানিয়ে দেয়।',
+    },
+    question: 'What are templates in Angular?',
+    answer: 'A template is a kind of HTML that instructs Angular about how to display a component. An Angular HTML template, like conventional HTML, produces a view or user interface in the browser, but with far more capabilities. The Angular API evaluates the HTML template of a component, creates HTML and renders it. There are two ways to create a template in an Angular component: inline template and linked template.',
+    points: [
+      'Inline template: the component decorator\'s template config is used to specify an inline HTML template for a component. The template will be wrapped inside single or double quotes.',
+      'Linked template: a component may include an HTML template in a separate HTML file. The templateUrl option is used to indicate the path of the HTML template file.',
+    ],
+    correction: 'Multi-line inline templates are normally written inside backticks (template literals), not just single or double quotes.',
+  },
+  {
+    id: 'nt-p2-4',
+    level: 'junior',
+    topic: 'performance',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 4,
+    notePage: 2,
+    simple: {
+      hi: 'AOT ek tiffin jaisa hai jo ghar se hi pakaa kar diya jaata hai. School mein bas khol ke kha lo, wahan khana banana nahi padta. Waise hi app pehle se compile hokar aati hai, isliye browser mein jaldi khulti hai.',
+      en: 'AOT is like a lunchbox that is cooked at home in advance. At school you just open it and eat; nobody has to cook there. In the same way the app comes already compiled, so it opens quickly in the browser.',
+      bn: 'AOT হলো বাড়ি থেকে আগেই রান্না করে দেওয়া টিফিনের মতো। স্কুলে শুধু খুলে খেয়ে নাও, সেখানে রান্না করতে হয় না। তেমনি অ্যাপ আগে থেকেই compile হয়ে আসে, তাই browser-এ তাড়াতাড়ি খোলে।',
+    },
+    question: 'What is an AOT compiler?',
+    answer: 'The AOT (Ahead of Time) compiler in Angular compiles Angular HTML and TypeScript code into efficient JavaScript before the browser downloads and runs the app. This makes the application load faster, reduces runtime errors and improves overall performance compared to JIT (Just in Time) compilation, which happens in the browser.',
+  },
+  {
+    id: 'nt-p3-5',
+    level: 'junior',
+    topic: 'performance',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 5,
+    notePage: 3,
+    simple: {
+      hi: 'JIT matlab restaurant mein order dene ke baad khana banna, thoda wait karna padta hai. AOT matlab khana pehle se ready, aate hi mil jaata hai. Production ke liye AOT hi best hai.',
+      en: 'JIT is like a restaurant cooking food only after you order, so you wait a bit. AOT is like the food being ready before you arrive, so you get it at once. For production, AOT is the best choice.',
+      bn: 'JIT মানে রেস্টুরেন্টে অর্ডার দেওয়ার পর রান্না হওয়া, একটু অপেক্ষা করতে হয়। AOT মানে খাবার আগে থেকেই তৈরি, পৌঁছাতেই পেয়ে যাও। Production-এর জন্য AOT-ই সবচেয়ে ভালো।',
+    },
+    question: 'How many types of compilation does Angular provide?',
+    answer: 'Angular provides two types of compilation: JIT (Just in Time) compilation and AOT (Ahead of Time) compilation.',
+    points: [
+      'JIT: happens at runtime in the browser.',
+      'JIT: compiles the Angular application in the browser as it loads.',
+      'JIT: faster development builds but slower performance in production.',
+      'AOT: happens during the build phase before the application is run.',
+      'AOT: compiles the application into efficient JavaScript code ahead of time, which leads to faster loading and better performance.',
+      'AOT: recommended for production builds.',
+    ],
+    correction: 'Since Angular 9 (Ivy), AOT is the default for both development and production builds, so JIT is rarely used for dev builds anymore.',
+  },
+  {
+    id: 'nt-p3-6',
+    level: 'fresher',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 6,
+    notePage: 3,
+    simple: {
+      hi: 'Component ek LEGO block jaisa hai. Har block ka apna shape (HTML template), apna rang (CSS) aur apna dimaag (TypeScript class) hota hai. Chhote-chhote blocks jod kar poori app banti hai.',
+      en: 'A component is like a LEGO block. Each block has its own shape (HTML template), its own colour (CSS) and its own brain (TypeScript class). You join small blocks to build the whole app.',
+      bn: 'Component হলো একটা LEGO ব্লকের মতো। প্রতিটা ব্লকের নিজের আকার (HTML template), নিজের রং (CSS) আর নিজের মাথা (TypeScript class) থাকে। ছোট ছোট ব্লক জুড়ে পুরো অ্যাপ তৈরি হয়।',
+    },
+    question: 'What is a component in Angular?',
+    answer: 'A component is a fundamental building block of Angular applications. It controls a part of the user interface and manages the data and logic for that section. Components are used to create reusable UI elements and define the structure and behavior of the app.',
+  },
+  {
+    id: 'nt-p4-7',
+    level: 'fresher',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 7,
+    notePage: 4,
+    simple: {
+      hi: '@Component ek naam-tag aur ID card jaisa hai jo class ko batata hai \'tum ek component ho\'. Card par likha hota hai ki tumhara tag kya hai (selector), tumhari drawing kahan hai (template) aur kapde kaise hain (styles). Is card ke bina Angular class ko pehchanta hi nahi.',
+      en: '@Component is like a name tag and ID card that tells a class \'you are a component\'. The card says what your tag is (selector), where your drawing is (template) and how you dress (styles). Without this card Angular does not recognise the class.',
+      bn: '@Component হলো একটা নাম-ট্যাগ আর আইডি কার্ডের মতো, যা class-কে বলে \'তুমি একটা component\'। কার্ডে লেখা থাকে তোমার ট্যাগ কী (selector), তোমার ছবি কোথায় (template) আর জামাকাপড় কেমন (styles)। এই কার্ড ছাড়া Angular class-টাকে চিনতেই পারে না।',
+    },
+    question: 'Explain the purpose of the @Component decorator in Angular.',
+    answer: 'The @Component decorator serves the following purposes:',
+    points: [
+      'Defining the component: it designates a class as an Angular component and provides metadata about the component.',
+      'Template association: links the component with its HTML template, defining the view.',
+      'Style binding: associates the component with its CSS styles to encapsulate and manage styling.',
+      'Selector definition: defines a custom HTML tag (selector) that represents the component in the application.',
+      'Dependency injection configuration: specifies the providers for the component, providing dependency injection.',
+    ],
+  },
+  {
+    id: 'nt-p4-8',
+    level: 'fresher',
+    topic: 'architecture',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 8,
+    notePage: 4,
+    simple: {
+      hi: 'Module ek school bag ke alag-alag pocket jaisa hai. Ek pocket mein books, ek mein pencil box, ek mein tiffin, taaki sab cheez sahi jagah mile. Waise hi module related components, pipes aur services ko ek saath rakhta hai.',
+      en: 'A module is like the separate pockets of a school bag. One pocket has books, one has the pencil box, one has the lunchbox, so everything is easy to find. In the same way a module keeps related components, pipes and services together.',
+      bn: 'Module হলো স্কুল ব্যাগের আলাদা আলাদা পকেটের মতো। এক পকেটে বই, এক পকেটে পেন্সিল বক্স, এক পকেটে টিফিন, যাতে সব জিনিস ঠিক জায়গায় পাওয়া যায়। তেমনি module সম্পর্কিত components, pipes আর services একসাথে রাখে।',
+    },
+    question: 'What is a module in Angular?',
+    answer: 'A module is a logical unit of the application that groups related components, directives, pipes and services. It helps organize and manage the application by encapsulating functionality into cohesive blocks.',
+    code: `@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}`,
+    correction: 'New projects have been generated standalone since Angular 17, and standalone is the default since v19 — so new apps bootstrap with bootstrapApplication() and do not need an AppModule.',
+  },
+  {
+    id: 'nt-p5-9',
+    level: 'fresher',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 9,
+    notePage: 5,
+    simple: {
+      hi: 'Angular CLI ek helpful robot jaisa hai jise tum chhote commands bolte ho. \'ng new\' bolo to naya project bana deta hai, \'ng serve\' bolo to app chala deta hai. Isse bahut saara haath ka kaam bach jaata hai.',
+      en: 'The Angular CLI is like a helpful robot that you give short commands to. Say \'ng new\' and it makes a new project; say \'ng serve\' and it runs the app. It saves you a lot of manual work.',
+      bn: 'Angular CLI হলো একটা সাহায্যকারী রোবটের মতো, যাকে তুমি ছোট ছোট command দাও। \'ng new\' বললে নতুন project বানিয়ে দেয়, \'ng serve\' বললে অ্যাপ চালিয়ে দেয়। এতে অনেক হাতের কাজ বেঁচে যায়।',
+    },
+    question: 'What is the Angular CLI?',
+    answer: 'Angular CLI (Command Line Interface) is a powerful tool that helps automate and streamline the development process for Angular applications. It provides a set of commands for creating, managing and building Angular projects. Common Angular CLI commands include:',
+    points: [
+      'ng new: creates a new Angular project.',
+      'ng serve: serves the application locally.',
+      'ng generate: generates components, services and more.',
+      'ng build: builds the application for production.',
+    ],
+  },
+  {
+    id: 'nt-p5-10',
+    level: 'junior',
+    topic: 'templates',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 10,
+    notePage: 5,
+    simple: {
+      hi: 'Directive ek sticker jaisa hai jo kisi bhi element par chipka do to usme naya power aa jaata hai. Jaise \'appHoverBackground\' sticker lagao to mouse le jaane par uska rang badal jaata hai. Element wahi rehta hai, bas uska behaviour badal jaata hai.',
+      en: 'A directive is like a sticker: stick it on any element and the element gets a new power. For example, put the \'appHoverBackground\' sticker on it and its colour changes when the mouse moves over it. The element stays the same; only its behaviour changes.',
+      bn: 'Directive হলো একটা স্টিকারের মতো, যেকোনো element-এ লাগালে তাতে নতুন ক্ষমতা আসে। যেমন \'appHoverBackground\' স্টিকার লাগালে মাউস নিয়ে গেলে তার রং বদলে যায়। Element একই থাকে, শুধু তার আচরণ বদলায়।',
+    },
+    question: 'What is a directive in Angular?',
+    answer: 'Directives are special markers on a DOM element that tell Angular to do something to that DOM element or its children. Directives are used to extend HTML functionality by adding behavior to elements, such as manipulating their attributes or styling.',
+    code: `import { Directive, ElementRef, Renderer2, HostListener, Input } from '@angular/core';
+
+@Directive({
+  selector: '[appHoverBackground]'
+})
+export class HoverBackgroundDirective {
+  @Input('appHoverBackground') hoverColor: string;
+
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  @HostListener('mouseenter') onMouseEnter() {
+    this.changeBackgroundColor(this.hoverColor || 'yellow');
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    this.changeBackgroundColor(null);
+  }
+
+  private changeBackgroundColor(color: string) {
+    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', color);
+  }
+}`,
+    correction: 'Modern Angular prefers input() signals and the host property in the decorator over @Input/@HostListener, and directives are standalone by default.',
+  },
+  {
+    id: 'nt-p6-11',
+    level: 'fresher',
+    topic: 'di',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 11,
+    notePage: 6,
+    simple: {
+      hi: 'Service ek school ki library jaisi hai. Har class (component) ko apni alag books kharidni nahi padti, sab ek hi library se le lete hain. Waise hi data aur logic ek service mein rehta hai aur sab components use share karte hain.',
+      en: 'A service is like the school library. Each class (component) doesn\'t have to buy its own books; everyone borrows from the same library. In the same way data and logic live in one service and all components share it.',
+      bn: 'Service হলো স্কুলের লাইব্রেরির মতো। প্রতিটা ক্লাসকে (component) নিজের বই কিনতে হয় না, সবাই একই লাইব্রেরি থেকে নেয়। তেমনি data আর logic একটা service-এ থাকে আর সব components তা share করে।',
+    },
+    question: 'What is a service in Angular?',
+    answer: 'A service is a class that encapsulates reusable logic, which can be shared across different components of an Angular application. Services are typically used for data fetching, business logic and other operations that need to be shared.',
+    code: `import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+@Injectable({ providedIn: 'root' })
+export class DataService {
+  private dataSubject = new BehaviorSubject<any>(null);
+  data$ = this.dataSubject.asObservable();
+
+  constructor(private http: HttpClient) {}
+
+  fetchData(): Observable<any> {
+    return this.http.get('https://api.example.com/data').pipe(
+      tap((data) => this.dataSubject.next(data)));
+  }
+
+  getData(): Observable<any> {
+    return this.data$;
+  }
+}`,
+  },
+  {
+    id: 'nt-p7-12',
+    level: 'fresher',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 12,
+    notePage: 7,
+    simple: {
+      hi: 'Two-way binding ek walkie-talkie jaisa hai. Tum bolo to dost sun leta hai, dost bole to tum sun lete ho. Waise hi component badle to screen badalti hai, aur screen par kuch type karo to component bhi badal jaata hai.',
+      en: 'Two-way binding is like a walkie-talkie. When you speak your friend hears, and when your friend speaks you hear. In the same way, when the component changes the screen changes, and when you type on the screen the component changes too.',
+      bn: 'Two-way binding হলো একটা ওয়াকি-টকির মতো। তুমি বললে বন্ধু শোনে, বন্ধু বললে তুমি শোনো। তেমনি component বদলালে স্ক্রিন বদলায়, আর স্ক্রিনে কিছু টাইপ করলে component-ও বদলে যায়।',
+    },
+    question: 'Explain two-way data binding in Angular.',
+    answer: 'Two-way data binding in Angular is a mechanism that allows synchronization of data between the model (component class) and the view (template). It ensures that changes in the model are reflected in the view and vice versa, automatically updating both when either one is modified.',
+    code: `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-user-input',
+  templateUrl: './user-input.component.html',
+  styleUrls: ['./user-input.component.css']
+})
+export class UserInputComponent {
+  userInput: string = '';
+  updateInput(value: string) {
+    this.userInput = value;
+  }
+}`,
+    correction: 'The example never shows [(ngModel)] in a template; in modern Angular two-way binding can also use model() signals with the [( )] syntax.',
+  },
+  {
+    id: 'nt-p8-13',
+    level: 'fresher',
+    topic: 'lifecycle',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 13,
+    notePage: 8,
+    simple: {
+      hi: 'Lifecycle hooks ek bachche ki zindagi ke khaas din jaise hain: janam din, school badalna, aur vidaai. ngOnInit janam par chalta hai, ngOnChanges jab kuch badalta hai, aur ngOnDestroy jaane se pehle. Har moment par tum apna kaam karwa sakte ho.',
+      en: 'Lifecycle hooks are like the special days in a child\'s life: birthday, changing school and saying goodbye. ngOnInit runs at birth, ngOnChanges runs when something changes, and ngOnDestroy runs just before leaving. At each moment you can get your own work done.',
+      bn: 'Lifecycle hooks হলো একটা বাচ্চার জীবনের বিশেষ দিনগুলোর মতো: জন্মদিন, স্কুল বদলানো আর বিদায়। ngOnInit জন্মের সময় চলে, ngOnChanges কিছু বদলালে, আর ngOnDestroy চলে যাওয়ার আগে। প্রতিটা মুহূর্তে তুমি নিজের কাজ করিয়ে নিতে পারো।',
+    },
+    question: 'What are Angular lifecycle hooks?',
+    answer: 'Angular lifecycle hooks are methods that allow developers to tap into key moments in a component\'s lifecycle. Key hooks include ngOnInit (called once when the component is initialized), ngOnChanges (called when input properties change) and ngOnDestroy (called before Angular destroys the component).',
+  },
+  {
+    id: 'nt-p8-14',
+    level: 'fresher',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 14,
+    notePage: 8,
+    simple: {
+      hi: 'AngularJS ek purani cycle jaisa hai aur Angular ek nayi electric scooter. Dono tumhe le jaate hain, par scooter (Angular) zyada tez, mazboot aur naye tools (TypeScript, components) ke saath aata hai. Isliye aaj naye project Angular mein bante hain.',
+      en: 'AngularJS is like an old bicycle and Angular is like a new electric scooter. Both take you places, but the scooter (Angular) is faster, stronger and comes with new tools (TypeScript, components). That is why new projects are built with Angular today.',
+      bn: 'AngularJS হলো একটা পুরনো সাইকেলের মতো আর Angular একটা নতুন ইলেকট্রিক স্কুটার। দুটোই তোমাকে নিয়ে যায়, কিন্তু স্কুটার (Angular) বেশি দ্রুত, মজবুত আর নতুন tools (TypeScript, components) নিয়ে আসে। তাই আজকাল নতুন project Angular-এ তৈরি হয়।',
+    },
+    question: 'What is the difference between Angular and AngularJS?',
+    answer: 'Angular and AngularJS differ in architecture, language, mobile support, performance and data binding. The notes compare them in a two-column table (Angular vs AngularJS):',
+    points: [
+      'Architecture: Angular is component-based; AngularJS uses MVC (Model-View-Controller).',
+      'Language: Angular uses TypeScript; AngularJS uses JavaScript.',
+      'Mobile: Angular is designed with mobile support; AngularJS has limited mobile support.',
+      'Performance: Angular has higher performance with AOT compilation; AngularJS is relatively slower due to dynamic compilation.',
+      'Data binding: Angular has two-way data binding with reactive forms and observables; AngularJS has two-way data binding with scopes and watchers.',
+    ],
+  },
+  {
+    id: 'nt-p9-15',
+    level: 'fresher',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 15,
+    notePage: 9,
+    simple: {
+      hi: 'Data binding ek dhaage jaisa hai jo do kathputliyon ko jodta hai. Ek hilti hai to doosri bhi turant hilti hai. Waise hi model aur view jude rehte hain, user kuch likhe to turant dikh jaata hai.',
+      en: 'Data binding is like a string tying two puppets together. When one moves, the other moves at once. In the same way the model and the view stay connected, so whatever the user types shows up immediately.',
+      bn: 'Data binding হলো দুটো পুতুলকে জোড়া একটা সুতোর মতো। একটা নড়লে অন্যটাও সঙ্গে সঙ্গে নড়ে। তেমনি model আর view জোড়া থাকে, user কিছু লিখলে সঙ্গে সঙ্গে দেখা যায়।',
+    },
+    question: 'What is data binding in AngularJS?',
+    answer: 'Data binding in Angular provides a function which helps us have an almost real-time reflection of the input given by the user, i.e. it creates a connection between the model and the view.',
+  },
+  {
+    id: 'nt-p9-16',
+    level: 'fresher',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 16,
+    notePage: 9,
+    simple: {
+      hi: 'One-way binding ek TV jaisa hai: TV bolta hai, tum sirf sunte ho. Two-way binding phone call jaisa hai: dono taraf se baat hoti hai. Jab sirf dikhana ho to one-way, aur jab user se input lena ho to two-way.',
+      en: 'One-way binding is like a TV: the TV talks and you only listen. Two-way binding is like a phone call: both sides talk. Use one-way when you only need to show data, and two-way when you need input from the user.',
+      bn: 'One-way binding হলো টিভির মতো: টিভি বলে, তুমি শুধু শোনো। Two-way binding হলো ফোন কলের মতো: দুই দিক থেকেই কথা হয়। শুধু দেখাতে হলে one-way, আর user-এর থেকে input নিতে হলে two-way।',
+    },
+    question: 'What are the differences between one-way binding and two-way binding?',
+    answer: 'In Angular, both one-way and two-way data binding are supported. Angular provides mechanisms for both types of binding based on the use case. The notes compare them in a two-column table:',
+    points: [
+      'One-way: data flows in one direction (from component to view or vice versa). Two-way: data flows in both directions (from component to view and vice versa).',
+      'One-way: unidirectional (either component -> view or view -> component). Two-way: bidirectional (component <-> view).',
+      'One-way: simpler to implement as it handles data in one direction only. Two-way: more complex, as it involves synchronization between the view and the component.',
+      'One-way: used when the view only needs to display data or when the component updates based on view changes. Two-way: used when you want to reflect changes in the model immediately to the view and vice versa.',
+      'Syntax: one-way uses {{ message }} or [property]="value"; two-way uses [(ngModel)]="value".',
+    ],
+  },
+  {
+    id: 'nt-p10-17',
+    level: 'fresher',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 17,
+    notePage: 10,
+    simple: {
+      hi: 'Interpolation ek khaali jagah wale form jaisa hai: \'Mera naam ___ hai\'. {{ }} wo khaali jagah hai jisme Angular sahi value bhar deta hai. Value badle to likha hua bhi apne aap badal jaata hai.',
+      en: 'Interpolation is like a fill-in-the-blank form: \'My name is ___\'. {{ }} is the blank where Angular fills in the right value. When the value changes, the text changes by itself.',
+      bn: 'Interpolation হলো শূন্যস্থান পূরণের ফর্মের মতো: \'আমার নাম ___\'। {{ }} হলো সেই ফাঁকা জায়গা যেখানে Angular সঠিক value বসিয়ে দেয়। Value বদলালে লেখাও নিজে থেকে বদলে যায়।',
+    },
+    question: 'What is string interpolation in Angular?',
+    answer: 'String interpolation is a technique used to bind data from the model (JavaScript) to the view (HTML) by embedding expressions within double curly braces {{ }}. It allows you to insert dynamic values or variables into the HTML content, making the view update automatically when the model changes.',
+    code: `<div>{{ message }}</div>`,
+  },
+  {
+    id: 'nt-p10-18',
+    level: 'junior',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 18,
+    notePage: 10,
+    simple: {
+      hi: 'Directive ek magic stamp jaisa hai jo tum alag-alag jagah laga sakte ho: naye tag par, attribute par, class par, ya component ke roop mein. Jahan bhi stamp lagta hai, wahan Angular kuch khaas kaam karta hai.',
+      en: 'A directive is like a magic stamp you can put in different places: as a new tag, as an attribute, as a class, or as a component. Wherever the stamp goes, Angular does something special there.',
+      bn: 'Directive হলো একটা জাদুর স্ট্যাম্পের মতো, যা তুমি আলাদা আলাদা জায়গায় লাগাতে পারো: নতুন ট্যাগে, attribute-এ, class-এ বা component হিসেবে। যেখানেই স্ট্যাম্প লাগে, সেখানে Angular বিশেষ কিছু কাজ করে।',
+    },
+    question: 'How many types of directives are available in AngularJS?',
+    answer: 'There are four kinds of directives in AngularJS; those are described below:',
+    points: [
+      'Element directives.',
+      'Attribute directives.',
+      'CSS class directives.',
+      'Component directives.',
+    ],
+    correction: 'In AngularJS the four directive kinds are element, attribute, CSS class and comment directives (the notes cross out \'Comment\' and write \'Component\'); in modern Angular directives are grouped as components, attribute and structural directives.',
+  },
+  {
+    id: 'nt-p11-20',
+    level: 'mid',
+    topic: 'di',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 20,
+    notePage: 11,
+    simple: {
+      hi: 'Factory ek cookie banane wali machine jaisi hai. Machine mein recipe daalo, wo cookie bana kar de deti hai, aur ye cookie app mein kahin bhi use ho sakti hai. Controller, service ya filter, sab ise le sakte hain.',
+      en: 'A factory is like a cookie-making machine. You put in the recipe, it makes the cookie and hands it over, and that cookie can be used anywhere in the app. A controller, service or filter can all take it.',
+      bn: 'Factory হলো একটা কুকি বানানোর মেশিনের মতো। মেশিনে রেসিপি দাও, সে কুকি বানিয়ে দেয়, আর সেই কুকি অ্যাপের যেকোনো জায়গায় ব্যবহার করা যায়। Controller, service বা filter সবাই এটা নিতে পারে।',
+    },
+    question: 'What is the factory method in AngularJS?',
+    answer: 'The AngularJS factory method makes the development process of AngularJS applications more robust. A factory is a simple function that allows us to add some logic to a created object and return the created object.',
+    points: [
+      'The factory is also used to create/return a function in the form of reusable code which can be used anywhere within the application.',
+      'Whenever we create an object using a factory, it always returns a new instance for the object.',
+      'The object returned by the factory can be integrated (injectable) with different components of the AngularJS framework such as controller, service, filter or directive.',
+    ],
+    correction: 'AngularJS factories are singletons: the factory function runs once and the same returned object is shared, so it does not return a new instance on every injection.',
+  },
+  {
+    id: 'nt-p11-21',
+    level: 'mid',
+    topic: 'change-detection',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 21,
+    notePage: 11,
+    simple: {
+      hi: 'Digest cycle ek teacher jaisa hai jo baar-baar attendance register check karta hai ki kuch badla to nahi. Agar kuch badla mila to board par turant update kar deta hai. Zarurat ho to tum $apply() bol kar khud bhi check karwa sakte ho.',
+      en: 'The digest cycle is like a teacher who keeps checking the attendance register to see if anything changed. If something changed, the teacher updates the board right away. If needed, you can call $apply() to ask for a check yourself.',
+      bn: 'Digest cycle হলো এমন একজন শিক্ষকের মতো, যিনি বারবার হাজিরা খাতা দেখেন কিছু বদলেছে কিনা। কিছু বদলালে সঙ্গে সঙ্গে বোর্ডে আপডেট করে দেন। দরকার হলে তুমি $apply() ডেকে নিজেও চেক করাতে পারো।',
+    },
+    question: 'What is the digest cycle in AngularJS?',
+    answer: 'The digest cycle in AngularJS is a process where Angular compares the current and previous value of the scope model to check for changes. If changes are detected, Angular updates the view. The cycle is triggered automatically after an event like a user action, HTTP request or model change, and it ensures that the view stays in sync with the model. It can also be manually triggered using $apply().',
+  },
+  {
+    id: 'nt-p12-22',
+    level: 'junior',
+    topic: 'di',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 22,
+    notePage: 12,
+    simple: {
+      hi: 'DI ek restaurant jaisa hai: tum khud khana nahi banate, waiter la kar de deta hai. Waise hi component khud service nahi banata, Angular use la kar de deta hai. Isse kaam saaf rehta hai aur testing aasaan hoti hai.',
+      en: 'DI is like a restaurant: you don\'t cook the food yourself, the waiter brings it to you. In the same way a component doesn\'t create the service itself; Angular brings it in. This keeps the work clean and makes testing easier.',
+      bn: 'DI হলো রেস্টুরেন্টের মতো: তুমি নিজে রান্না করো না, ওয়েটার এনে দেয়। তেমনি component নিজে service বানায় না, Angular এনে দেয়। এতে কাজ পরিষ্কার থাকে আর testing সহজ হয়।',
+    },
+    question: 'What is dependency injection in Angular?',
+    answer: 'Dependency Injection (DI) in Angular is a design pattern where services or objects are provided to components or other services rather than being created within them. It allows for better modularity, testability and management of dependencies. Angular\'s DI framework automatically injects required services into components, making it easier to manage and maintain the application.',
+  },
+  {
+    id: 'nt-p12-23',
+    level: 'fresher',
+    topic: 'di',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 23,
+    notePage: 12,
+    simple: {
+      hi: 'Service banana ek naya helper hire karne jaisa hai. Tum us par @Injectable ka badge lagate ho taaki Angular use pehchane aur zarurat par kisi ko bhi bhej sake. CLI se \'ng generate service\' bolo to ye kaam jaldi ho jaata hai.',
+      en: 'Creating a service is like hiring a new helper. You give it an @Injectable badge so Angular recognises it and can send it to anyone who needs it. With the CLI, \'ng generate service\' does this quickly.',
+      bn: 'Service বানানো হলো একজন নতুন সাহায্যকারী নিয়োগ করার মতো। তুমি তাকে @Injectable ব্যাজ পরাও, যাতে Angular তাকে চেনে আর দরকারে যে কারো কাছে পাঠাতে পারে। CLI-তে \'ng generate service\' বললে এই কাজ তাড়াতাড়ি হয়ে যায়।',
+    },
+    question: 'How do you create a service in Angular?',
+    answer: 'A service can be created using the Angular CLI or manually by creating a class decorated with @Injectable(). Example: creating a data fetching service.',
+    code: `import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataFetchingService {
+  private apiUrl = 'https://api.example.com/data';
+  constructor(private http: HttpClient) {}
+  fetchData(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
+}`,
+  },
+  {
+    id: 'nt-p13-24',
+    level: 'fresher',
+    topic: 'routing',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 24,
+    notePage: 13,
+    simple: {
+      hi: 'Router ek building ki lift jaisa hai. Tum button dabate ho (URL), aur lift tumhe sahi floor (component) par le jaati hai, poori building badle bina. Waise hi page reload kiye bina sahi screen dikh jaati hai.',
+      en: 'The router is like a lift in a building. You press a button (URL) and the lift takes you to the right floor (component) without changing the whole building. In the same way the right screen appears without reloading the page.',
+      bn: 'Router হলো একটা বিল্ডিংয়ের লিফটের মতো। তুমি বোতাম টেপো (URL), আর লিফট তোমাকে ঠিক তলায় (component) নিয়ে যায়, পুরো বিল্ডিং না বদলে। তেমনি পেজ reload না করেই ঠিক স্ক্রিন দেখা যায়।',
+    },
+    question: 'What is the Angular Router?',
+    answer: 'The Angular Router is a library that enables navigation between different views or pages in a Single Page Application (SPA). It allows developers to define routes, handle URL changes and load components dynamically based on the route, providing a smooth and efficient user experience without page reloads.',
+  },
+  {
+    id: 'nt-p13-25',
+    level: 'junior',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 25,
+    notePage: 13,
+    simple: {
+      hi: 'Scope ek ghar ke kamre jaisa hai. Kamre ke andar rakhi cheezein sirf us kamre wale log dekh aur use kar sakte hain. Naye Angular mein ye kaam component ki apni state karti hai.',
+      en: 'Scope is like a room in a house. The things kept inside the room can be seen and used only by the people in that room. In modern Angular, the component\'s own state does this job.',
+      bn: 'Scope হলো বাড়ির একটা ঘরের মতো। ঘরের ভেতরে রাখা জিনিস শুধু সেই ঘরের লোকেরাই দেখতে আর ব্যবহার করতে পারে। নতুন Angular-এ এই কাজটা component-এর নিজের state করে।',
+    },
+    question: 'What is scope in Angular?',
+    answer: 'In Angular, scope refers to the environment or context in which variables, expressions and functions are evaluated. It determines the visibility and accessibility of these variables within different parts of the application, particularly in relation to the component\'s templates and controller.',
+    points: [
+      'Note: In Angular 2+ (modern Angular), the term scope is no longer used. It is replaced by component state and data binding.',
+    ],
+  },
+  {
+    id: 'nt-p13-26',
+    level: 'fresher',
+    topic: 'routing',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 26,
+    notePage: 13,
+    simple: {
+      hi: 'Routing ek post office jaisa hai jo har chitthi ko address dekh kar sahi ghar bhejta hai. Agar address galat ho to chitthi \'pata nahi mila\' counter (wildcard ** route) par jaati hai. Ye counter sabse aakhir mein hona chahiye, warna saari chitthiyan wahin chali jaayengi.',
+      en: 'Routing is like a post office that sends each letter to the right house by reading its address. If the address is wrong, the letter goes to the \'address not found\' counter (the wildcard ** route). This counter must be the last one, or every letter would end up there.',
+      bn: 'Routing হলো একটা পোস্ট অফিসের মতো, যা ঠিকানা দেখে প্রতিটা চিঠি ঠিক বাড়িতে পাঠায়। ঠিকানা ভুল হলে চিঠি \'ঠিকানা পাওয়া যায়নি\' কাউন্টারে (wildcard ** route) যায়। এই কাউন্টার সবার শেষে থাকতে হবে, নাহলে সব চিঠি সেখানেই চলে যাবে।',
+    },
+    question: 'What is routing in Angular? What is the purpose of a wildcard route?',
+    answer: 'Routing in Angular allows navigation between different components/views in a Single Page Application (SPA) without reloading the page. The wildcard route (**) is used to handle invalid or unknown URLs.',
+    points: [
+      'The wildcard route must be last in the routes array, otherwise it will catch any route.',
+    ],
+    code: `const routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent }
+];
+
+// wildcard route
+const routes = [
+  { path: 'home', component: HomeComponent },
+  { path: '**', component: NotFoundComponent }
+];`,
+  },
+  {
+    id: 'nt-p14-1',
+    level: 'junior',
+    topic: 'fundamentals',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 1,
+    notePage: 14,
+    simple: {
+      hi: 'Socho tumhare paas ek asli drawing board hai (Real DOM). Jab kuch badalta hai, Angular poora board dobara nahi banata, sirf woh hissa mita kar naya banata hai jo badla hai (change detection). Aur har component ke rang-roop ek alag dabbe mein rehte hain taaki doosron mein na mil jayein (encapsulation).',
+      en: 'Imagine a real drawing board (the Real DOM). When something changes, Angular does not redraw the whole board, it only erases and redraws the part that changed (change detection). And each component keeps its colours and style in its own box so they do not mix with others (encapsulation).',
+      bn: 'ধরো তোমার কাছে একটা আসল ড্রয়িং বোর্ড আছে (Real DOM)। কিছু বদলালে Angular পুরো বোর্ড আবার আঁকে না, শুধু যে অংশটা বদলেছে সেটা মুছে নতুন করে আঁকে (change detection)। আর প্রতিটা component-এর রং আর স্টাইল নিজের আলাদা বাক্সে থাকে, যাতে অন্যদের সাথে মিশে না যায় (encapsulation)।',
+    },
+    question: 'What type of DOM is used in Angular?',
+    answer: 'Angular uses the Real DOM (Document Object Model). The change detection mechanism is used to update only the affected parts of the DOM when data changes, improving performance. In addition, Angular uses a Shadow DOM for encapsulation, which helps isolate the styles and behaviour of a component.',
+    points: [
+      'Real DOM: updates the entire DOM when changes occur.',
+      'Change Detection: optimizes updates to only the parts of the DOM that need re-rendering.',
+      'Shadow DOM: provides component style and behaviour encapsulation.',
+    ],
+    correction: 'By default Angular uses emulated style encapsulation, not a real Shadow DOM (that only happens with ViewEncapsulation.ShadowDom).',
+  },
+  {
+    id: 'nt-p14-2',
+    level: 'fresher',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 2,
+    notePage: 14,
+    simple: {
+      hi: 'Bootstrap ek ready-made kapdon ki dukaan jaisa hai. Ya toh tum kapde ghar le aao aur almari mein rakh lo (npm se install), ya phir har baar dukaan se seedha pehen lo (CDN link). Dono tarike se tumhari app sundar dikhti hai.',
+      en: 'Bootstrap is like a shop of ready-made clothes. Either you bring the clothes home and keep them in your cupboard (install with npm), or you wear them straight from the shop every time (CDN link). Both ways your app looks nice.',
+      bn: 'Bootstrap হলো রেডিমেড জামাকাপড়ের দোকানের মতো। হয় তুমি জামা বাড়ি এনে আলমারিতে রাখো (npm দিয়ে install), নয়তো প্রতিবার দোকান থেকে সরাসরি পরে নাও (CDN link)। দুই ভাবেই তোমার অ্যাপ সুন্দর দেখায়।',
+    },
+    question: 'In how many ways can Bootstrap be embedded in Angular?',
+    answer: 'Bootstrap can be added in two ways. Using npm (recommended): install Bootstrap via npm and import it into the angular.json file under the \'styles\' and \'scripts\' arrays. Using a CDN (Content Delivery Network): instead of installing Bootstrap locally, you can link to Bootstrap\'s CSS and JS files directly from a CDN in your index.html file.',
+    points: [
+      'Using npm (recommended): npm install bootstrap, then add it to the \'styles\' and \'scripts\' arrays in angular.json.',
+      'Using a CDN: link Bootstrap\'s CSS and JS files directly in index.html.',
+    ],
+    code: `npm install bootstrap`,
+  },
+  {
+    id: 'nt-p15-3',
+    level: 'fresher',
+    topic: 'communication',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 3,
+    notePage: 15,
+    simple: {
+      hi: 'Socho papa (parent component) apne bachche (child component) ko tiffin dete hain. Papa tiffin haath se dete hain (@Input), aur bachcha kuch chahiye toh awaaz lagata hai (@Output). Agar poore ghar ko cheez chahiye toh woh fridge mein rakhi jaati hai jahan se sab le sakte hain (service).',
+      en: 'Imagine a dad (parent component) giving a lunchbox to his kid (child component). Dad hands it over directly (@Input), and when the kid needs something he calls out (@Output). If the whole family needs something, it is kept in the fridge where everyone can take it (service).',
+      bn: 'ধরো বাবা (parent component) তার বাচ্চাকে (child component) টিফিন দিচ্ছেন। বাবা হাতে হাতে টিফিন দেন (@Input), আর বাচ্চার কিছু লাগলে সে ডাক দেয় (@Output)। পুরো বাড়ির কিছু লাগলে সেটা ফ্রিজে রাখা হয়, যেখান থেকে সবাই নিতে পারে (service)।',
+    },
+    question: 'How can you pass data between components in Angular?',
+    answer: 'Data can be passed between components using the @Input and @Output decorators, services, or router state. The example shows passing data from a parent component to a child component using the @Input decorator.',
+    points: [
+      'Ways to share data: @Input/@Output decorators, services, router state.',
+      'Example: parent passes \'parentData\' to the child through the [childData] property binding.',
+    ],
+    code: `// child.component.ts
+import {Component, Input} from '@angular/core';
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+
+// child.component.html
+<div>
+  <p>Data from Parent: {{childData}}</p>
+</div>
+
+// parent.component.ts
+import {Component} from '@angular/core';
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html',
+  styleUrls: ['./parent.component.css']
+})
+export class ParentComponent {
+  parentData: string = 'Hello from Parent Component';
+}
+
+// parent.component.html
+<div>
+  <app-child [childData]="parentData"></app-child>
+</div>
+
+// app.module.ts
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {ParentComponent} from './parent/parent.component';
+import {ChildComponent} from './child/child.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ParentComponent,
+    ChildComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}`,
+    correction: 'In modern Angular components are standalone by default (no NgModule declarations needed) and the input()/output() functions are preferred over @Input/@Output.',
+  },
+  {
+    id: 'nt-p16-4',
+    level: 'junior',
+    topic: 'routing',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 4,
+    notePage: 16,
+    simple: {
+      hi: 'Lazy loading ek school bag jaisa hai jismein tum sirf aaj ke period ki kitaabein rakhte ho, poori saal ki nahi. Bag halka rehta hai aur tum jaldi school pahunch jaate ho. Jab kisi aur kitaab ki zaroorat ho, tab use le lete ho.',
+      en: 'Lazy loading is like a school bag where you pack only today\'s books, not the whole year\'s. The bag stays light and you reach school quickly. When you need another book, you fetch it then.',
+      bn: 'Lazy loading হলো এমন একটা স্কুল ব্যাগের মতো যেখানে তুমি শুধু আজকের ক্লাসের বই রাখো, সারা বছরের নয়। ব্যাগ হালকা থাকে আর তুমি তাড়াতাড়ি স্কুলে পৌঁছে যাও। অন্য বই দরকার হলে তখন নিয়ে নাও।',
+    },
+    question: 'Explain lazy loading in Angular.',
+    answer: 'Lazy loading in Angular is a technique used to improve the performance of an application by loading feature modules only when they are needed, rather than loading all modules upfront. This reduces the initial load and speeds up the startup time of the application.',
+    correction: 'Modern Angular lazy-loads standalone components with loadComponent/loadChildren in routes and @defer blocks in templates, so NgModules are not required.',
+  },
+  {
+    id: 'nt-p16-5',
+    level: 'mid',
+    topic: 'architecture',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 5,
+    notePage: 16,
+    simple: {
+      hi: 'Ek restaurant socho. Kitchen (Model) mein khaana banta hai, table (View) par customer baithta hai, aur waiter (ViewModel) dono ke beech order aur khaana le jaata hai. Customer ko kitchen mein jaana nahi padta, waiter sab sambhal leta hai.',
+      en: 'Think of a restaurant. Food is made in the kitchen (Model), the customer sits at the table (View), and the waiter (ViewModel) carries orders and food between them. The customer never has to enter the kitchen, the waiter handles everything.',
+      bn: 'একটা রেস্টুরেন্টের কথা ভাবো। রান্নাঘরে (Model) খাবার তৈরি হয়, টেবিলে (View) কাস্টমার বসে, আর ওয়েটার (ViewModel) দুজনের মাঝে অর্ডার আর খাবার নিয়ে যায়। কাস্টমারকে রান্নাঘরে যেতে হয় না, ওয়েটার সব সামলে নেয়।',
+    },
+    question: 'What is MVVM architecture in Angular?',
+    answer: 'MVVM (Model-View-ViewModel) is a software architecture pattern that is commonly used in Angular applications, providing a clean separation of concerns between different components of an application. This ensures that changes in one part of the application (like in the logic or data) do not directly affect or interfere with the user interface.',
+    points: [
+      'Diagram: View <-> ViewModel <-> Model. View sends \'UI Events\' to the ViewModel; ViewModel sends \'Property changed events\' and \'ViewModel data\' back to the View. ViewModel sends \'update\' and \'Read\' to the Model; Model sends \'Model changed events\' to the ViewModel.',
+      'Model: represents the application\'s data and logic.',
+      'Model: the part of the application that manages the state; it can be composed of services, APIs or even simple objects.',
+      'Model: in Angular, the Model can be represented by services or interfaces that fetch data from a database or API and expose methods for interacting with that data.',
+      'View: represents the UI (user interface) elements that the user interacts with, such as buttons, inputs, forms etc.',
+      'View: in Angular, the view is typically defined using HTML and CSS and is tied to the template of a component.',
+      'View: listens for changes in the ViewModel and displays updated data to the user.',
+      'ViewModel: the key part of MVVM in Angular. It acts as a bridge between the Model and the View.',
+      'ViewModel: holds the data and the logic needed to present the Model\'s data in a way that the View can easily display.',
+      'ViewModel: represented by the component in Angular, which binds the data and defines the behaviour that will be reflected in the View.',
+      'Angular\'s two-way data binding (via ngModel) allows the ViewModel to automatically synchronize with the View, enabling automatic updates when data changes.',
+    ],
+  },
+  {
+    id: 'nt-p18-6',
+    level: 'fresher',
+    topic: 'lifecycle',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 6,
+    notePage: 18,
+    simple: {
+      hi: 'Component ki zindagi ek paudhe jaisi hai. Beej boya (ngOnInit), paani diya toh badla (ngOnChanges), roz dekhbhaal hui (ngDoCheck), phool khile (ngAfterViewInit), aur aakhir mein paudha hataya (ngOnDestroy). Har hook ek khaas pal hai jab tum kuch kar sakte ho.',
+      en: 'A component\'s life is like a plant. You plant the seed (ngOnInit), it changes when watered (ngOnChanges), it is checked every day (ngDoCheck), flowers bloom (ngAfterViewInit), and finally the plant is removed (ngOnDestroy). Each hook is a special moment when you can do something.',
+      bn: 'Component-এর জীবন একটা গাছের মতো। বীজ পোঁতা হলো (ngOnInit), জল দিলে বদলায় (ngOnChanges), রোজ দেখাশোনা হয় (ngDoCheck), ফুল ফোটে (ngAfterViewInit), আর শেষে গাছটা সরিয়ে ফেলা হয় (ngOnDestroy)। প্রতিটা hook হলো একটা বিশেষ মুহূর্ত যখন তুমি কিছু করতে পারো।',
+    },
+    question: 'What are Angular lifecycle hooks?',
+    answer: 'Angular lifecycle hooks are methods that allow you to tap into key moments in a component\'s lifecycle. Here are the main lifecycle hooks:',
+    points: [
+      'ngOnInit(): called once after the component\'s data-bound properties have been initialized.',
+      'ngOnChanges(changes: SimpleChanges): called whenever one or more data-bound input properties change.',
+      'ngDoCheck(): called during every change detection run, allowing you to implement your own change detection.',
+      'ngAfterContentInit(): called once after Angular projects external content into the component\'s view.',
+      'ngAfterContentChecked(): called after every check of projected content.',
+      'ngAfterViewInit(): called once after the component\'s view (and child views) has been initialized.',
+      'ngAfterViewChecked(): called after every check of the component\'s view (and child views).',
+      'ngOnDestroy(): called just before Angular destroys the component, allowing you to clean up resources.',
+    ],
+    correction: 'ngOnChanges actually runs before ngOnInit; modern Angular also offers afterNextRender/afterEveryRender and DestroyRef.onDestroy.',
+  },
+  {
+    id: 'nt-p19-7',
+    level: 'fresher',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 7,
+    notePage: 19,
+    simple: {
+      hi: 'Pipe ek juice machine jaisa hai. Tum santra daalte ho aur glass mein juice aata hai, par asli santra ki tokri waisi hi rehti hai. Waise hi pipe data ko sundar format mein dikhata hai, asli data badle bina.',
+      en: 'A pipe is like a juice machine. You put in an orange and juice comes out in the glass, but the basket of oranges stays the same. In the same way a pipe shows data in a nice format without changing the original data.',
+      bn: 'Pipe হলো একটা জুস মেশিনের মতো। তুমি কমলা দাও আর গ্লাসে জুস আসে, কিন্তু কমলার ঝুড়িটা যেমন ছিল তেমনই থাকে। ঠিক সেভাবেই pipe আসল data না বদলে সেটাকে সুন্দর ফরম্যাটে দেখায়।',
+    },
+    question: 'What is a Pipe in Angular?',
+    answer: 'A Pipe is a way to transform data in the template. It allows you to format or manipulate data before displaying it to the user. Angular provides several built-in pipes like DatePipe, UpperCasePipe and CurrencyPipe, and you can also create custom pipes. Pipes are typically used to modify the display of data without altering the original data itself.',
+  },
+  {
+    id: 'nt-p19-8',
+    level: 'mid',
+    topic: 'performance',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 8,
+    notePage: 19,
+    simple: {
+      hi: 'Socho tum restaurant mein jaate ho aur khaana pehle se plate mein laga hua milta hai (server par bana). Tumhe kitchen mein khud banane ka intezaar nahi karna padta. Isliye page jaldi dikhta hai aur Google bhi use aasaani se padh leta hai.',
+      en: 'Imagine going to a restaurant where the food arrives already plated (made on the server). You do not have to wait to cook it yourself. That is why the page shows up quickly and Google can also read it easily.',
+      bn: 'ধরো তুমি রেস্টুরেন্টে গেলে আর খাবার আগে থেকেই প্লেটে সাজানো আসে (server-এ তৈরি)। তোমাকে নিজে রান্না করার জন্য অপেক্ষা করতে হয় না। তাই পেজ তাড়াতাড়ি দেখা যায় আর Google-ও সহজে সেটা পড়তে পারে।',
+    },
+    question: 'What is Angular Universal?',
+    answer: 'Angular Universal is a technology that enables server-side rendering (SSR) for Angular applications, improving performance, initial load times and search engine optimization (SEO) by pre-rendering the application on the server before sending it to the client. This results in faster, more interactive user experiences and better indexing by search engines.',
+    correction: 'Angular Universal has been replaced by built-in SSR in the Angular CLI (@angular/ssr, ng new --ssr) since v17.',
+  },
+  {
+    id: 'nt-p19-9',
+    level: 'mid',
+    topic: 'performance',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 9,
+    notePage: 19,
+    simple: {
+      hi: 'App ko tez banana ek cycle ko tez chalane jaisa hai. Bekaar saamaan utaar do (tree shaking), bag chhota karo (minification), sirf zaroori cheez saath lo (lazy loading), aur jo pehle se theek hai use baar baar mat check karo (OnPush, trackBy).',
+      en: 'Making an app fast is like making a bicycle go faster. Throw away useless luggage (tree shaking), make the bag smaller (minification), carry only what you need (lazy loading), and do not keep re-checking things that are already fine (OnPush, trackBy).',
+      bn: 'অ্যাপকে দ্রুত করা মানে একটা সাইকেলকে জোরে চালানোর মতো। অকেজো মাল নামিয়ে দাও (tree shaking), ব্যাগ ছোট করো (minification), শুধু দরকারি জিনিস সঙ্গে নাও (lazy loading), আর যা আগে থেকেই ঠিক আছে সেটা বারবার চেক কোরো না (OnPush, trackBy)।',
+    },
+    question: 'How do you optimize Angular applications?',
+    answer: 'To optimize Angular applications, you can:',
+    points: [
+      'Use AOT (Ahead-of-Time) compilation: pre-compile the application to improve startup time and reduce the size of the bundle.',
+      'Lazy loading: load modules only when they are needed to reduce initial loading time.',
+      'OnPush change detection: use the OnPush change detection strategy to minimize unnecessary checks.',
+      'Tree shaking: remove unused code during the build process to reduce bundle size.',
+      'Minification and uglification: minify and compress JavaScript and CSS files for smaller payloads.',
+      'Use trackBy with ngFor: improve performance in lists by using trackBy to avoid re-rendering unchanged items.',
+      'Service workers: implement service workers for caching and offline support.',
+    ],
+    correction: 'AOT is already the default since Angular 9, and modern templates use @for with a required track expression instead of *ngFor with trackBy; signals, zoneless and @defer are also key optimizations.',
+  },
+  {
+    id: 'nt-p20-10',
+    level: 'junior',
+    topic: 'http',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 10,
+    notePage: 20,
+    simple: {
+      hi: 'Interceptor ek building ke security guard jaisa hai. Har chitthi jo andar ya bahar jaati hai, guard use check karta hai, us par stamp lagata hai (token), aur gadbad ho toh note kar leta hai. Isliye har kamre mein alag guard nahi chahiye.',
+      en: 'An interceptor is like the security guard of a building. Every letter going in or out is checked by the guard, who puts a stamp on it (token) and notes down any problem. So you do not need a separate guard for every room.',
+      bn: 'Interceptor হলো একটা বিল্ডিংয়ের সিকিউরিটি গার্ডের মতো। যে চিঠি ভেতরে আসে বা বাইরে যায়, গার্ড সেটা চেক করে, তাতে স্ট্যাম্প লাগায় (token), আর কোনো গোলমাল হলে লিখে রাখে। তাই প্রতিটা ঘরে আলাদা গার্ড লাগে না।',
+    },
+    question: 'What are Angular interceptors?',
+    answer: 'Angular interceptors are services that intercept and modify HTTP requests and responses. They allow you to perform actions such as adding headers (e.g. authentication tokens), logging or handling errors globally. Interceptors are useful for managing HTTP communication centrally in Angular applications.',
+    correction: 'Modern Angular prefers functional interceptors (HttpInterceptorFn) registered with provideHttpClient(withInterceptors([...])) over class-based ones.',
+  },
+  {
+    id: 'nt-p20-11',
+    level: 'senior',
+    topic: 'change-detection',
+    difficulty: 'hard',
+    source: 'notes',
+    noteNo: 11,
+    notePage: 20,
+    simple: {
+      hi: 'NgZone ek alarm ghanti jaisi hai. Jab bhi koi kaam khatam hota hai (timer ya server se jawab), ghanti bajti hai aur Angular samajh jaata hai ki ab screen ko update karna hai. Bina ghanti ke Angular ko pata hi nahi chalta ki kuch badla hai.',
+      en: 'NgZone is like an alarm bell. Whenever some task finishes (a timer or a reply from the server), the bell rings and Angular knows it is time to update the screen. Without the bell Angular would not know that something changed.',
+      bn: 'NgZone হলো একটা অ্যালার্ম ঘণ্টার মতো। যখনই কোনো কাজ শেষ হয় (timer বা server থেকে উত্তর), ঘণ্টা বাজে আর Angular বোঝে যে এখন স্ক্রিন আপডেট করতে হবে। ঘণ্টা ছাড়া Angular জানতেই পারত না যে কিছু বদলেছে।',
+    },
+    question: 'Explain the purpose of NgZone in Angular.',
+    answer: 'NgZone in Angular is a service that helps Angular know when to update the view by tracking asynchronous operations. It runs change detection whenever an asynchronous operation, like a setTimeout or HTTP request, completes. NgZone ensures that Angular is aware of changes in the application state and triggers the necessary updates to the view.',
+    correction: 'Since Angular v21 new apps are zoneless by default, so zone.js/NgZone no longer triggers change detection; signals and markForCheck do.',
+  },
+  {
+    id: 'nt-p20-12',
+    level: 'fresher',
+    topic: 'communication',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 12,
+    notePage: 20,
+    simple: {
+      hi: '@Input ek dakiye jaisa hai jo papa ki chitthi bachche tak le jaata hai. @Output ek ghanti jaisi hai jo bachcha bajata hai taaki papa ko pata chale kuch hua hai. Ek neeche data bhejta hai, doosra upar khabar bhejta hai.',
+      en: '@Input is like a postman who carries dad\'s letter to the kid. @Output is like a bell the kid rings so dad knows something happened. One sends data down, the other sends news up.',
+      bn: '@Input হলো একজন ডাকপিয়নের মতো যে বাবার চিঠি বাচ্চার কাছে পৌঁছে দেয়। @Output হলো একটা ঘণ্টার মতো যা বাচ্চা বাজায় যাতে বাবা জানতে পারেন কিছু হয়েছে। একটা নিচে data পাঠায়, অন্যটা ওপরে খবর পাঠায়।',
+    },
+    question: 'What is the difference between @Input and @Output in Angular?',
+    answer: '@Input passes data from the parent to the child component, while @Output emits events from the child to the parent component.',
+    points: [
+      'Table (Decorator | Purpose | Example):',
+      '@Input | Pass data from parent to child component | <child [childData]="parentData"></child>',
+      '@Output | Emit events from child to parent component | <child (childEvent)="parentMethod($event)"></child>',
+    ],
+    code: `<child [childData]="parentData"></child>
+<child (childEvent)="parentMethod($event)"></child>`,
+    correction: 'Modern Angular prefers the input() and output() functions (and model() for two-way binding) over the @Input/@Output decorators.',
+  },
+  {
+    id: 'nt-p21-13',
+    level: 'mid',
+    topic: 'routing',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 13,
+    notePage: 21,
+    simple: {
+      hi: 'Authentication ek party ke entry pass jaisa hai. Gate par guard (guard) dekhta hai ki tumhare paas pass (JWT token) hai ya nahi. Pass hai toh andar jao, nahi toh bahar ruko.',
+      en: 'Authentication is like an entry pass for a party. The guard at the gate (guard) checks whether you have a pass (JWT token). If you have it you go in, otherwise you wait outside.',
+      bn: 'Authentication হলো একটা পার্টির এন্ট্রি পাসের মতো। গেটে গার্ড (guard) দেখে তোমার কাছে পাস (JWT token) আছে কিনা। পাস থাকলে ভেতরে যাও, না থাকলে বাইরে অপেক্ষা করো।',
+    },
+    question: 'How do you implement authentication in Angular?',
+    answer: 'Authentication can be implemented using JWT tokens, Angular guards and interceptors to manage login and secure routes. Example: securing a route with an AuthGuard.',
+    points: [
+      'Tools: JWT tokens, route guards, HTTP interceptors.',
+      'Example shows an AuthService whose isLoggedIn() checks for \'userToken\' in localStorage.',
+    ],
+    code: `import {Injectable} from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  constructor() {}
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('userToken');
+  }
+}`,
+    correction: 'Modern Angular uses functional guards (CanActivateFn) and functional interceptors; the notes show only the AuthService, not the guard itself.',
+  },
+  {
+    id: 'nt-p21-14',
+    level: 'junior',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 14,
+    notePage: 21,
+    simple: {
+      hi: 'Pehle har khilona ek bade dabbe (NgModule) mein hi milta tha. Standalone component ek akela khilona hai jo apni batteries khud saath laata hai, kisi bade dabbe ki zaroorat nahi. Isliye use kahin bhi le jaakar khel sakte ho.',
+      en: 'Earlier every toy came only inside a big box (NgModule). A standalone component is a single toy that brings its own batteries, no big box needed. So you can take it anywhere and play with it.',
+      bn: 'আগে প্রতিটা খেলনা একটা বড় বাক্সের (NgModule) ভেতরেই পাওয়া যেত। Standalone component হলো একটা একা খেলনা যা নিজের ব্যাটারি নিজেই সঙ্গে আনে, বড় বাক্সের দরকার নেই। তাই সেটা যেখানে খুশি নিয়ে গিয়ে খেলা যায়।',
+    },
+    question: 'What are Standalone Components in Angular 19?',
+    answer: 'In Angular 19, standalone components provide a simpler and more flexible way to build applications without depending on NgModules. They reduce complexity, improve optimization through better tree-shaking, and make components easier to manage, test and reuse. This leads to cleaner code, improved performance and a streamlined development workflow.',
+    points: [
+      'No need for complex NgModule dependencies.',
+      'Better tree-shaking: optimized bundle size.',
+      'Easier to develop, test and reuse components independently.',
+      'Cleaner code and improved flexibility in application architecture.',
+    ],
+    correction: 'Standalone components were introduced in Angular 14 and became the default in v19, so standalone: true is no longer needed.',
+  },
+  {
+    id: 'nt-p22-15',
+    level: 'mid',
+    topic: 'forms',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 15,
+    notePage: 22,
+    simple: {
+      hi: 'Typed form ek aisa dabba hai jis par label laga hai: \'sirf pencil\'. Agar koi galti se rubber daalne ki koshish kare toh turant pata chal jaata hai. Isliye baad mein galat cheez nikalne ka dar nahi rehta.',
+      en: 'A typed form is like a box with a label saying \'pencils only\'. If someone tries to put an eraser in by mistake, you find out right away. So there is no fear of pulling out the wrong thing later.',
+      bn: 'Typed form হলো এমন একটা বাক্স যার গায়ে লেবেল লাগানো: \'শুধু পেন্সিল\'। কেউ ভুল করে রবার রাখতে চাইলে সঙ্গে সঙ্গে ধরা পড়ে। তাই পরে ভুল জিনিস বেরোনোর ভয় থাকে না।',
+    },
+    question: 'How do you use Typed Forms?',
+    answer: 'Typed forms in Angular 19 provide enhanced type safety for reactive forms. By defining strict types for FormGroup, FormControl and FormArray, developers can prevent runtime errors, ensure consistency and handle form data more robustly. This improves maintainability and the overall developer experience.',
+    points: [
+      'Strong type-checking for form controls to prevent runtime errors.',
+      'Easier management and access to form values with proper type support.',
+      'More robust and maintainable reactive forms for large applications.',
+    ],
+    correction: 'Typed reactive forms were introduced in Angular 14, not 19 (and Angular 21 adds experimental Signal Forms).',
+  },
+  {
+    id: 'nt-p22-16',
+    level: 'junior',
+    topic: 'signals',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 16,
+    notePage: 22,
+    simple: {
+      hi: 'Signal ek scoreboard jaisa hai. Jaise hi koi goal karta hai, score badalta hai aur sirf scoreboard ka woh number apne aap update ho jaata hai. Kisi ko baar baar poora stadium check nahi karna padta.',
+      en: 'A signal is like a scoreboard. As soon as someone scores a goal, the score changes and only that number on the scoreboard updates by itself. Nobody has to keep checking the whole stadium.',
+      bn: 'Signal হলো একটা স্কোরবোর্ডের মতো। কেউ গোল করলেই স্কোর বদলায় আর স্কোরবোর্ডের শুধু সেই সংখ্যাটা নিজে থেকেই আপডেট হয়ে যায়। কাউকে বারবার পুরো স্টেডিয়াম চেক করতে হয় না।',
+    },
+    question: 'What is the purpose of the Signal API?',
+    answer: 'The Signal API in Angular simplifies state management by providing reactive signals that automatically track changes and update the view. This reduces the need for manual change detection, improves performance and makes applications more responsive and efficient.',
+    points: [
+      'Automatic tracking of state changes and dependencies.',
+      'Updates the view without manual change detection.',
+      'Reduces complexity in managing reactivity.',
+      'Optimizes performance by minimizing unnecessary updates.',
+    ],
+  },
+  {
+    id: 'nt-p23-17',
+    level: 'mid',
+    topic: 'di',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 17,
+    notePage: 23,
+    simple: {
+      hi: 'inject() ek vending machine jaisa hai. Tum button dabate ho aur jo cheez chahiye (service) woh turant mil jaati hai. Kisi ko pehle se haath mein pakda kar dene (constructor parameter) ki zaroorat nahi.',
+      en: 'inject() is like a vending machine. You press a button and the thing you need (a service) comes out right away. Nobody has to hand it to you beforehand (constructor parameter).',
+      bn: 'inject() হলো একটা ভেন্ডিং মেশিনের মতো। তুমি বোতাম টিপলেই যা দরকার (service) সঙ্গে সঙ্গে বেরিয়ে আসে। কাউকে আগে থেকে হাতে ধরিয়ে দিতে (constructor parameter) হয় না।',
+    },
+    question: 'How does the inject() function work?',
+    answer: 'The inject() function simplifies the process of dependency injection (DI). It allows developers to access and inject services or dependencies directly within the component\'s constructor or lifecycle methods without the need for constructor parameters.',
+    correction: 'inject() only works in an injection context (field initializers, the constructor, factory functions), not inside lifecycle methods like ngOnInit.',
+  },
+  {
+    id: 'nt-p23-18',
+    level: 'mid',
+    topic: 'fundamentals',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 18,
+    notePage: 23,
+    simple: {
+      hi: 'Functional component ek cookie cutter jaisa hai. Tum aata (input) daalte ho aur ek jaisi shape ki cookie (UI) nikal aati hai, bina kisi bade machine ke. Chhota, simple aur baar baar use hone wala.',
+      en: 'A functional component is like a cookie cutter. You put in dough (input) and a cookie of the same shape (UI) comes out, with no big machine needed. Small, simple and reusable again and again.',
+      bn: 'Functional component হলো একটা কুকি কাটারের মতো। তুমি ময়দা (input) দাও আর একই আকারের কুকি (UI) বেরিয়ে আসে, কোনো বড় মেশিন লাগে না। ছোট, সহজ আর বারবার ব্যবহার করা যায়।',
+    },
+    question: 'Explain the use of Functional Components.',
+    answer: 'Functional components focus purely on rendering UI based on inputs and outputs, without requiring a class structure. This approach brings a more functional programming style to Angular, making it easier to write and test components with better performance, especially for simple and reusable components.',
+    correction: 'Angular has no React-style functional components; components are always classes, though inject(), input()/output() and signals give a more functional style.',
+  },
+  {
+    id: 'nt-p23-19',
+    level: 'mid',
+    topic: 'performance',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 19,
+    notePage: 23,
+    simple: {
+      hi: 'Ivy ek naya, tez printing machine jaisa hai. Purani machine poori kitaab chhaapti thi, nayi sirf woh panne chhaapti hai jo chahiye. Isliye kaam jaldi hota hai aur kaagaz bhi kam lagta hai.',
+      en: 'Ivy is like a new, faster printing machine. The old machine printed the whole book, the new one prints only the pages you need. So work is done faster and less paper is used.',
+      bn: 'Ivy হলো একটা নতুন, দ্রুত প্রিন্টিং মেশিনের মতো। পুরনো মেশিন পুরো বই ছাপত, নতুনটা শুধু দরকারি পাতাগুলো ছাপে। তাই কাজ তাড়াতাড়ি হয় আর কাগজও কম লাগে।',
+    },
+    question: 'What is Ivy in Angular?',
+    answer: 'Ivy is Angular\'s next-generation rendering engine, introduced to improve performance and reduce bundle size. It offers faster compilation, more efficient rendering and enhanced debugging capabilities. Ivy\'s advanced tree-shaking features eliminate unused code, leading to smaller and faster applications. Additionally, Ivy provides better backward compatibility, making it easier to update and maintain Angular applications.',
+    correction: 'Ivy has been the default since Angular 9 and the only engine since v13 (View Engine was removed), so it is no longer \'next-generation\'.',
+  },
+  {
+    id: 'nt-p23-20',
+    level: 'mid',
+    topic: 'routing',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 20,
+    notePage: 23,
+    simple: {
+      hi: 'Resolver ek mummy jaisa hai jo mehmaan aane se pehle hi khaana table par laga deti hai. Jab mehmaan (user) kamre mein aata hai toh sab ready milta hai, intezaar nahi karna padta.',
+      en: 'A resolver is like a mom who puts the food on the table before the guests arrive. When the guest (user) enters the room everything is ready, no waiting needed.',
+      bn: 'Resolver হলো এমন একজন মায়ের মতো যিনি অতিথি আসার আগেই খাবার টেবিলে সাজিয়ে রাখেন। অতিথি (user) ঘরে ঢুকলে সব তৈরি পায়, অপেক্ষা করতে হয় না।',
+    },
+    question: 'What is a Resolver in Angular?',
+    answer: 'A Resolver in Angular is a service that prefetches data before a route is activated, ensuring that the necessary data is available when the route is accessed. This is particularly useful for loading important data that a component depends on, thereby enhancing user experience by avoiding loading indicators or incomplete views.',
+    correction: 'Modern Angular uses functional resolvers (ResolveFn) instead of class-based resolver services.',
+  },
+  {
+    id: 'nt-p24-1',
+    level: 'junior',
+    topic: 'fundamentals',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 1,
+    notePage: 24,
+    simple: {
+      hi: 'Angular ek poora ready ghar jaisa hai jismein kitchen, furniture sab pehle se hai. React sirf ek achchha furniture set jaisa hai, baaki cheezein tumhe khud jodni padti hain. Bade project ke liye Angular aur jaldi interactive UI ke liye React pasand kiya jaata hai.',
+      en: 'Angular is like a fully built house with the kitchen and furniture already inside. React is like just a good furniture set, the rest you add yourself. Angular is preferred for big projects and React for quick interactive UIs.',
+      bn: 'Angular হলো একটা পুরো তৈরি বাড়ির মতো যেখানে রান্নাঘর, আসবাব সব আগে থেকেই আছে। React হলো শুধু একটা ভালো আসবাবের সেটের মতো, বাকি জিনিস তোমাকে নিজে জুড়তে হয়। বড় প্রজেক্টের জন্য Angular আর দ্রুত interactive UI-এর জন্য React পছন্দ করা হয়।',
+    },
+    question: 'What is the difference between Angular and React?',
+    answer: 'Angular is a full-fledged framework, while React is a library for building user interfaces.',
+    points: [
+      'Table (Angular | React):',
+      'Full-fledged framework | Library for building user interfaces',
+      'Google | Facebook',
+      'TypeScript (JavaScript superset) | JavaScript (JSX syntax)',
+      'MVC (Model-View-Controller) / MVVM (Model-View-ViewModel) | Component-based architecture',
+      'Suitable for large-scale applications with complex requirements | Best for building interactive UIs and SPAs (single page applications)',
+    ],
+    correction: 'Modern Angular is also component-based (not classic MVC), and React is now maintained by Meta.',
+  },
+  {
+    id: 'nt-p24-2',
+    level: 'junior',
+    topic: 'architecture',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 2,
+    notePage: 24,
+    simple: {
+      hi: 'NgModule ek almari ke drawer jaisa hai. Ek drawer mein saare pencil, doosre mein saari copies. Isse saamaan dhoondhna aur sambhalna aasaan ho jaata hai.',
+      en: 'An NgModule is like a drawer in a cupboard. One drawer holds all the pencils, another holds all the notebooks. This makes things easy to find and manage.',
+      bn: 'NgModule হলো আলমারির একটা ড্রয়ারের মতো। একটা ড্রয়ারে সব পেন্সিল, আরেকটায় সব খাতা। এতে জিনিস খুঁজে পাওয়া আর সামলানো সহজ হয়।',
+    },
+    question: 'What is the purpose of NgModule in Angular?',
+    answer: 'The purpose of NgModule in Angular is to organize an application into cohesive blocks of functionality by grouping related components, directives, pipes and services. NgModule defines a compilation context for these elements, providing modularity and maintainability.',
+    correction: 'Standalone is the default since Angular 19 (new projects are standalone since v17), so NgModules are optional and mostly kept for legacy code and libraries.',
+  },
+  {
+    id: 'nt-p24-3',
+    level: 'junior',
+    topic: 'routing',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 3,
+    notePage: 24,
+    simple: {
+      hi: 'Guard ek school ke chowkidaar jaisa hai. Woh dekhta hai ki tum andar aa sakte ho ya nahi (CanActivate), aur kya tum kaam adhoora chhod kar bahar ja sakte ho (CanDeactivate). Bina ijazat koi andar nahi aa sakta.',
+      en: 'A guard is like a school gatekeeper. He checks whether you are allowed in (CanActivate), and whether you may leave before finishing your work (CanDeactivate). Nobody gets in without permission.',
+      bn: 'Guard হলো স্কুলের দারোয়ানের মতো। সে দেখে তুমি ভেতরে আসতে পারবে কিনা (CanActivate), আর কাজ অসমাপ্ত রেখে বাইরে যেতে পারবে কিনা (CanDeactivate)। অনুমতি ছাড়া কেউ ভেতরে আসতে পারে না।',
+    },
+    question: 'What are Angular guards?',
+    answer: 'Angular guards are services that control access to routes in an Angular application. They are used to protect routes from unauthorized access or to prevent unwanted navigation. Common types of guards include:',
+    points: [
+      'CanActivate: determines if a route can be activated.',
+      'CanDeactivate: checks if a route can be deactivated.',
+      'CanLoad: determines if a module can be loaded lazily.',
+    ],
+    correction: 'CanLoad is deprecated in favour of CanMatch, and modern guards are plain functions (CanActivateFn, CanDeactivateFn, CanMatchFn) rather than services.',
+  },
+  {
+    id: 'nt-p25-4',
+    level: 'junior',
+    topic: 'forms',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 4,
+    notePage: 25,
+    simple: {
+      hi: 'Template-driven form ek bhara-bharaya form jaisa hai jo teacher class mein deti hai, tum bas khaali jagah bharte ho. Reactive form aisa hai jaise tum khud ruler se poora form banate ho, har dabba tumhare control mein. Chhote kaam ke liye pehla, bade kaam ke liye doosra.',
+      en: 'A template-driven form is like a ready-made form the teacher hands out, you just fill in the blanks. A reactive form is like drawing the whole form yourself with a ruler, every box under your control. The first is for small jobs, the second for big ones.',
+      bn: 'Template-driven form হলো টিচারের দেওয়া একটা তৈরি ফর্মের মতো, তুমি শুধু ফাঁকা জায়গা ভরো। Reactive form হলো যেন তুমি নিজে রুলার দিয়ে পুরো ফর্ম আঁকছ, প্রতিটা ঘর তোমার নিয়ন্ত্রণে। ছোট কাজের জন্য প্রথমটা, বড় কাজের জন্য দ্বিতীয়টা।',
+    },
+    question: 'What is the difference between Template-driven and Reactive forms?',
+    answer: 'Template-driven forms are based on directives, while Reactive forms are based on explicit creation in the component class.',
+    points: [
+      'Table (Template-driven form | Reactive form):',
+      'Based on directives | Based on explicit creation',
+      'Asynchronous | Synchronous',
+      'Simple forms | Complex forms',
+      'Two-way data binding | Immutable data model',
+    ],
+  },
+  {
+    id: 'nt-p25-5',
+    level: 'mid',
+    topic: 'forms',
+    difficulty: 'hard',
+    source: 'notes',
+    noteNo: 5,
+    notePage: 25,
+    simple: {
+      hi: 'Validator ek exam checker jaisa hai jo form ki har entry ko check karta hai. Jaise kisi ne pehle se liya hua naam (username) likha, toh checker turant laal nishaan laga deta hai. Custom validator matlab tum khud apne niyam banate ho.',
+      en: 'A validator is like an exam checker who checks every entry in the form. If someone writes a name (username) that is already taken, the checker puts a red mark right away. A custom validator means you write your own rules.',
+      bn: 'Validator হলো একজন পরীক্ষার খাতা দেখা টিচারের মতো যিনি ফর্মের প্রতিটা এন্ট্রি চেক করেন। কেউ আগে থেকে নেওয়া নাম (username) লিখলে তিনি সঙ্গে সঙ্গে লাল দাগ দেন। Custom validator মানে তুমি নিজের নিয়ম নিজে বানাও।',
+    },
+    question: 'How do you create custom validators in Angular?',
+    answer: 'Custom validators can be created by implementing the ValidatorFn interface and using it in the form controls. Example: creating a custom validator to check if a username is available.',
+    code: `import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UsernameValidatorService {
+  private takenUsernames = ['admin', 'user', 'guest'];
+  checkUsername(username: string): Observable<boolean> {
+    return of(this.takenUsernames.includes(username)).pipe(
+      map(isTaken => !isTaken));
+  }
+}`,
+    correction: 'The example is really an async availability check; to plug it into a form control it should be wrapped in an AsyncValidatorFn that returns ValidationErrors | null.',
+  },
+  {
+    id: 'nt-p26-6',
+    level: 'senior',
+    topic: 'architecture',
+    difficulty: 'hard',
+    source: 'notes',
+    noteNo: 6,
+    notePage: 26,
+    simple: {
+      hi: 'Dynamic component ek magic sticker book jaisa hai. Page par pehle se sticker nahi chipka hota, jab zaroorat ho tab tum sahi sticker nikaal kar chipka dete ho. Jaise popup ya alert jo sirf zaroorat par dikhte hain.',
+      en: 'A dynamic component is like a magic sticker book. The stickers are not stuck on the page beforehand; when you need one, you pick the right sticker and stick it on. Like a popup or alert that appears only when needed.',
+      bn: 'Dynamic component হলো একটা ম্যাজিক স্টিকার বইয়ের মতো। পাতায় আগে থেকে স্টিকার লাগানো থাকে না, যখন দরকার তখন ঠিক স্টিকারটা বের করে লাগিয়ে দাও। যেমন popup বা alert যা শুধু দরকার হলেই দেখা যায়।',
+    },
+    question: 'Explain Dynamic Components in Angular.',
+    answer: 'Dynamic components in Angular are components that are created and inserted into the application at runtime, rather than being statically declared in the template. This allows for greater flexibility and responsiveness in applications.',
+  },
+  {
+    id: 'nt-p26-7',
+    level: 'junior',
+    topic: 'routing',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 7,
+    notePage: 26,
+    simple: {
+      hi: 'Eager loading aisa hai jaise picnic par jaate waqt tum saara saamaan ek saath gaadi mein bhar lete ho, chahe baad mein zaroorat pade ya na pade. Shuru mein thoda time lagta hai, par baad mein sab turant haath mein hota hai.',
+      en: 'Eager loading is like packing everything into the car at once before a picnic, whether you need it later or not. It takes a bit longer at the start, but later everything is right at hand.',
+      bn: 'Eager loading মানে পিকনিকে যাওয়ার আগে সব জিনিস একসাথে গাড়িতে ভরে নেওয়া, পরে লাগুক বা না লাগুক। শুরুতে একটু সময় লাগে, কিন্তু পরে সব কিছু সঙ্গে সঙ্গে হাতের কাছে থাকে।',
+    },
+    question: 'What is Eager loading?',
+    answer: 'In AngularJS, eager loading refers to the process where modules, services and controllers are loaded at the start of the application, even if they are not immediately needed. Eager loading is typically used when the developer expects all parts of the application to be used early on.',
+    correction: 'The note describes AngularJS; in modern Angular eager loading means routes/components bundled into the initial bundle (not lazy-loaded), and there are no controllers.',
+  },
+  {
+    id: 'nt-p26-8',
+    level: 'fresher',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 8,
+    notePage: 26,
+    simple: {
+      hi: 'Data binding ek walkie-talkie jaisa hai jo component aur screen ke beech baat karata hai. Kabhi sirf component bolta hai (interpolation, property binding), kabhi sirf screen bolti hai (event binding), aur kabhi dono ek doosre se baat karte hain (two-way binding).',
+      en: 'Data binding is like a walkie-talkie that lets the component and the screen talk. Sometimes only the component talks (interpolation, property binding), sometimes only the screen talks (event binding), and sometimes both talk to each other (two-way binding).',
+      bn: 'Data binding হলো একটা ওয়াকি-টকির মতো যা component আর স্ক্রিনের মধ্যে কথা বলায়। কখনো শুধু component বলে (interpolation, property binding), কখনো শুধু স্ক্রিন বলে (event binding), আর কখনো দুজনেই একে অপরের সাথে কথা বলে (two-way binding)।',
+    },
+    question: 'What is Data Binding in Angular?',
+    answer: 'Data binding in Angular is a mechanism that allows communication between the component and the view (HTML template). It synchronizes the data between the model (component) and the view, making it easy to reflect changes in the UI whenever data changes in the component. There are 4 types of data binding in Angular:',
+    points: [
+      'Interpolation (one-way binding)',
+      'Property binding (one-way binding)',
+      'Event binding (one-way binding)',
+      'Two-way binding',
+    ],
+  },
+  {
+    id: 'nt-p27-9',
+    level: 'junior',
+    topic: 'templates',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 9,
+    notePage: 27,
+    simple: {
+      hi: 'Impure pipe ek aise chowkidar jaisa hai jo har baar ghanti bajne par (change detection) poora ghar dobara check karta hai, chahe kuch badla ho ya nahi. Isse kaam sahi hota hai, par bahut mehnat lagti hai, isliye dhyan se use karna chahiye.',
+      en: 'An impure pipe is like a guard who checks the whole house again every time the bell rings (change detection), even if nothing changed. It always gets things right, but it works very hard, so use it carefully.',
+      bn: 'Impure pipe হলো এমন এক পাহারাদারের মতো, যে প্রতিবার ঘণ্টা বাজলেই (change detection) পুরো বাড়ি আবার চেক করে, কিছু বদলাক বা না বদলাক। কাজ ঠিকঠাক হয়, কিন্তু খুব খাটুনি হয়, তাই সাবধানে use করতে হয়।',
+    },
+    question: 'What are impure pipes in Angular?',
+    answer: 'Impure pipes in Angular are pipes that can change their output when input values change over time, even without change detection running. Unlike pure pipes, impure pipes are evaluated every time change detection runs, which can lead to performance issues if not used carefully.',
+    correction: 'Impure pipes do not run without change detection; they simply re-run on every change detection cycle, even when the input reference has not changed.',
+  },
+  {
+    id: 'nt-p27-10',
+    level: 'junior',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 10,
+    notePage: 27,
+    simple: {
+      hi: 'Pure pipe ek samajhdar calculator jaisa hai. Agar tum wahi numbers dobara do, to wo dobara calculate nahi karta, purana answer hi de deta hai. Sirf naye numbers aane par hi kaam karta hai.',
+      en: 'A pure pipe is like a smart calculator. If you give it the same numbers again, it does not calculate again; it just gives the old answer. It only works when new numbers come in.',
+      bn: 'Pure pipe হলো একটা বুদ্ধিমান ক্যালকুলেটরের মতো। একই সংখ্যা আবার দিলে সে আবার হিসাব করে না, আগের উত্তরটাই দিয়ে দেয়। নতুন সংখ্যা এলে তবেই কাজ করে।',
+    },
+    question: 'What are pure pipes in Angular?',
+    answer: 'Pure pipes in Angular are pipes that only re-evaluate when their input data changes. This makes them more efficient compared to impure pipes, as they are only executed when the values of the input change.',
+  },
+  {
+    id: 'nt-p27-11',
+    level: 'junior',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 11,
+    notePage: 27,
+    simple: {
+      hi: 'PipeTransform ek recipe card jaisa hai jo bolta hai: \'tumhare paas transform naam ka step hona hi chahiye.\' Har custom pipe ko ye card follow karna padta hai, taaki wo data ko ek roop se doosre roop mein badal sake, jaise aate se roti.',
+      en: 'PipeTransform is like a recipe card that says: \'you must have a step called transform.\' Every custom pipe has to follow this card so it can change data from one form to another, like turning flour into bread.',
+      bn: 'PipeTransform হলো একটা রেসিপি কার্ডের মতো, যেখানে লেখা থাকে: \'তোমার transform নামের একটা ধাপ থাকতেই হবে।\' প্রতিটা custom pipe এই কার্ড মেনে চলে, যাতে ডেটাকে এক রূপ থেকে আরেক রূপে বদলাতে পারে, যেমন আটা থেকে রুটি।',
+    },
+    question: 'What is the PipeTransform interface in Angular?',
+    answer: 'In Angular, the PipeTransform interface is used to define the structure of a custom pipe. It is part of the Pipe decorator, which helps in creating custom pipes to transform data within templates.',
+    correction: 'PipeTransform is a separate interface that the pipe class implements (it requires a transform() method); it is not part of the @Pipe decorator.',
+  },
+  {
+    id: 'nt-p28-1',
+    level: 'mid',
+    topic: 'scenarios',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 1,
+    notePage: 28,
+    simple: {
+      hi: 'forkJoin ek teacher jaisa hai jo class ke saare bachchon ka homework aane tak wait karta hai. Jab sab jama kar dete hain, tabhi wo saari copies ek saath check karta hai. Agar ek bhi bachcha nahi aaya, to checking shuru nahi hoti.',
+      en: 'forkJoin is like a teacher who waits until every child in the class hands in their homework. Only when everyone has submitted does she check all the copies together. If even one child is missing, the checking does not start.',
+      bn: 'forkJoin হলো এমন এক টিচারের মতো, যিনি ক্লাসের সব বাচ্চার হোমওয়ার্ক জমা না পড়া পর্যন্ত অপেক্ষা করেন। সবাই জমা দিলে তবেই সব খাতা একসাথে দেখেন। একজনও না দিলে দেখা শুরু হয় না।',
+    },
+    question: '(Scenario) We are developing an Angular application that needs to fetch data from multiple APIs and display them together on the same page. How would we handle the asynchronous API calls and ensure the data is displayed after all responses are received?',
+    answer: 'I would use the RxJS forkJoin operator to handle multiple API calls concurrently. This ensures that all API responses are received before processing the data. forkJoin waits until all observables complete and then emits the result in an array. This is perfect for scenarios where you want to fetch data from multiple sources simultaneously.',
+    points: [
+      'Section heading on this page: \'Angular Scenario Based Interview Questions\'.',
+    ],
+    code: `getData() {
+  const api1 = ...;
+  const api2 = ...;
+  forkJoin([api1, api2]).subscribe(
+    ([res1, res2]) => {
+      this.processData(res1, res2);
+    }
+  );
+}`,
+  },
+  {
+    id: 'nt-p29-2',
+    level: 'mid',
+    topic: 'scenarios',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 2,
+    notePage: 29,
+    simple: {
+      hi: 'Lazy loading ek picnic bag jaisa hai. Tum shuru mein saara saamaan nahi uthate, sirf zaroori cheezein lete ho. Baaki cheezein tab mangwate ho jab unki zaroorat padti hai, isliye chalna halka aur tez hota hai.',
+      en: 'Lazy loading is like packing for a picnic. You do not carry everything at the start, only what you need now. The rest is fetched when you actually need it, so the trip is light and fast.',
+      bn: 'Lazy loading হলো পিকনিকের ব্যাগ গোছানোর মতো। শুরুতে সব জিনিস নিয়ে যাও না, শুধু দরকারিগুলো নাও। বাকিগুলো দরকার পড়লে তখন আনাও, তাই চলা হালকা আর দ্রুত হয়।',
+    },
+    question: '(Scenario) Your Angular application is getting slower due to a large number of modules and components. How would you optimize the application\'s performance?',
+    answer: 'One way to optimize an Angular application is by implementing lazy loading to load modules only when needed. This reduces the initial bundle size, improving load time.',
+    points: [
+      'By using the loadChildren property, Angular will load the FeatureModule only when the user navigates to the /feature route.',
+      'This improves the app\'s performance by deferring the loading of non-essential modules.',
+    ],
+    code: `const routes: Routes = [
+  { path: 'features', loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule) }
+];`,
+    correction: 'In modern standalone Angular you lazy-load with loadComponent or loadChildren pointing to a routes file (no NgModule needed), and can also use @defer blocks for parts of a template.',
+  },
+  {
+    id: 'nt-p30-3',
+    level: 'mid',
+    topic: 'scenarios',
+    difficulty: 'hard',
+    source: 'notes',
+    noteNo: 3,
+    notePage: 30,
+    simple: {
+      hi: 'OnPush ek aise postman jaisa hai jo sirf tab ghanti bajata hai jab naya lifafa (new reference) aata hai. Agar tum purane lifafe ke andar chupke se letter badal do (mutation), to use pata hi nahi chalta. Isliye naya lifafa bhejo ya khud ghanti bajao (markForCheck).',
+      en: 'OnPush is like a postman who rings the bell only when a new envelope (new reference) arrives. If you quietly change the letter inside the old envelope (mutation), he never notices. So send a new envelope or ring the bell yourself (markForCheck).',
+      bn: 'OnPush হলো এমন এক পোস্টম্যানের মতো, যে শুধু নতুন খাম (new reference) এলে তবেই বেল বাজায়। পুরনো খামের ভেতরে চুপিচুপি চিঠি বদলে দিলে (mutation) সে টেরই পায় না। তাই নতুন খাম পাঠাও, নয়তো নিজেই বেল বাজাও (markForCheck)।',
+    },
+    question: '(Scenario) Debugging change detection issues: we notice that a component is not updating as expected when data changes. How would you debug and resolve the issue related to Angular\'s change detection mechanism?',
+    answer: 'First, I would check if the component is using the OnPush change detection strategy. If the OnPush strategy is being used, Angular only checks for changes when an input reference changes. If the data is updated by mutation, Angular will not detect the change. In this case I would either create a new object reference and call markForCheck(). If the object is mutated directly, OnPush doesn\'t detect the change.',
+    code: `@Component({
+  selector: 'app-sample',
+  templateUrl: './sample.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+constructor(private cd: ChangeDetectorRef) {}
+
+updateData() {
+  this.data = { ...this.data, newValue: 'updated' };
+  this.cd.markForCheck();
+}`,
+    correction: 'In modern Angular (zoneless by default in v21) the preferred fix is to hold the data in a signal and update it with set()/update(), which marks OnPush views for refresh automatically; inject() is preferred over constructor injection.',
+  },
+  {
+    id: 'nt-p31-4',
+    level: 'mid',
+    topic: 'scenarios',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 4,
+    notePage: 31,
+    simple: {
+      hi: 'Route guard ek building ke security guard jaisa hai. Andar jaane se pehle wo tumhara ID card (login) check karta hai. ID hai to andar jao, nahi hai to wo tumhe reception (login page) par bhej deta hai.',
+      en: 'A route guard is like the security guard of a building. Before you go in, he checks your ID card (login). If you have it, you go in; if not, he sends you to the reception (login page).',
+      bn: 'Route guard হলো একটা বিল্ডিংয়ের সিকিউরিটি গার্ডের মতো। ভেতরে ঢোকার আগে সে তোমার ID কার্ড (login) দেখে। থাকলে ঢুকতে দেয়, না থাকলে রিসেপশনে (login page) পাঠিয়ে দেয়।',
+    },
+    question: '(Scenario) Implementing route guards for authentication: how would you protect specific routes in your Angular application so that only authenticated users can access them?',
+    answer: 'I would implement route guards using Angular\'s CanActivate interface to protect routes. The AuthGuard checks if the user is authenticated before allowing access to the route. If the user is not authenticated, they are redirected to the login page. This ensures that only authorized users can access certain parts of the application.',
+    code: `import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { AuthService } from './auth.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActive {
+  constructor(private authService: AuthService,
+              private router: Router) {}
+
+  canActivate(): boolean {
+    if (this.authService.isAuthenticated()) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
+}`,
+    correction: 'Functional guards (CanActivateFn with inject()) are the recommended style in modern Angular — class-based guards still work but need more boilerplate — and \'implements CanActive\' in the notes should be \'CanActivate\'.',
+  },
+  {
+    id: 'nt-p32-1',
+    level: 'junior',
+    topic: 'js-functions',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 1,
+    notePage: 32,
+    simple: {
+      hi: 'Closure ek school bag jaisa hai. Ghar se nikalte waqt maa ne bag mein tiffin rakh diya. Ab tum school mein ho aur maa ghar par, phir bhi tiffin tumhare bag mein hai aur tum use kha sakte ho.',
+      en: 'A closure is like a school bag. Before you left home, your mother packed a tiffin in it. Now you are at school and she is at home, but the tiffin is still in your bag and you can eat it.',
+      bn: 'Closure হলো একটা স্কুল ব্যাগের মতো। বাড়ি থেকে বেরোনোর সময় মা ব্যাগে টিফিন ভরে দিয়েছে। এখন তুমি স্কুলে, মা বাড়িতে, তবু টিফিনটা তোমার ব্যাগেই আছে আর তুমি খেতে পারো।',
+    },
+    question: 'What is a closure in JavaScript?',
+    answer: 'A closure is a function that retains access to variables from its lexical scope even after the parent function has executed. Or: closure means a function can remember and access variables from its outer scope even after the outer function has finished execution. In a simple way, it means a function remembers where it was created and can still use those variables later.',
+    points: [
+      'Section change: this page starts a new numbered list of JavaScript/CSS questions.',
+    ],
+    code: `function outer() {
+  let money = 100;
+  return function inner() {
+    console.log(money);
+  };
+}
+const myFunc = outer();
+myFunc(); // 100`,
+  },
+  {
+    id: 'nt-p32-2',
+    level: 'fresher',
+    topic: 'js-basics',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 2,
+    notePage: 32,
+    simple: {
+      hi: 'Hoisting ek class ki attendance jaisa hai. Teacher padhana shuru karne se pehle saare naam register mein likh leti hai. var wale bachche ka naam hai par wo khaali seat (undefined) hai, aur let/const wale ko tab tak bulaya nahi ja sakta jab tak wo khud na aa jaye.',
+      en: 'Hoisting is like class attendance. Before the lesson starts, the teacher writes all the names in the register. The var child\'s name is there but the seat is empty (undefined), and the let/const child cannot be called until they actually arrive.',
+      bn: 'Hoisting হলো ক্লাসের হাজিরা খাতার মতো। পড়ানো শুরুর আগে টিচার সবার নাম খাতায় লিখে নেন। var-এর নাম আছে কিন্তু সিট ফাঁকা (undefined), আর let/const-কে নিজে না আসা পর্যন্ত ডাকা যায় না।',
+    },
+    question: 'What is hoisting?',
+    answer: 'Hoisting is JavaScript\'s default behavior of moving declarations to the top. In simple terms, JavaScript moves declarations to the top before executing code.',
+    points: [
+      'var is hoisted (but initialized as undefined).',
+      'let and const are hoisted but not usable before the declaration (error) — this is the Temporal Dead Zone.',
+    ],
+    code: `console.log(a); // undefined
+var a = 10;
+
+console.log(b); // error
+let b = 10;`,
+  },
+  {
+    id: 'nt-p33-3',
+    level: 'fresher',
+    topic: 'js-basics',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 3,
+    notePage: 33,
+    simple: {
+      hi: 'var ek khula ground hai jahan koi bhi kahin se aa ja sakta hai aur naam dobara likh sakta hai. let ek kamre ka whiteboard hai: kamre ke andar hi dikhta hai aur likha hua mita kar badal sakte ho. const us kamre ki deewar par lagi naam ki plate hai: ek baar lag gayi to badal nahi sakte.',
+      en: 'var is like an open playground: anyone can come from anywhere and even write the same name again. let is a whiteboard inside a room: it is only seen inside that room and you can erase and change it. const is the name plate fixed on the room\'s wall: once put up, it cannot be changed.',
+      bn: 'var হলো একটা খোলা মাঠের মতো, যেখানে যে কেউ যেকোনো দিক থেকে আসতে পারে, একই নাম আবারও লিখতে পারে। let হলো ঘরের ভেতরের হোয়াইটবোর্ড: শুধু ঘরের ভেতরেই দেখা যায়, মুছে বদলানো যায়। const হলো ঘরের দেওয়ালে লাগানো নামের ফলক: একবার লাগালে আর বদলানো যায় না।',
+    },
+    question: 'What is the difference between the var, let and const keywords in JavaScript?',
+    answer: 'var declares variables with function or global scope and allows re-declaration and updates within the same scope. let declares variables with block scope, allowing updates but not re-declaration within the same block. const declares block-scoped variables that cannot be reassigned after the initial assignment.',
+    points: [
+      'Block scope demonstration: inside if (true) { var a = 1; let b = 2; const c = 3; }, outside the block console.log(a) works (var is function/global scoped), console.log(b) gives an error (let is block scoped), console.log(c) gives an error (const is block scoped).',
+    ],
+    code: `var x = 10;
+var x = 20; // redeclaration allowed
+x = 30;     // update allowed
+console.log(x); // 30
+
+let y = 10;
+// let y = 20; // Redeclaration not allowed
+y = 25;        // update allowed
+console.log(y); // output: 25
+
+const z = 10;
+// z = 20 // reassignment not allowed
+console.log(z); // output: 10
+
+// Block scope demonstration
+if (true) {
+  var a = 1;
+  let b = 2;
+  const c = 3;
+}
+console.log(a); // works (var is function/global scoped)
+console.log(b); // Error (let is block scoped)
+console.log(c); // Error (const is block scoped)`,
+  },
+  {
+    id: 'nt-p34-4',
+    level: 'junior',
+    topic: 'js-functions',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 4,
+    notePage: 34,
+    simple: {
+      hi: 'Normal function apna khud ka \'this\' rakhta hai, jaise har ghar ka apna address. Arrow function ek mehmaan jaisa hai jo jis ghar mein baitha hai, usi ka address (this) use karta hai. Aur arrow function likhna chhota bhi hai, jaise poore naam ki jagah nickname.',
+      en: 'A normal function keeps its own \'this\', like every house having its own address. An arrow function is like a guest who uses the address (this) of whatever house it is sitting in. Arrow functions are also shorter to write, like a nickname instead of a full name.',
+      bn: 'Normal function নিজের আলাদা \'this\' রাখে, যেমন প্রতিটা বাড়ির নিজের ঠিকানা। Arrow function হলো এক অতিথির মতো, যে যে বাড়িতে বসে আছে সেই বাড়ির ঠিকানাই (this) ব্যবহার করে। আর arrow function লেখাও ছোট, যেমন পুরো নামের বদলে ডাকনাম।',
+    },
+    question: 'What is the difference between arrow functions and normal functions?',
+    answer: 'In JavaScript, functions are essential building blocks. ES6 introduced arrow functions, offering a shorter syntax and simpler \'this\' handling. While both regular and arrow functions achieve similar tasks, they differ in syntax, behavior and usage.',
+    points: [
+      'Regular function syntax: let x = function functionName(parameters) { }',
+      'Arrow function syntax: let x = (parameters) => { // body of the function };',
+    ],
+    code: `function greet(name) {
+  console.log('Hello, ' + name + '!');
+}
+// calling the function
+greet('Geek');
+// output: Hello, Geek!
+
+// Syntax:
+let x = function functionName(parameters) { };
+
+const greet = (name) => {
+  console.log('Hello, \${name}!');
+};
+greet('Geeks');
+// output: Hello, Geeks.
+
+// Syntax:
+let x = (parameters) => {
+  // body of the function
+};`,
+    correction: 'The arrow-function example needs backticks (`Hello, ${name}!`) — ${} interpolation does not work inside single quotes.',
+  },
+  {
+    id: 'nt-p35-5',
+    level: 'junior',
+    topic: 'js-async',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 5,
+    notePage: 35,
+    simple: {
+      hi: 'Callback aisa hai jaise tum dost ko apna phone number de do aur bolo \'kaam ho jaye to call karna.\' Promise ek restaurant ki token slip jaisi hai: abhi khana nahi mila, par slip pakki hai ki khana milega (then) ya mana ho jayega (catch).',
+      en: 'A callback is like giving your friend your phone number and saying \'call me when the job is done.\' A Promise is like a restaurant token slip: you do not have the food yet, but the slip promises you will either get it (then) or be told no (catch).',
+      bn: 'Callback হলো বন্ধুকে নিজের ফোন নম্বর দিয়ে বলা, \'কাজ হয়ে গেলে ফোন করিস।\' Promise হলো রেস্টুরেন্টের টোকেন স্লিপের মতো: এখনও খাবার পাওনি, কিন্তু স্লিপ কথা দিচ্ছে খাবার পাবে (then) নয়তো না বলে দেবে (catch)।',
+    },
+    question: 'What is the difference between a Promise and a callback?',
+    answer: 'Callback in JavaScript: a callback is a function that is passed as an argument to another function and executed later (usually after an async operation). Promise in JavaScript: a Promise is an object that represents the eventual completion or failure of an async operation.',
+    points: [
+      'Callbacks suffer from inversion of control and callback hell, while promises provide better readability, chaining, and structured error handling.',
+      'Angular actually uses Observables (RxJS), not Promises directly.',
+    ],
+    code: `// Callback
+function fetchData(callback) {
+  setTimeout(() => {
+    callback("Data received");
+  }, 1000);
+}
+fetchData(function (result) {
+  console.log(result);
+});
+
+// Promise
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Data received");
+    }, 1000);
+  });
+}
+fetchData()
+  .then(result => console.log(result))
+  .catch(error => console.log(error));`,
+  },
+  {
+    id: 'nt-p36-6',
+    level: 'junior',
+    topic: 'js-dom',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 6,
+    notePage: 36,
+    simple: {
+      hi: 'Bubbling paani ke bulbule jaisa hai: neeche (button) se shuru hokar upar (parent, phir document) tak jaata hai. Capturing ulta hai, jaise upar se patthar giraana jo neeche target tak pahunchta hai. stopPropagation bulbule ko beech mein hi phod deta hai.',
+      en: 'Bubbling is like a bubble in water: it starts at the bottom (the button) and rises up (to the parent, then the document). Capturing is the opposite, like dropping a stone from the top that falls down to the target. stopPropagation pops the bubble halfway.',
+      bn: 'Bubbling হলো জলের বুদবুদের মতো: নিচ (button) থেকে শুরু হয়ে উপরে (parent, তারপর document) ওঠে। Capturing উল্টো, যেন উপর থেকে একটা পাথর ফেলা, যা নিচে target-এ গিয়ে পড়ে। stopPropagation বুদবুদটাকে মাঝপথেই ফাটিয়ে দেয়।',
+    },
+    question: 'What is event bubbling and capturing?',
+    answer: 'Event bubbling means that when an event happens on an element, it first runs on that element, then propagates upward to its parent, then grandparent... up to the root (document). Event capturing is the opposite: the event starts from the root and travels down to the target element.',
+    points: [
+      'Key differences (table): Bubbling goes child -> parent; Capturing goes parent -> child.',
+      'Default: Bubbling — yes (default behavior); Capturing — no (must enable manually).',
+      'event.stopPropagation(); stops the event from going to the parent.',
+    ],
+    code: `<div id="parent">
+  <button id="child">Click Me</button>
+</div>
+
+event.stopPropagation(); // stops event from going to parent`,
+  },
+  {
+    id: 'nt-p37-7',
+    level: 'junior',
+    topic: 'js-dom',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 7,
+    notePage: 37,
+    simple: {
+      hi: 'Event delegation ek class monitor jaisa hai. Har bachche ke paas alag teacher rakhne ki jagah, ek monitor poori class sambhalta hai aur dekhta hai ki kis bachche ne haath uthaya (event.target). Naya bachcha aaye to bhi wahi monitor kaam karta hai.',
+      en: 'Event delegation is like a class monitor. Instead of keeping a separate teacher for every child, one monitor looks after the whole class and sees which child raised a hand (event.target). Even when a new child joins, the same monitor handles it.',
+      bn: 'Event delegation হলো ক্লাস মনিটরের মতো। প্রতিটা বাচ্চার জন্য আলাদা টিচার না রেখে, একজন মনিটর পুরো ক্লাস সামলায় আর দেখে কে হাত তুলেছে (event.target)। নতুন বাচ্চা এলেও সেই মনিটরই কাজ করে।',
+    },
+    question: 'What is event delegation?',
+    answer: 'Event delegation is a technique where you attach a single event listener to a parent element to handle events for its child elements using event bubbling. Why do we use it? Instead of adding event listeners to multiple child elements, we add one listener to the parent and use event.target to detect which child triggered it.',
+    points: [
+      'i) Add one listener to the parent.',
+      'ii) Use event.target to detect which child triggered it.',
+      'Event delegation improves performance by reducing the number of event listeners and works well with dynamically added elements using event bubbling.',
+      'Note: usually in Angular we don\'t manually use delegation; the framework handles it via templates and binding.',
+    ],
+  },
+  {
+    id: 'nt-p37-8',
+    level: 'fresher',
+    topic: 'js-es6',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 8,
+    notePage: 37,
+    simple: {
+      hi: 'Array ek egg tray jaisa hai jismein cheezein line se rakhi jaati hain. Tray banane ke kai tareeke hain: seedha haath se bharo ([ ]), dukaan se mangwao (new Array), ya kisi word ke letters tod kar ek-ek khane mein daalo (Array.from ya spread).',
+      en: 'An array is like an egg tray where things sit in a row. There are many ways to make the tray: fill it by hand ([ ]), order it from a shop (new Array), or break a word into letters and put one in each slot (Array.from or spread).',
+      bn: 'Array হলো ডিমের ট্রের মতো, যেখানে জিনিস সারি দিয়ে রাখা থাকে। ট্রে বানানোর অনেক উপায়: সরাসরি হাতে ভরো ([ ]), দোকান থেকে আনাও (new Array), বা একটা শব্দ ভেঙে প্রতিটা অক্ষর আলাদা খোপে রাখো (Array.from বা spread)।',
+    },
+    question: 'What are the ways to create an array in JavaScript?',
+    answer: 'The array literal [] is the most preferred way due to simplicity and performance, while methods like Array.from() and the spread operator are useful for converting iterables.',
+    points: [
+      '1) Array literal: const arr = [1, 2, 3, 4]',
+      '2) Using the Array constructor: const arr = new Array(1, 2, 3, 4);',
+      '3) Using Array.of(): const arr = Array.of(5); // [5]',
+      '4) Using Array.from(): const arr = Array.from("hello"); // [\'h\',\'e\',\'l\',\'l\',\'o\']',
+      '5) Using the spread operator: const arr = [..."hello"];',
+    ],
+    code: `const arr = [1, 2, 3, 4];
+const arr = new Array(1, 2, 3, 4);
+const arr = Array.of(5);
+console.log(arr); // [5]
+const arr = Array.from("hello");
+console.log(arr); // ['h','e','l','l','o']
+const arr = [..."hello"];`,
+  },
+  {
+    id: 'nt-p38-6',
+    level: 'fresher',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 6,
+    notePage: 38,
+    simple: {
+      hi: 'Box model ek gift box jaisa hai. Andar gift (content) hai, uske charo taraf thermocol (padding), phir gatte ka dabba (border), aur dabbe ke bahar thodi khaali jagah (margin) taaki doosre dabbe se na takraye.',
+      en: 'The box model is like a gift box. Inside is the gift (content), around it is the soft packing (padding), then the cardboard box (border), and outside the box some empty space (margin) so it does not bump into other boxes.',
+      bn: 'Box model হলো একটা গিফট বক্সের মতো। ভেতরে উপহার (content), তার চারপাশে নরম প্যাকিং (padding), তারপর কার্ডবোর্ডের বাক্স (border), আর বাক্সের বাইরে একটু ফাঁকা জায়গা (margin), যাতে অন্য বাক্সে ধাক্কা না লাগে।',
+    },
+    question: 'What is the box model?',
+    answer: 'In the CSS box model every element is a rectangular box consisting of content, padding, border and margin, and box-sizing controls how width and height are calculated.',
+    points: [
+      'Diagram: four nested rectangles — outermost \'margin\', then \'border\', then \'padding\', with \'content\' in the centre.',
+    ],
+  },
+  {
+    id: 'nt-p38-7',
+    level: 'fresher',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 7,
+    notePage: 38,
+    simple: {
+      hi: 'Socho class mein ek bachcha hai. display: none matlab bachcha ghar chala gaya aur uski kursi bhi hata di, baaki sab khisak kar baith gaye. visibility: hidden matlab bachcha invisible cloak pehen kar baitha hai: dikhta nahi, par kursi abhi bhi bhari hai.',
+      en: 'Imagine a child in class. display: none means the child went home and the chair was removed too, so everyone else moved up. visibility: hidden means the child is wearing an invisibility cloak: you cannot see them, but the chair is still taken.',
+      bn: 'ভাবো ক্লাসে একটা বাচ্চা আছে। display: none মানে বাচ্চাটা বাড়ি চলে গেছে, চেয়ারটাও সরিয়ে দেওয়া হয়েছে, বাকিরা সরে এসে বসেছে। visibility: hidden মানে বাচ্চাটা অদৃশ্য চাদর গায়ে বসে আছে: দেখা যায় না, কিন্তু চেয়ারটা এখনও ভরা।',
+    },
+    question: 'What is the difference between visibility: hidden and display: none?',
+    answer: 'display: none — the element is completely removed from the layout (like it doesn\'t exist). visibility: hidden — the element is hidden but still occupies space in the layout. In short, display: none removes the element from the document flow, while visibility: hidden hides it but keeps its space in the layout.',
+    points: [
+      'display: none — element is not visible.',
+      'display: none — takes no space.',
+      'display: none — other elements shift to fill the space.',
+      'visibility: hidden — element is invisible.',
+      'visibility: hidden — still takes space.',
+      'visibility: hidden — layout does not change.',
+    ],
+  },
+  {
+    id: 'nt-p39-8',
+    level: 'fresher',
+    topic: 'css-advanced',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 8,
+    notePage: 39,
+    simple: {
+      hi: 'Media query ek darzi jaisa hai jo kapde ka naap dekh kar silai badalta hai. Chhota bachcha (mobile) aaye to chhota kapda, bada aadmi (desktop) aaye to bada kapda. Screen ka size dekh kar style badal jaata hai.',
+      en: 'A media query is like a tailor who changes the stitching based on the size. A small child (mobile) gets small clothes, a grown-up (desktop) gets big clothes. The style changes by looking at the screen size.',
+      bn: 'Media query হলো এক দর্জির মতো, যে মাপ দেখে সেলাই বদলায়। ছোট বাচ্চা (mobile) এলে ছোট জামা, বড় মানুষ (desktop) এলে বড় জামা। স্ক্রিনের সাইজ দেখে style বদলে যায়।',
+    },
+    question: 'What are media queries?',
+    answer: 'Media queries are used in CSS to apply styles based on different screen sizes, resolutions, or device conditions.',
+    code: `@media (max-width: 600px) {
+  body {
+    background-color: red;
+  }
+}`,
+  },
+  {
+    id: 'nt-p39-9',
+    level: 'fresher',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 9,
+    notePage: 39,
+    simple: {
+      hi: 'Pseudo-class ek mood ring jaisa hai: ungli rakho (hover) to rang badal jaata hai, button ki halat dekh kar style badalta hai. Pseudo-element poori cheez ki jagah sirf ek hissa sajata hai, jaise copy ke shuru mein ek sticker chipkana (::before).',
+      en: 'A pseudo-class is like a mood ring: put your finger on it (hover) and the colour changes, so the style changes with the element\'s state. A pseudo-element decorates only one part instead of the whole thing, like sticking a sticker at the start of a notebook (::before).',
+      bn: 'Pseudo-class হলো একটা মুড রিংয়ের মতো: আঙুল রাখলে (hover) রং বদলে যায়, element-এর অবস্থা দেখে style বদলায়। Pseudo-element পুরো জিনিসটা নয়, শুধু একটা অংশ সাজায়, যেমন খাতার শুরুতে একটা স্টিকার লাগানো (::before)।',
+    },
+    question: 'What is a pseudo-class in CSS?',
+    answer: 'A pseudo-class is a keyword added to a selector that defines a special state of an element. It lets you style elements based on user interaction, position, and state. Pseudo-elements are used to style specific parts of an element, not the whole element.',
+    points: [
+      'i) User interaction',
+      'ii) Position',
+      'iii) State',
+      'Pseudo-class examples: :hover, :active, :focus, :nth-child(2), :first-child.',
+      'Pseudo-element examples: ::before, ::after, ::first-element.',
+    ],
+    code: `selector:pseudo-class {
+  property: value;
+}
+
+button:hover {
+  color: red;
+}
+/* active, focus, nth-child(2), first-child */
+
+selector::pseudo-element {
+  property: value;
+}
+
+p::before {
+  content: "?";
+}
+/* ::after, ::first-element */`,
+    correction: 'There is no ::first-element pseudo-element; the real ones are ::first-letter and ::first-line (alongside ::before and ::after).',
+  },
+  {
+    id: 'nt-p40-10',
+    level: 'fresher',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 10,
+    notePage: 40,
+    simple: {
+      hi: 'Directive ek magic sticker jaisa hai jo HTML ko naya kaam sikhata hai. Component sticker apna poora chehra (template) laata hai, structural sticker cheezein dikhata ya chhupata hai, aur attribute sticker sirf rang-roop badalta hai.',
+      en: 'A directive is like a magic sticker that teaches HTML a new trick. A component sticker brings its own whole face (template), a structural sticker shows or hides things, and an attribute sticker only changes the look.',
+      bn: 'Directive হলো একটা জাদুর স্টিকারের মতো যা HTML-কে নতুন কাজ শেখায়। Component স্টিকার নিজের পুরো চেহারা (template) নিয়ে আসে, structural স্টিকার জিনিস দেখায় বা লুকায়, আর attribute স্টিকার শুধু রং-রূপ বদলায়।',
+    },
+    question: 'What are the different types of directives?',
+    answer: 'There are three types of directives in Angular: Component, Structural and Attribute directives.',
+    points: [
+      'Diagram: \'Different types of Directive\' branches into three boxes — Component, Structural and Attribute directives.',
+      'Component: directives with a template.',
+      'Structural: used to change the DOM structure (add/remove elements), e.g. *ngIf, *ngFor, *ngSwitch.',
+      'Attribute directives: used to change the appearance or behaviour of elements, e.g. ngClass, ngStyle — changes style dynamically.',
+    ],
+    code: `@Component({
+  selector: 'app-example',
+  template: '<h1>Hello</h1>'
+})
+
+<p [ngStyle]="{color: 'red'}">Text</p>`,
+    correction: 'Modern Angular (v17+) prefers the built-in @if/@for/@switch control flow over *ngIf/*ngFor/*ngSwitch, and inline templates are normally written with backticks.',
+  },
+  {
+    id: 'nt-p40-11',
+    level: 'junior',
+    topic: 'forms',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 11,
+    notePage: 40,
+    simple: {
+      hi: 'Reactive form banana ek tiffin pack karne jaisa hai. FormControl ek akela dabba hai, FormGroup kai dabbon wala tiffin hai, aur FormBuilder ek helper hai jo jaldi se poora tiffin pack kar deta hai.',
+      en: 'Making a reactive form is like packing a lunch box. FormControl is one single box, FormGroup is a tiffin with many boxes, and FormBuilder is a helper who packs the whole tiffin quickly for you.',
+      bn: 'Reactive form বানানো একটা টিফিন বাক্স গোছানোর মতো। FormControl হলো একটা একা বাক্স, FormGroup হলো অনেক বাক্সওয়ালা টিফিন, আর FormBuilder হলো একজন সাহায্যকারী যে তাড়াতাড়ি পুরো টিফিন গুছিয়ে দেয়।',
+    },
+    question: 'What are the different ways to create a reactive form?',
+    answer: 'There are 3 main ways. (1) Using FormControl (basic way): used for a single input control; simple but not scalable for large forms. (2) Using FormGroup (most common): structured and widely used, used to group multiple form controls. (3) Using FormBuilder (best practice): shortcut and cleaner syntax, less code and easy to manage large forms; preferred in real projects. So, a reactive form in Angular can be created using FormControl, FormGroup or FormBuilder, where FormBuilder is preferred due to cleaner and more maintainable code.',
+    points: [
+      'FormControl — basic way, for a single input control; simple but not scalable for large forms.',
+      'FormGroup — most common, structured and widely used; groups multiple form controls.',
+      'FormBuilder — best practice; shortcut and cleaner syntax, less code, easy to manage large forms, preferred in real projects.',
+    ],
+    code: `// 1) FormControl
+import { FormControl } from '@angular/forms';
+name = new FormControl('');
+
+<input [formControl]="name">
+
+// 2) FormGroup
+import { FormGroup, FormControl } from '@angular/forms';
+form = new FormGroup({
+  name: new FormControl(''),
+  email: new FormControl(''),
+});
+
+<form [formGroup]="form">
+  <input formControlName="name">
+  <input formControlName="email">
+</form>
+
+// 3) FormBuilder
+import { FormBuilder } from '@angular/forms';
+constructor(private fb: FormBuilder) {}
+form = this.fb.group({
+  name: [''],
+  email: [''],
+});`,
+    correction: 'In modern Angular, FormBuilder is usually obtained with inject(FormBuilder) (or NonNullableFormBuilder) instead of constructor injection, and the package is \'@angular/forms\', not \'@angular/form\'.',
+  },
+  {
+    id: 'nt-p41-12',
+    level: 'fresher',
+    topic: 'routing',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 12,
+    notePage: 41,
+    simple: {
+      hi: 'router-outlet ek TV screen jaisa hai. Jab tum remote se channel (URL) badalte ho, screen par us channel ka program (component) dikhne lagta hai. Ek ghar mein kai TV bhi ho sakte hain, waise hi kai router-outlet ho sakte hain.',
+      en: 'router-outlet is like a TV screen. When you change the channel (URL) with the remote, that channel\'s show (component) appears on the screen. A house can have many TVs, just like an app can have many router-outlets.',
+      bn: 'router-outlet হলো একটা টিভি স্ক্রিনের মতো। রিমোট দিয়ে চ্যানেল (URL) বদলালে স্ক্রিনে সেই চ্যানেলের অনুষ্ঠান (component) দেখা যায়। একটা বাড়িতে অনেক টিভি থাকতে পারে, তেমনি অনেক router-outlet-ও থাকতে পারে।',
+    },
+    question: 'What does router-outlet do? Can we use more than one router outlet in a single project?',
+    answer: 'router-outlet is a directive in Angular that acts as a placeholder where routed components are dynamically loaded. When the user clicks /home, HomeComponent loads inside the router-outlet; /about loads AboutComponent inside the router-outlet. Yes, we can use multiple router outlets in a single project.',
+    points: [
+      'How it works: i) Angular checks the current URL.',
+      'ii) Matches it with the route config.',
+      'iii) Loads that component into the router-outlet.',
+    ],
+    code: `<a routerLink="/home">Home</a>
+<a routerLink="/about">About</a>
+<router-outlet></router-outlet>`,
+  },
+  {
+    id: 'nt-p42-13',
+    level: 'mid',
+    topic: 'fundamentals',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 13,
+    notePage: 42,
+    simple: {
+      hi: 'Naya Angular ek naye model ke phone jaisa hai. Signals ek smart notification hai jo sirf badli cheez batata hai, @if/@for aasaan shortcuts hain, zoneless matlab battery bachane wala mode, aur @defer bhaari app ko tabhi kholta hai jab zaroorat ho.',
+      en: 'New Angular is like a newer phone model. Signals are smart notifications that only tell you what changed, @if/@for are easy shortcuts, zoneless is a battery-saving mode, and @defer opens heavy apps only when you need them.',
+      bn: 'নতুন Angular হলো নতুন মডেলের ফোনের মতো। Signals হলো স্মার্ট নোটিফিকেশন যা শুধু বদলানো জিনিসটা জানায়, @if/@for সহজ শর্টকাট, zoneless মানে ব্যাটারি বাঁচানোর মোড, আর @defer ভারী অ্যাপ শুধু দরকার হলে খোলে।',
+    },
+    question: 'In recent versions of Angular (up to Angular 21), what new features have we got?',
+    answer: 'Recent Angular versions bring Signals, the new control flow syntax, improved (zoneless) change detection and deferrable views.',
+    points: [
+      'Signals: i) new reactive system (alternative to RxJS for state); ii) simpler and faster change detection.',
+      'New control flow syntax: replaces *ngIf, *ngFor with @if, @for.',
+      'Improved change detection (zoneless): option to remove Zone.js, better performance, works well with signals.',
+      'Deferrable views (lazy rendering): load components only when needed, using @defer { <heavy-component /> }.',
+    ],
+    code: `@defer {
+  <heavy-component />
+}`,
+    correction: 'In Angular v21 zoneless change detection is the default for new apps (not just an option), and standalone components and Vitest are also defaults.',
+  },
+  {
+    id: 'nt-p43-14',
+    level: 'junior',
+    topic: 'http',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 14,
+    notePage: 43,
+    simple: {
+      hi: 'Yeh restaurant jaisa hai. Service waiter hai jo kitchen (API) se khana (employee list) laata hai, component table par plate rakhta hai, aur jab tak khana nahi aata tab tak \'loading\' board dikhata hai.',
+      en: 'It is like a restaurant. The service is the waiter who brings food (employee list) from the kitchen (API), the component puts the plates on the table, and shows a \'loading\' board until the food arrives.',
+      bn: 'এটা একটা রেস্টুরেন্টের মতো। Service হলো ওয়েটার যে রান্নাঘর (API) থেকে খাবার (employee list) আনে, component টেবিলে প্লেট সাজায়, আর খাবার না আসা পর্যন্ত \'loading\' বোর্ড দেখায়।',
+    },
+    question: 'If we have an API which returns an employee list and I want to display the employee data in a table, how will you do it in Angular?',
+    answer: 'I would use a service with HttpClient to fetch the data, subscribe in the component and render it using ngFor while handling loading and error states. For better performance and scalability, I would use trackBy and proper typing with interfaces.',
+    correction: 'In modern Angular you would typically render with @for (which requires a track expression) and can use the async pipe, toSignal() or httpResource() instead of a manual subscribe.',
+  },
+  {
+    id: 'nt-p43-15',
+    level: 'junior',
+    topic: 'rxjs',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 15,
+    notePage: 43,
+    simple: {
+      hi: 'Observable ek paani ki pipe jaisa hai jisme se time ke saath boondein (data) aati rehti hain, aur subscribe matlab balti neeche rakhna. RxJS operators filter ya tap jaise hain jo paani ko saaf karte, badalte ya rokte hain.',
+      en: 'An observable is like a water pipe where drops (data) keep coming over time, and subscribe means putting a bucket under it. RxJS operators are like filters and taps that clean, change or pause the water.',
+      bn: 'Observable হলো একটা জলের পাইপের মতো যেখান থেকে সময়ের সাথে ফোঁটা ফোঁটা (data) আসতে থাকে, আর subscribe মানে নিচে বালতি রাখা। RxJS operator-গুলো ফিল্টার বা কলের মতো যা জল পরিষ্কার করে, বদলায় বা থামায়।',
+    },
+    question: 'What is RxJS, and which RxJS operators do you know?',
+    answer: 'RxJS (Reactive Extensions for JavaScript) is a library for handling asynchronous data streams using observables. It is used heavily in Angular for HTTP calls, events and state management. In simple terms, RxJS allows us to work with async data like API responses, user events or streams in a reactive way. Here the API response is an observable stream and subscribe() means listening to the data. An observable is a stream of data over time: it can emit multiple values and can be async.',
+    points: [
+      'Example: this.http.get(\'/api/users\').subscribe(...) — API response = observable stream, subscribe() = listening to data (side note: \'How to create observables\').',
+      'What is an Observable? A stream of data over time; can emit multiple values; can be async.',
+      'map — transform data: map(data => data.name)',
+      'filter — filter values: filter(user => user.active)',
+      'tap — debug / side effects: tap(data => console.log(data))',
+      'switchMap — cancels the previous request and switches to the new one; used in search APIs.',
+      'mergeMap — runs multiple requests in parallel.',
+      'concatMap — executes requests one by one.',
+      'debounceTime — search use-case; waits before firing the API: debounceTime(300)',
+      'catchError — handles errors: catchError(() => of([]))',
+    ],
+    code: `this.http.get('/api/users').subscribe(data => {
+  console.log(data);
+});
+
+map(data => data.name)
+filter(user => user.active)
+tap(data => console.log(data))
+switchMap(() => this.http.get('/api/data'))
+mergeMap(() => this.http.get('/api/data'))
+debounceTime(300)
+catchError(() => of([]))`,
+  },
+  {
+    id: 'nt-p45-1',
+    level: 'mid',
+    topic: 'architecture',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 1,
+    notePage: 45,
+    simple: {
+      hi: 'Core module ghar ke main switchboard jaisa hai — ek hi hota hai aur poore ghar ko bijli deta hai. Shared module ek toolbox jaisa hai — har kamre mein le ja sakte ho aur uske tools baar-baar use kar sakte ho.',
+      en: 'The Core module is like the main switchboard of a house — there is only one and it powers the whole house. The Shared module is like a toolbox — you can carry it to every room and use its tools again and again.',
+      bn: 'Core module হলো বাড়ির মেইন সুইচবোর্ডের মতো — একটাই থাকে আর পুরো বাড়িতে বিদ্যুৎ দেয়। Shared module হলো একটা টুলবক্সের মতো — যেকোনো ঘরে নিয়ে যাওয়া যায় আর তার যন্ত্রপাতি বারবার ব্যবহার করা যায়।',
+    },
+    question: 'What are Core and Shared modules? Explain the difference with a practical example.',
+    answer: 'The Core module is used for singleton services and application-wide functionality like authentication, interceptors and guards. It should be imported only once in AppModule. The Shared module is used for reusable components, pipes, directives and common Angular modules that are shared across multiple feature modules. Shared modules can be imported multiple times.',
+    points: [
+      'Folder diagram (Core module): app/ > core/ > services/, guards/, interceptors/, component/, core.module.ts',
+      'Folder diagram (Shared module): app/ > shared/ > components/, pipes/, directives/, shared.module.ts',
+    ],
+    correction: 'With standalone components (generated since v17, default since v19) NgModules are optional; app-wide singletons now use providedIn: \'root\' or providers in app.config.ts, and reusable pieces are imported directly as standalone components/pipes/directives.',
+  },
+  {
+    id: 'nt-p45-2',
+    level: 'mid',
+    topic: 'rxjs',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 2,
+    notePage: 45,
+    simple: {
+      hi: 'fromEvent ek doorbell ke saath laga recorder jaisa hai. Har baar koi bell bajata hai (click ya keyup), recorder use ek message bana kar observable stream mein bhej deta hai, aur debounceTime thoda rukta hai taaki baar-baar bajne par pareshan na ho.',
+      en: 'fromEvent is like a recorder attached to a doorbell. Every time someone rings it (a click or keyup), the recorder turns it into a message in an observable stream, and debounceTime waits a little so repeated rings don\'t bother you.',
+      bn: 'fromEvent হলো কলিং বেলের সাথে লাগানো একটা রেকর্ডারের মতো। প্রতিবার কেউ বেল বাজালে (click বা keyup), রেকর্ডার সেটাকে observable stream-এ একটা মেসেজ বানিয়ে পাঠায়, আর debounceTime একটু অপেক্ষা করে যাতে বারবার বাজলে বিরক্ত না হতে হয়।',
+    },
+    question: 'Give a practical example of the fromEvent operator.',
+    answer: 'fromEvent is an RxJS operator used to convert button clicks, keyboard typing, mouse movement, window resize and scroll events into an observable. fromEvent is an RxJS creation operator that converts DOM events into observables. For example, in Angular search functionality we can use fromEvent with keyup events to listen to user typing and combine it with operators like debounceTime to optimize API calls.',
+    points: [
+      'Button click',
+      'Keyboard typing',
+      'Mouse movement',
+      'Window resize',
+      'Scroll event',
+    ],
+  },
+  {
+    id: 'nt-p46-3',
+    level: 'mid',
+    topic: 'http',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 3,
+    notePage: 46,
+    simple: {
+      hi: 'Access token ek movie ticket jaisa hai jo thodi der hi chalta hai. Refresh token ek membership card jaisa hai — ticket expire hone par tum card dikha kar naya ticket le lete ho, dobara line mein lag kar register nahi karna padta.',
+      en: 'An access token is like a movie ticket that works only for a short time. A refresh token is like a membership card — when the ticket expires, you show the card and get a new ticket without standing in line to register again.',
+      bn: 'Access token হলো একটা সিনেমার টিকিটের মতো যা অল্প সময়ের জন্য চলে। Refresh token হলো একটা মেম্বারশিপ কার্ডের মতো — টিকিটের মেয়াদ শেষ হলে কার্ড দেখিয়ে নতুন টিকিট নেওয়া যায়, আবার লাইনে দাঁড়িয়ে রেজিস্টার করতে হয় না।',
+    },
+    question: 'What is an access token and a refresh token?',
+    answer: 'Access token: an access token is a temporary key given after login. The frontend sends it with API requests to prove that the user is authenticated. Problem with only an access token: if the token expires quickly, the user gets logged out frequently, which is a bad user experience. So we use a refresh token. Refresh token: a refresh token is used to generate a new access token without asking the user to log in again. In short: an access token is a short-lived token used to authenticate API requests. A refresh token is a long-lived token used to generate a new access token when the old one expires. This improves both security and user experience because users don\'t need to log in repeatedly.',
+    points: [
+      'After login the backend returns: { "accessToken": "short-lived", "refreshToken": "long-lived" }',
+      'API requests use the access token — HTTP header Authorization: Bearer <short-lived token>.',
+      'When the access token expires, the API returns 401 Unauthorized.',
+      'Frontend sends the refresh token — HTTP POST /refresh-token; backend checks the refresh token and gives a new access token; user stays logged in.',
+    ],
+    code: `{ "accessToken": "short-lived", "refreshToken": "long-lived" }
+
+Authorization: Bearer short-lived
+
+if (error.status === 401) {
+  return this.authService.refreshToken
+}`,
+  },
+  {
+    id: 'nt-p47-4',
+    level: 'mid',
+    topic: 'performance',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 4,
+    notePage: 47,
+    simple: {
+      hi: 'App ko fast banana school bag halka karne jaisa hai. Sirf aaj ki kitaabein rakho (lazy loading), har baar poora bag mat kholo (OnPush), purane kaagaz phenko (unsubscribe), aur bhaari cheezein compress karke rakho.',
+      en: 'Making the app fast is like making a school bag lighter. Carry only today\'s books (lazy loading), don\'t open the whole bag every time (OnPush), throw away old papers (unsubscribe), and pack heavy things compactly.',
+      bn: 'অ্যাপ দ্রুত করা মানে স্কুলব্যাগ হালকা করার মতো। শুধু আজকের বই রাখো (lazy loading), প্রতিবার পুরো ব্যাগ খুলো না (OnPush), পুরনো কাগজ ফেলে দাও (unsubscribe), আর ভারী জিনিস ছোট করে গুছিয়ে রাখো।',
+    },
+    question: 'How can you improve Angular application performance?',
+    answer: 'To improve Angular performance I use lazy loading, OnPush change detection, trackBy in ngFor, the async pipe and proper subscription cleanup. I also optimize API calls using debounceTime, reduce bundle size, avoid heavy template functions, and use production builds with tree shaking and minification.',
+    points: [
+      '1) Lazy loading: load modules only when needed; improves initial load time.',
+      '2) Use OnPush change detection: Angular normally checks all components frequently; OnPush reduces unnecessary checks and improves rendering performance.',
+      '3) Use trackBy in *ngFor: without trackBy, Angular re-renders the whole list; better for large lists.',
+      '4) Unsubscribe observables: avoid memory leaks — this.destroy$.next(); this.destroy$.complete(); prevents unnecessary memory usage.',
+      '5) Use async pipe instead of manual subscribe: {{ users$ | async }} — Angular automatically unsubscribes.',
+      '6) Debounce API calls: useful for search input, debounceTime(500); reduces unnecessary API requests.',
+      '7) Optimize images & assets: compress images, use WebP, lazy load images with <img loading="lazy">.',
+      '8) Avoid heavy functions in templates: {{ calculateTotal() }} is bad because the function runs repeatedly during change detection; better: total = this.calculateTotal();',
+      '9) Enable production build: ng build --configuration production — this does minification, tree shaking, optimization.',
+      '10) Use pure pipes: pure pipes execute only when the input changes — reduces unnecessary calculations.',
+    ],
+    code: `@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+<li *ngFor="let user of users; trackBy: trackById">
+
+trackById(index: number, item: any) {
+  return item.id;
+}
+
+this.destroy$.next();
+this.destroy$.complete();
+
+{{ users$ | async }}
+
+debounceTime(500)
+
+<img loading="lazy">
+
+// Bad
+{{ calculateTotal() }}
+// Better
+total = this.calculateTotal();
+
+ng build --configuration production`,
+    correction: 'In modern Angular, @for requires a track expression (replacing trackBy), takeUntilDestroyed() replaces the destroy$ pattern, signals/computed() avoid heavy template functions, and production is already the default ng build configuration.',
+  },
+  {
+    id: 'nt-p49-5',
+    level: 'mid',
+    topic: 'performance',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 5,
+    notePage: 49,
+    simple: {
+      hi: 'Server-side rendering ek ready-made pizza jaisa hai. Restaurant (server) pehle se pizza bana kar bhejta hai, to tum turant kha sakte ho, ghar par bana kar wait nahi karna padta (browser).',
+      en: 'Server-side rendering is like a ready-made pizza. The restaurant (server) makes the pizza and sends it, so you can eat right away instead of waiting to cook it at home (browser).',
+      bn: 'Server-side rendering হলো রেডিমেড পিৎজার মতো। রেস্টুরেন্ট (server) আগে থেকেই পিৎজা বানিয়ে পাঠায়, তাই সঙ্গে সঙ্গে খাওয়া যায়, বাড়িতে (browser) বানানোর জন্য অপেক্ষা করতে হয় না।',
+    },
+    question: 'What is Angular Universal, and why is it used?',
+    answer: 'Angular Universal is Angular\'s server-side rendering solution. It renders Angular pages on the server and sends pre-rendered HTML to the browser. It is mainly used for better SEO, faster initial page load, improved performance metrics and better social media previews.',
+    correction: 'Since Angular v17 Angular Universal has been replaced by the built-in @angular/ssr package (ng add @angular/ssr / ng new --ssr) with hydration.',
+  },
+  {
+    id: 'nt-p50-6',
+    level: 'senior',
+    topic: 'architecture',
+    difficulty: 'hard',
+    source: 'notes',
+    noteNo: 6,
+    notePage: 50,
+    simple: {
+      hi: 'Dynamic component ek khaali photo frame jaisa hai jisme tum zaroorat ke hisaab se koi bhi photo (component) baad mein laga sakte ho. ViewContainerRef woh frame hai aur createComponent() photo lagane ka kaam karta hai.',
+      en: 'A dynamic component is like an empty photo frame where you can put any photo (component) later, whenever you need. ViewContainerRef is the frame and createComponent() puts the photo in.',
+      bn: 'Dynamic component হলো একটা খালি ফটো ফ্রেমের মতো, যেখানে দরকার মতো পরে যেকোনো ছবি (component) লাগানো যায়। ViewContainerRef হলো সেই ফ্রেম আর createComponent() ছবিটা লাগানোর কাজ করে।',
+    },
+    question: 'How do you dynamically load a component in Angular?',
+    answer: 'Dynamic component loading in Angular means creating components at runtime instead of declaring them directly in templates. We usually use ViewContainerRef and createComponent() for this. It is useful for modals, dynamic dashboards, role-based UI rendering and reusable widget systems.',
+    points: [
+      'Examples: popup/modal',
+      'Dynamic dashboard widgets',
+      'Role-based UI',
+      'Tabs',
+    ],
+  },
+  {
+    id: 'nt-p50-7',
+    level: 'junior',
+    topic: 'templates',
+    difficulty: 'easy',
+    source: 'notes',
+    noteNo: 7,
+    notePage: 50,
+    simple: {
+      hi: 'Custom pipe ek juice machine jaisa hai. Tum usme phal (data) daalte ho aur woh tumhare pasand ka juice (format kiya hua text) nikaal deta hai. Machine ka asli kaam transform() ke andar hota hai.',
+      en: 'A custom pipe is like a juice machine. You put fruit (data) in and it gives out the juice you like (formatted text). The machine\'s real work happens inside transform().',
+      bn: 'Custom pipe হলো একটা জুস মেশিনের মতো। তুমি ফল (data) দাও আর সে তোমার পছন্দের জুস (format করা text) বের করে দেয়। মেশিনের আসল কাজটা হয় transform()-এর ভিতরে।',
+    },
+    question: 'How do you create a custom pipe in Angular?',
+    answer: 'A custom pipe in Angular is used to transform data in templates. We create it using the @Pipe decorator and implement the PipeTransform interface. The main logic is written inside the transform() method. Custom pipes help make templates cleaner and reusable.',
+    points: [
+      'Examples: capitalize text',
+      'Format phone numbers',
+      'Filter data',
+      'Shorten long text',
+      'CLI note: ng g p capitalize',
+    ],
+    code: `ng g p capitalize`,
+  },
+  {
+    id: 'nt-p51-8',
+    level: 'junior',
+    topic: 'di',
+    difficulty: 'medium',
+    source: 'notes',
+    noteNo: 8,
+    notePage: 51,
+    simple: {
+      hi: 'Injector ek school ke store-room wale uncle jaisa hai. Tumhe pencil (service) chahiye to khud mat banao — uncle se maango, woh de denge, aur sabko wahi ek shared box milta hai.',
+      en: 'The injector is like the store-room keeper at school. If you need a pencil (service), you don\'t make it yourself — you ask him and he gives it, and everyone gets things from the same shared box.',
+      bn: 'Injector হলো স্কুলের স্টোররুমের কাকুর মতো। পেন্সিল (service) দরকার হলে নিজে বানাতে হয় না — কাকুকে চাইলেই দিয়ে দেন, আর সবাই একই শেয়ার করা বাক্স থেকে পায়।',
+    },
+    question: 'What is the role of the injector in Angular?',
+    answer: 'The injector is a core part of Angular\'s dependency injection system. Its role is to create and provide service instances to components or other services. It also manages dependency lifecycle and maintains singleton instances using Angular\'s hierarchical injector system. Simple understanding: suppose a component needs AuthService. Instead of manually creating it (const auth = new AuthService();), the Angular injector automatically creates and provides it through the constructor; the injector handles this internally.',
+    points: [
+      'Main roles of the injector:',
+      'i) Create service instances.',
+      'ii) Provide dependencies — injects services into components, directives, pipes and other services.',
+      'iii) Maintain singleton instances — usually creates a shared instance with providedIn: \'root\'; the same service instance is used across the app.',
+    ],
+    code: `// Instead of
+const auth = new AuthService();
+
+// Angular injector provides it
+constructor(private authService: AuthService) {}
+
+providedIn: 'root'`,
+    correction: 'Modern Angular commonly uses the inject() function (e.g. private authService = inject(AuthService)) instead of constructor injection.',
+  },
+];

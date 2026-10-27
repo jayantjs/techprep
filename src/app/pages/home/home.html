@@ -1,0 +1,130 @@
+<section class="hero">
+  <p class="eyebrow">Tech Interview Prep · Fresher to Senior</p>
+  <h1>Crack your next <span class="gradient-text">{{ track().title }}</span> interview</h1>
+  <p class="lead">
+    Pick a technology and your experience level, and get the questions interviewers actually ask —
+    with answers, code, simple explanations, flashcards and quizzes.
+  </p>
+</section>
+
+<section>
+  <h2>Step 1 · Choose a technology</h2>
+  <div class="tech-grid" role="radiogroup" aria-label="Technology">
+    @for (t of tracks; track t.id) {
+      <button
+        type="button"
+        role="radio"
+        class="tech-card"
+        [class.is-active]="track().id === t.id"
+        [attr.aria-checked]="track().id === t.id"
+        (click)="progress.track.set(t.id)"
+      >
+        <span class="monogram">{{ t.short }}</span>
+        <span class="topic-text">
+          <strong>{{ t.title }}</strong>
+          <small>{{ t.topicCount }} topics</small>
+        </span>
+      </button>
+    }
+  </div>
+</section>
+
+<section class="exp-section" [class.is-unset]="!selected()">
+  <div class="section-head">
+    <h2>Step 2 · {{ selected() ? 'Your experience' : 'Select your experience' }}</h2>
+    <button type="button" class="chip" [class.is-active]="!selected()" (click)="choose(null)">
+      All levels · {{ allCount() }}
+    </button>
+  </div>
+  <div class="exp-grid" role="radiogroup" aria-label="Experience level">
+    @for (level of levels(); track level.id) {
+      <button
+        type="button"
+        role="radio"
+        class="exp-card"
+        [class.is-active]="selected()?.id === level.id"
+        [attr.aria-checked]="selected()?.id === level.id"
+        (click)="choose(level.id)"
+      >
+        <span class="exp-years">{{ level.years }}</span>
+        <strong>{{ level.label }}</strong>
+        <small>{{ level.focus }}</small>
+        <span class="exp-count">{{ level.count }} questions</span>
+      </button>
+    }
+  </div>
+  @if (track().id === 'angular') {
+    <div class="spotlight">
+      <a class="spotlight-card" routerLink="/topic/scenarios">
+        <span class="monogram">Sc</span>
+        <span><strong>Real-world scenarios</strong><small>"Users double-click Save", "401 after token expiry", "app takes 8 s to load"…</small></span>
+      </a>
+      <a class="spotlight-card" routerLink="/topic/coding">
+        <span class="monogram">&lt;/&gt;</span>
+        <span><strong>Coding challenges</strong><small>Counter, todo, search, guards, interceptors, cart store — full solutions.</small></span>
+      </a>
+    </div>
+  }
+  @if (selected(); as s) {
+    <p class="muted exp-note">
+      Showing {{ total() }} {{ track().title }} questions for
+      <strong>{{ s.label }} ({{ s.years }})</strong> — includes lower-level basics too, since
+      interviewers usually start there.
+    </p>
+  }
+  <div class="hero-actions">
+    <a class="btn btn-primary" routerLink="/practice">Start practicing</a>
+    <a class="btn" routerLink="/flashcards">Flashcards</a>
+    <a class="btn" routerLink="/quiz">Take a quiz · {{ quizCount() }} MCQs</a>
+    <a class="btn" routerLink="/mock">🎤 Mock interview</a>
+    <a class="btn" routerLink="/kbc">🏆 KBC</a>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <span class="stat-value">{{ pct() }}%</span>
+    <span class="stat-label">{{ track().title }} mastery</span>
+    <div class="bar"><div class="bar-fill" [style.width.%]="pct()"></div></div>
+  </div>
+  <div class="stat">
+    <span class="stat-value text-known">{{ known() }}</span>
+    <span class="stat-label">Known of {{ total() }}</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value text-review">{{ review() }}</span>
+    <span class="stat-label">To revise</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value">{{ progress.bestQuizPct() }}%</span>
+    <span class="stat-label">Best quiz score</span>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <h2>{{ track().title }} topics</h2>
+    <button type="button" class="btn btn-sm btn-ghost" (click)="resetProgress()">Reset progress</button>
+  </div>
+  @if (loading()) {
+    <p class="empty">Loading {{ track().title }} questions…</p>
+  } @else {
+    <div class="topic-grid">
+      @for (t of topics(); track t.id) {
+        <a class="topic-card" [routerLink]="['/topic', t.id]">
+          <span class="monogram">{{ t.short }}</span>
+          <span class="topic-text">
+            <strong>{{ t.title }}</strong>
+            <small>{{ t.description }}</small>
+          </span>
+          <span class="topic-progress">
+            <span class="bar"><span class="bar-fill" [style.width.%]="t.pct"></span></span>
+            <small>{{ t.known }}/{{ t.count }} known</small>
+          </span>
+        </a>
+      } @empty {
+        <p class="empty">No questions for this level yet — try "All levels".</p>
+      }
+    </div>
+  }
+</section>

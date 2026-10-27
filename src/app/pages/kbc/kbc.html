@@ -1,0 +1,179 @@
+<div class="kbc">
+  @switch (phase()) {
+    @case ('intro') {
+      <div class="kbc-intro">
+        <p class="kbc-eyebrow">{{ track().title }} edition</p>
+        <h1>🏆 Who Will Be a Crorepati?</h1>
+        <p class="kbc-lead">
+          {{ gameSize() }} questions, from ₹1,000 to
+          <strong>₹1 Crore</strong>. Questions get harder as the prize grows.
+        </p>
+        <ul class="kbc-rules">
+          <li>🔒 Pick an answer, then <strong>Lock the answer</strong> — no changes after that.</li>
+          <li>🛟 Safe havens at <strong>₹10,000</strong> and <strong>₹3,20,000</strong> — a wrong answer after them still pays that much.</li>
+          <li>⏱ 45 s for questions 1–5, 60 s for 6–10, no timer after that.</li>
+          <li>🏳️ You can quit before locking and take home what you've won.</li>
+          <li>Lifelines, once each: <strong>50:50</strong>, <strong>👥 Audience Poll</strong>, <strong>🎓 Ask the Expert</strong>, <strong>🔄 Flip the Question</strong>.</li>
+        </ul>
+        @if (best()) {
+          <p class="kbc-best">Your best in {{ track().title }}: <strong>{{ rupees(best()) }}</strong></p>
+        }
+        <button type="button" class="kbc-btn kbc-btn-gold" [disabled]="!poolSize()" (click)="start()">
+          Start the game ▶
+        </button>
+        @if (!poolSize()) {
+          <p class="kbc-lead">No quiz questions for {{ track().title }} yet.</p>
+        }
+        <a class="kbc-link" routerLink="/quiz">← Back to the normal quiz</a>
+      </div>
+    }
+
+    @default {
+      @if (current(); as q) {
+        <div class="kbc-stage">
+          <div class="kbc-main">
+            <div class="kbc-top">
+              <span class="kbc-pill">Question {{ index() + 1 }} / {{ questions().length }}</span>
+              <span class="kbc-pill kbc-pill-gold">
+                Playing for {{ rupees(playingFor()) }}{{ isMilestone() ? ' 🛟' : '' }}
+              </span>
+              @if (timeLimit() && phase() === 'question') {
+                <span class="kbc-timer" [class.is-low]="timeLeft() <= 10">{{ timeLeft() }}</span>
+              }
+            </div>
+
+            <div class="kbc-lifelines" role="group" aria-label="Lifelines">
+              @for (l of lifelineInfo; track l.id) {
+                <button
+                  type="button"
+                  class="kbc-lifeline"
+                  [class.is-used]="used()[l.id]"
+                  [disabled]="used()[l.id] || phase() !== 'question'"
+                  [attr.aria-label]="l.label"
+                  [title]="l.label"
+                  (click)="useLifeline(l.id)"
+                >
+                  {{ l.icon }}
+                </button>
+              }
+            </div>
+
+            <div class="kbc-question">
+              <small>{{ topicMap[q.topic].title }}</small>
+              <p>{{ q.question }}</p>
+            </div>
+
+            <div class="kbc-options">
+              @for (option of q.options; track $index; let i = $index) {
+                <button
+                  type="button"
+                  class="kbc-option"
+                  [attr.data-state]="optionState(i)"
+                  [disabled]="phase() !== 'question' || removed().includes(i)"
+                  (click)="choose(i)"
+                >
+                  <span class="kbc-letter">{{ letters[i] }}:</span>
+                  <span>{{ removed().includes(i) ? '' : option }}</span>
+                </button>
+              }
+            </div>
+
+            @if (poll(); as votes) {
+              <div class="kbc-panel">
+                <strong>👥 Audience poll</strong>
+                <div class="kbc-poll">
+                  @for (v of votes; track $index; let i = $index) {
+                    @if (!removed().includes(i)) {
+                      <div class="kbc-poll-col">
+                        <span class="kbc-poll-bar"><span [style.height.%]="v"></span></span>
+                        <small>{{ letters[i] }} · {{ v }}%</small>
+                      </div>
+                    }
+                  }
+                </div>
+              </div>
+            }
+            @if (expert(); as e) {
+              <div class="kbc-panel">
+                <p class="kbc-expert">
+                  <strong>🎓 Expert:</strong>
+                  {{ e.sure ? "I'm quite sure" : "I think so, but I'm not certain" }} — the answer should be
+                  <strong>{{ letters[e.option] }}</strong>.
+                </p>
+              </div>
+            }
+
+            @switch (phase()) {
+              @case ('question') {
+                <div class="kbc-actions">
+                  <button type="button" class="kbc-btn kbc-btn-gold" [disabled]="selected() === null" (click)="lock()">
+                    🔒 Lock the answer
+                  </button>
+                  <button type="button" class="kbc-btn" (click)="quit()">
+                    🏳️ Quit with {{ rupees(banked()) }}
+                  </button>
+                </div>
+              }
+              @case ('locked') {
+                <p class="kbc-suspense">Locking answer {{ letters[selected()!] }}… final answer!</p>
+              }
+              @case ('correct') {
+                <div class="kbc-panel kbc-win">
+                  <strong>✅ Correct answer! You have won {{ rupees(playingFor()) }}</strong>
+                  @if (isMilestone()) {
+                    <span>🛟 Milestone reached — {{ rupees(playingFor()) }} is now guaranteed!</span>
+                  }
+                  <small>{{ q.explanation }}</small>
+                </div>
+                <div class="kbc-actions">
+                  <button type="button" class="kbc-btn kbc-btn-gold" (click)="next()">Next question ▶</button>
+                </div>
+              }
+              @case ('over') {
+                <div class="kbc-panel kbc-over">
+                  @switch (outcome()) {
+                    @case ('won') {
+                      <h2>🎉 Congratulations! You are a Crorepati!</h2>
+                    }
+                    @case ('quit') {
+                      <h2>🏳️ You quit the game</h2>
+                    }
+                    @case ('timeout') {
+                      <h2>⏱ Time's up!</h2>
+                    }
+                    @default {
+                      <h2>❌ Wrong answer</h2>
+                    }
+                  }
+                  <p class="kbc-prize">You take home <strong>{{ rupees(winnings()) }}</strong></p>
+                  @if (outcome() !== 'won') {
+                    <small>
+                      The correct answer was <strong>{{ letters[q.correct] }}: {{ q.options[q.correct] }}</strong> — {{ q.explanation }}
+                    </small>
+                  }
+                </div>
+                <div class="kbc-actions">
+                  <button type="button" class="kbc-btn kbc-btn-gold" (click)="start()">Play again ▶</button>
+                  <a class="kbc-btn" routerLink="/quiz">Normal quiz</a>
+                </div>
+              }
+            }
+          </div>
+
+          <ol class="kbc-ladder" aria-label="Prize ladder">
+            @for (step of ladderView(); track step.i) {
+              <li
+                [class.is-current]="step.i === index()"
+                [class.is-done]="step.i < index()"
+                [class.is-milestone]="step.milestone"
+              >
+                <span>{{ step.i + 1 }}</span>
+                <span>{{ rupees(step.amount) }}</span>
+              </li>
+            }
+          </ol>
+        </div>
+      }
+    }
+  }
+</div>

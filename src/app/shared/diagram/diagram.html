@@ -1,0 +1,301 @@
+<figure class="dg">
+  @switch (id()) {
+    @case ('data-binding') {
+      <div class="dg-bind">
+        <div class="dg-node dg-accent">Component class (.ts)</div>
+        <div class="dg-bind-rows">
+          <div class="dg-bind-row"><code>{{ interpolationExample }}</code><span class="dg-dir">class → view</span><small>Interpolation</small></div>
+          <div class="dg-bind-row"><code>[src]="url"</code><span class="dg-dir">class → view</span><small>Property binding</small></div>
+          <div class="dg-bind-row"><code>(click)="save()"</code><span class="dg-dir dg-dir-back">view → class</span><small>Event binding</small></div>
+          <div class="dg-bind-row"><code>[(ngModel)]="name"</code><span class="dg-dir dg-dir-both">class ⇄ view</span><small>Two-way binding</small></div>
+        </div>
+        <div class="dg-node dg-accent-2">Template (.html)</div>
+      </div>
+      <figcaption>[ ] = data goes <b>into</b> the view · ( ) = event comes <b>out</b> of the view · [( )] = both</figcaption>
+    }
+
+    @case ('spa-bootstrap') {
+      <div class="dg-flow">
+        <div class="dg-node">index.html<small>&lt;app-root&gt;</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node">main.ts<small>bootstrapApplication()</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node dg-accent">App component<small>header + &lt;router-outlet&gt;</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-stack">
+          <div class="dg-node dg-sm">/ → Home</div>
+          <div class="dg-node dg-sm">/quiz → Quiz</div>
+          <div class="dg-node dg-sm">/profile → Profile</div>
+        </div>
+      </div>
+      <figcaption>Page loads once. After that the router only swaps the component inside &lt;router-outlet&gt; — no full reload.</figcaption>
+    }
+
+    @case ('lifecycle') {
+      <ol class="dg-timeline">
+        <li><span class="dg-tag">create</span><b>constructor</b><small>inject services</small></li>
+        <li><span class="dg-tag">inputs</span><b>ngOnChanges</b><small>every time an input changes</small></li>
+        <li><span class="dg-tag dg-tag-accent">once</span><b>ngOnInit</b><small>start fetching data here</small></li>
+        <li><span class="dg-tag">every CD</span><b>ngDoCheck</b><small>custom change checks</small></li>
+        <li><span class="dg-tag">once</span><b>ngAfterContentInit</b><small>&lt;ng-content&gt; is ready</small></li>
+        <li><span class="dg-tag">once</span><b>ngAfterViewInit</b><small>own template + children ready, viewChild() usable</small></li>
+        <li><span class="dg-tag">every CD</span><b>ngAfter…Checked</b><small>after each check</small></li>
+        <li><span class="dg-tag dg-tag-wrong">end</span><b>ngOnDestroy</b><small>unsubscribe, clear timers</small></li>
+      </ol>
+    }
+
+    @case ('communication') {
+      <div class="dg-comm">
+        <div class="dg-node dg-accent">Parent component</div>
+        <div class="dg-comm-arrows">
+          <span class="dg-dir">↓ input() — data goes down</span>
+          <span class="dg-dir dg-dir-back">↑ output() — events go up</span>
+          <span class="dg-dir dg-dir-both">⇅ model() — both ways</span>
+        </div>
+        <div class="dg-node dg-accent-2">Child component</div>
+      </div>
+      <div class="dg-flow dg-mt">
+        <div class="dg-node dg-sm">Sibling A</div>
+        <span class="dg-arrow">⇄</span>
+        <div class="dg-node dg-sm dg-accent">Shared service (signal)</div>
+        <span class="dg-arrow">⇄</span>
+        <div class="dg-node dg-sm">Sibling B</div>
+      </div>
+      <figcaption>Parent ↔ child: inputs / outputs. Components that are not related: share a service.</figcaption>
+    }
+
+    @case ('di-hierarchy') {
+      <div class="dg-layers">
+        <div class="dg-layer">Platform injector<small>shared by all apps on the page</small></div>
+        <div class="dg-layer">Root injector<small>providedIn: 'root', app.config providers — one instance for the whole app</small></div>
+        <div class="dg-layer">Route injector<small>providers on a lazy route — one instance for that section</small></div>
+        <div class="dg-layer dg-layer-accent">Parent component injector<small>component providers: [...]</small></div>
+        <div class="dg-layer dg-layer-accent-2">Child component<small>inject(UserService) ← asks here first</small></div>
+      </div>
+      <figcaption>Angular searches from the bottom up. The first injector that has a provider wins. Nobody has it → NullInjectorError.</figcaption>
+    }
+
+    @case ('change-detection') {
+      <ul class="dg-tree">
+        <li>
+          <span class="dg-chip dg-checked">App ✓</span>
+          <ul>
+            <li><span class="dg-chip dg-checked dg-event">Header ✓ (click here)</span></li>
+            <li>
+              <span class="dg-chip dg-skipped">Dashboard · OnPush — skipped</span>
+              <ul>
+                <li><span class="dg-chip dg-skipped">Chart — skipped</span></li>
+                <li><span class="dg-chip dg-skipped">Table — skipped</span></li>
+              </ul>
+            </li>
+            <li><span class="dg-chip dg-checked">Sidebar ✓</span></li>
+          </ul>
+        </li>
+      </ul>
+      <figcaption>
+        Change detection goes top → down. Default components are always checked (✓). An OnPush
+        component and its children are skipped unless an input reference, a template event, a
+        signal or the async pipe marks it dirty.
+      </figcaption>
+    }
+
+    @case ('signals') {
+      <div class="dg-flow">
+        <div class="dg-node dg-accent">count = signal(2)<small>count.set(5)</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node">double = computed(…)<small>2 × count = 10</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-stack">
+          <div class="dg-node dg-sm dg-accent-2">Template re-renders</div>
+          <div class="dg-node dg-sm">effect() logs / saves</div>
+        </div>
+      </div>
+      <figcaption>Change one signal → only the things that read it update. Like an Excel cell: change A1 and every formula using A1 recalculates.</figcaption>
+    }
+
+    @case ('flattening') {
+      <div class="dg-marbles">
+        @for (lane of lanes; track lane.name) {
+          <div class="dg-lane">
+            <div class="dg-lane-name"><code>{{ lane.name }}</code><small>{{ lane.note }}</small></div>
+            <div class="dg-lane-track">
+              @for (m of lane.marbles; track $index) {
+                <span
+                  class="dg-marble"
+                  [class.dg-marble-src]="lane.name === 'source'"
+                  [class.dg-marble-dropped]="m.dropped"
+                  [style.left.%]="m.at"
+                  >{{ m.label }}</span
+                >
+              }
+            </div>
+          </div>
+        }
+      </div>
+      <figcaption>Each value (a, b, c) starts an HTTP request that takes some time and returns A, B, C. Faded = cancelled or ignored.</figcaption>
+    }
+
+    @case ('interceptors') {
+      <div class="dg-flow">
+        <div class="dg-node dg-accent">Component<small>http.get('/api')</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node dg-sm">Auth<small>adds token</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node dg-sm">Logging<small>logs time</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node dg-sm">Error<small>handles 401/500</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node dg-accent-2">Server</div>
+      </div>
+      <figcaption>Request passes through every interceptor in order. The response comes back through them in reverse order ←.</figcaption>
+    }
+
+    @case ('lazy-loading') {
+      <div class="dg-load">
+        <div class="dg-load-step">
+          <span class="dg-tag dg-tag-accent">App opens</span>
+          <div class="dg-files">
+            <span class="dg-file dg-file-on">main.js · 70 kB</span>
+            <span class="dg-file">admin.js</span>
+            <span class="dg-file">reports.js</span>
+          </div>
+        </div>
+        <div class="dg-load-step">
+          <span class="dg-tag">User opens /admin</span>
+          <div class="dg-files">
+            <span class="dg-file dg-file-on">main.js</span>
+            <span class="dg-file dg-file-on dg-file-new">admin.js ⬇ now</span>
+            <span class="dg-file">reports.js</span>
+          </div>
+        </div>
+      </div>
+      <figcaption>Only the code for the first screen is downloaded at start. Other sections download when the user visits them.</figcaption>
+    }
+
+    @case ('event-loop') {
+      <div class="dg-loop">
+        <div class="dg-loop-box">
+          <span class="dg-tag dg-tag-accent">Call stack</span>
+          <div class="dg-stack">
+            <div class="dg-node dg-sm">console.log('C')</div>
+            <div class="dg-node dg-sm">main()</div>
+          </div>
+          <small>Runs one thing at a time</small>
+        </div>
+        <div class="dg-loop-box">
+          <span class="dg-tag">Web APIs</span>
+          <div class="dg-stack">
+            <div class="dg-node dg-sm">setTimeout timer</div>
+            <div class="dg-node dg-sm">fetch / DOM events</div>
+          </div>
+          <small>Wait outside JS</small>
+        </div>
+        <div class="dg-loop-box">
+          <span class="dg-tag dg-tag-known">Microtask queue · first</span>
+          <div class="dg-files">
+            <span class="dg-file dg-file-on">Promise.then</span>
+            <span class="dg-file dg-file-on">await</span>
+            <span class="dg-file dg-file-on">queueMicrotask</span>
+          </div>
+          <span class="dg-tag dg-mt">Task queue · after</span>
+          <div class="dg-files">
+            <span class="dg-file">setTimeout</span>
+            <span class="dg-file">setInterval</span>
+            <span class="dg-file">click handler</span>
+          </div>
+        </div>
+      </div>
+      <div class="dg-flow dg-mt">
+        <code>log('A'); setTimeout(→'B'); Promise.then(→'C'); log('D')</code>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node dg-sm dg-accent">A · D · C · B</div>
+      </div>
+      <figcaption>The event loop moves work to the call stack only when it is empty: all microtasks first, then one task, then microtasks again.</figcaption>
+    }
+
+    @case ('prototype-chain') {
+      <div class="dg-flow">
+        <div class="dg-node dg-accent">dog<small>name: 'Tommy'</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node">Animal.prototype<small>speak()</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node">Object.prototype<small>toString(), hasOwnProperty()</small></div>
+        <span class="dg-arrow">→</span>
+        <div class="dg-node dg-sm">null</div>
+      </div>
+      <figcaption>dog.speak(): not on dog → look in Animal.prototype (found). dog.toString(): keep going up to Object.prototype. Reaching null means undefined.</figcaption>
+    }
+
+    @case ('event-bubbling') {
+      <div class="dg-bubble">
+        <div class="dg-bubble-col">
+          <span class="dg-tag">1 · Capturing ↓</span>
+          <div class="dg-stack">
+            <div class="dg-node dg-sm">window</div>
+            <div class="dg-node dg-sm">document</div>
+            <div class="dg-node dg-sm">&lt;ul&gt;</div>
+          </div>
+        </div>
+        <div class="dg-bubble-col">
+          <span class="dg-tag dg-tag-accent">2 · Target</span>
+          <div class="dg-node dg-accent">&lt;button&gt; clicked</div>
+        </div>
+        <div class="dg-bubble-col">
+          <span class="dg-tag dg-tag-known">3 · Bubbling ↑</span>
+          <div class="dg-stack">
+            <div class="dg-node dg-sm">&lt;ul&gt;  ← delegation listens here</div>
+            <div class="dg-node dg-sm">document</div>
+            <div class="dg-node dg-sm">window</div>
+          </div>
+        </div>
+      </div>
+      <figcaption>An event travels down to the target, then bubbles back up. stopPropagation() stops the journey; preventDefault() only cancels the browser's default action.</figcaption>
+    }
+
+    @case ('box-model') {
+      <div class="dg-box dg-box-margin">
+        <span class="dg-box-label">margin</span>
+        <div class="dg-box dg-box-border">
+          <span class="dg-box-label">border</span>
+          <div class="dg-box dg-box-padding">
+            <span class="dg-box-label">padding</span>
+            <div class="dg-box dg-box-content">content<small>width × height</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="dg-flow dg-mt">
+        <div class="dg-node dg-sm">content-box<small>width = content only → padding + border make it bigger</small></div>
+        <div class="dg-node dg-sm dg-accent">border-box<small>width = content + padding + border</small></div>
+      </div>
+      <figcaption>Every element is a box inside boxes. Margin is outside the border (transparent, can collapse); padding is inside it (takes the background).</figcaption>
+    }
+
+    @case ('flexbox') {
+      <div class="dg-flex-demo">
+        <span class="dg-flex-axis dg-flex-main">main axis → justify-content</span>
+        <span class="dg-flex-axis dg-flex-cross">cross axis ↓ align-items</span>
+        <div class="dg-flex-row">
+          <span class="dg-flex-item">1</span>
+          <span class="dg-flex-item dg-flex-tall">2</span>
+          <span class="dg-flex-item">3</span>
+        </div>
+      </div>
+      <div class="dg-flow dg-mt">
+        <div class="dg-node dg-sm">flex-direction: row<small>main = horizontal</small></div>
+        <div class="dg-node dg-sm">flex-direction: column<small>main = vertical (axes swap)</small></div>
+      </div>
+      <figcaption>justify-content always works along the main axis, align-items along the cross axis. Change flex-direction and the two axes swap.</figcaption>
+    }
+
+    @case ('specificity') {
+      <div class="dg-spec">
+        <div class="dg-spec-head"><span>Selector</span><span>ID</span><span>Class / attr / :pseudo</span><span>Element</span></div>
+        <div class="dg-spec-row"><code>p</code><span>0</span><span>0</span><span class="dg-hit">1</span></div>
+        <div class="dg-spec-row"><code>.card p</code><span>0</span><span class="dg-hit">1</span><span class="dg-hit">1</span></div>
+        <div class="dg-spec-row"><code>nav .link:hover</code><span>0</span><span class="dg-hit">2</span><span class="dg-hit">1</span></div>
+        <div class="dg-spec-row"><code>#menu a</code><span class="dg-hit">1</span><span>0</span><span class="dg-hit">1</span></div>
+      </div>
+      <figcaption>Compare left to right like a cricket score: one ID beats any number of classes, one class beats any number of elements. Inline styles beat all of these; !important overrides normal rules.</figcaption>
+    }
+  }
+</figure>

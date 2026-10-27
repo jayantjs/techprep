@@ -1,0 +1,2115 @@
+import { Question } from './models';
+
+/** HTML and CSS interview questions. */
+export const WEB_QUESTIONS: Question[] = [
+  {
+    id: 'hm-1',
+    level: 'fresher',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'HTML ek ghar ka naksha jaisa hai. <head> ghar ke documents ki file hai jo mehmaan ko dikhti nahi (naam, address), aur <body> wo kamre hain jahan sab log aakar baithte hain aur sab kuch dikhta hai.',
+      en: 'HTML is like the plan of a house. The <head> is the file of house papers that guests don\'t see (name, address), and the <body> is the rooms where everyone comes in and sees everything.',
+      bn: 'HTML হলো একটা বাড়ির নকশার মতো। <head> হলো বাড়ির কাগজপত্রের ফাইল যা অতিথিরা দেখে না (নাম, ঠিকানা), আর <body> হলো সেই ঘরগুলো যেখানে সবাই এসে বসে আর সবকিছু দেখতে পায়।',
+    },
+    question: 'What is HTML? Explain the basic structure of an HTML document (doctype, html, head, body).',
+    answer: 'HTML (HyperText Markup Language) is the markup language that describes the structure and meaning of web content using elements written as tags. A document starts with <!DOCTYPE html>, then a root <html> element (ideally with a lang attribute). Inside it, <head> holds metadata the user does not see directly (charset, title, viewport, links to CSS, scripts), and <body> holds the visible content.',
+    points: [
+      'HTML is markup, not a programming language — it describes structure and meaning',
+      '<!DOCTYPE html> puts the browser in standards mode',
+      '<html lang="en"> is the root; lang helps screen readers and translation',
+      '<head>: <meta charset>, <title>, viewport meta, <link>, <script>',
+      '<body>: everything rendered on the page',
+      'Today HTML is maintained by WHATWG as the HTML Living Standard',
+    ],
+    code: `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My First Page</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Hello, world</h1>
+    <p>This is a paragraph.</p>
+  </body>
+</html>`,
+  },
+  {
+    id: 'hm-2',
+    level: 'fresher',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'DOCTYPE cricket match se pehle umpire ka announcement jaisa hai: "Aaj naye rules se khelenge." Agar announcement nahi hua, to sab purane gully cricket rules se khelne lagte hain aur game ulta-pulta ho jaata hai.',
+      en: 'DOCTYPE is like the umpire announcing before a cricket match: "Today we play by the new rules." If nobody announces it, everyone starts playing by old gully-cricket rules and the game gets messy.',
+      bn: 'DOCTYPE হলো ক্রিকেট ম্যাচের আগে আম্পায়ারের ঘোষণার মতো: "আজ নতুন নিয়মে খেলা হবে।" ঘোষণা না হলে সবাই পুরনো পাড়ার ক্রিকেটের নিয়মে খেলতে শুরু করে আর খেলা এলোমেলো হয়ে যায়।',
+    },
+    question: 'What is <!DOCTYPE html> and why is it needed?',
+    answer: '<!DOCTYPE html> is a document type declaration, not an HTML element; it must be the first thing in the document (only whitespace or comments may come before it). Its only job today is to make the browser render the page in standards (no-quirks) mode. Without it, browsers fall back to quirks mode, which emulates old browser bugs and can change layout behaviour such as box sizing and table/line-height rules.',
+    points: [
+      'It is a declaration, not a tag, and has no closing tag',
+      'It is case-insensitive; <!DOCTYPE html> is the conventional form',
+      'Missing doctype → quirks mode → inconsistent layout across browsers',
+      'The old HTML 4/XHTML doctypes with long DTD URLs are no longer needed',
+      'document.compatMode returns "CSS1Compat" in standards mode, "BackCompat" in quirks mode',
+    ],
+    code: `<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8"><title>Doctype</title></head>
+  <body>
+    <script>
+      // "CSS1Compat" = standards mode, "BackCompat" = quirks mode
+      console.log(document.compatMode);
+    </script>
+  </body>
+</html>`,
+  },
+  {
+    id: 'hm-3',
+    level: 'fresher',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Semantic HTML school ki notebook mein headings likhne jaisa hai: "Prashn", "Uttar", "Saransh". Teacher (aur Google, screen reader) turant samajh jaate hain kaunsa hissa kya hai, sirf mota likhne se nahi.',
+      en: 'Semantic HTML is like labelling parts of your school notebook: "Question", "Answer", "Summary". The teacher (and Google, and screen readers) instantly knows what each part is, not just that it is written in bold.',
+      bn: 'Semantic HTML হলো স্কুলের খাতায় অংশগুলোর নাম লিখে দেওয়ার মতো: "প্রশ্ন", "উত্তর", "সারাংশ"। শিক্ষক (আর Google, screen reader) সঙ্গে সঙ্গে বুঝে যায় কোন অংশ কী, শুধু মোটা অক্ষরে লেখা দেখে নয়।',
+    },
+    question: 'What is semantic HTML? Give examples (header, nav, main, article, section, aside, footer).',
+    answer: 'Semantic HTML means choosing elements by their meaning rather than their look, so browsers, search engines and assistive technologies understand the page. <header> is introductory content, <nav> is a block of major navigation links, <main> is the page\'s primary content (only one visible per page), <article> is self-contained content that makes sense on its own, <section> is a thematic group usually with a heading, <aside> is tangential content like a sidebar, and <footer> holds closing info. Many of these map to ARIA landmarks automatically, which screen-reader users use to jump around.',
+    points: [
+      'Meaning over appearance — styling is CSS\'s job',
+      'Improves accessibility (landmarks), SEO and code readability',
+      'Only one visible <main> per document',
+      '<header>/<footer> can also appear inside <article> or <section>',
+      'Prefer <button>, <a>, <ul>, <time> etc. over generic <div>/<span> with classes',
+    ],
+    code: `<body>
+  <header>
+    <h1>Tech Blog</h1>
+    <nav aria-label="Primary">
+      <a href="/">Home</a> <a href="/posts">Posts</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>Understanding Signals</h2>
+      <section>
+        <h3>Why signals?</h3>
+        <p>...</p>
+      </section>
+    </article>
+    <aside>Related posts</aside>
+  </main>
+  <footer>&copy; 2026 Tech Blog</footer>
+</body>`,
+  },
+  {
+    id: 'hm-4',
+    level: 'fresher',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Block element train ke poore dabbe jaisa hai — har dabba alag line mein, poori jagah leta hai. Inline element dabbe ke andar baithe yatri jaise hain, ek ke baad ek. Inline-block wo yatri hai jo apni fixed size wali suitcase ke saath line mein baitha hai.',
+      en: 'A block element is like a whole train coach — each coach is on its own and takes the full width. Inline elements are like passengers sitting one after another in a row. Inline-block is a passenger in the row who also has a fixed-size suitcase that takes its own space.',
+      bn: 'Block element হলো ট্রেনের পুরো একটা কামরার মতো — প্রতিটা কামরা আলাদা, পুরো জায়গা নেয়। Inline element হলো সারিতে পাশাপাশি বসা যাত্রীদের মতো। Inline-block হলো সেই যাত্রী যে সারিতে বসে আছে কিন্তু সঙ্গে নির্দিষ্ট মাপের একটা সুটকেস আছে যেটা নিজের জায়গা নেয়।',
+    },
+    question: 'Block vs inline vs inline-block elements.',
+    answer: 'These describe an element\'s CSS display behaviour (browsers give each HTML element a default). Block elements like <div>, <p>, <h1> start on a new line and take the full available width, and width/height/vertical margins apply. Inline elements like <span>, <a>, <strong> flow within text, take only as much width as their content, and ignore width/height and vertical margins. inline-block sits inline like text but respects width, height, padding and margins like a block — common for buttons and badges.',
+    points: [
+      'Block: new line, full width, width/height work',
+      'Inline: same line, content width, width/height ignored, vertical margins don\'t push lines',
+      'inline-block: inline flow + box sizing like block',
+      'It is a CSS display value; you can change any element with display',
+      'Modern HTML spec uses content categories (flow, phrasing) instead of the old block/inline terms',
+      'Whitespace between inline-block elements creates small gaps',
+    ],
+    code: `<style>
+  .box  { display: block;        width: 150px; background: #fde68a; }
+  .chip { display: inline-block; width: 80px; padding: 4px; background: #bfdbfe; }
+  span  { width: 500px; /* ignored: span is inline */ background: #fecaca; }
+</style>
+
+<div class="box">Block (own line)</div>
+<p>Text with <span>inline span</span> and
+  <span class="chip">inline-block</span> chips.</p>`,
+  },
+  {
+    id: 'hm-5',
+    level: 'junior',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Meta tags tiffin box ke upar lagi chit jaise hain: "Isme veg biryani hai, Rahul ka hai." Dabba khole bina hi sab samajh jaate hain. Open Graph wo photo wali chit hai jo WhatsApp par link bhejne par dikhti hai.',
+      en: 'Meta tags are like the note stuck on a tiffin box: "Veg biryani, belongs to Rahul." Everyone understands without opening the box. Open Graph is the note with a photo that shows up when you share the link on WhatsApp.',
+      bn: 'Meta tags হলো টিফিন বাক্সের ওপর লাগানো চিরকুটের মতো: "এতে ভেজ বিরিয়ানি আছে, রাহুলের।" বাক্স না খুলেই সবাই বুঝে যায়। Open Graph হলো ছবিওয়ালা সেই চিরকুট যেটা WhatsApp-এ link পাঠালে দেখা যায়।',
+    },
+    question: 'Important meta tags: charset, viewport, description and Open Graph.',
+    answer: '<meta charset="utf-8"> declares the character encoding and should appear within the first 1024 bytes so text decodes correctly. <meta name="viewport" content="width=device-width, initial-scale=1"> makes mobile browsers use the device width instead of a ~980px desktop layout, which responsive CSS depends on. <meta name="description"> gives a summary that search engines may show as the snippet. Open Graph tags (<meta property="og:title" ...>) control the title, description and image shown when the link is shared on WhatsApp, Facebook, LinkedIn etc.',
+    points: [
+      'charset utf-8 first in <head>',
+      'viewport is essential for responsive design; don\'t disable zoom with user-scalable=no',
+      'description affects click-through, not ranking directly; keep it unique per page',
+      'Open Graph uses the property attribute: og:title, og:description, og:image, og:url, og:type',
+      'Twitter/X uses name="twitter:card" and falls back to OG tags',
+      'meta keywords is ignored by Google',
+    ],
+    code: `<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masala Dosa Recipe | FoodieHub</title>
+  <meta name="description" content="Crispy masala dosa at home in 30 minutes.">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Masala Dosa Recipe">
+  <meta property="og:description" content="Crispy masala dosa at home.">
+  <meta property="og:image" content="https://example.com/img/dosa.jpg">
+  <meta property="og:url" content="https://example.com/recipes/dosa">
+  <meta name="twitter:card" content="summary_large_image">
+</head>`,
+  },
+  {
+    id: 'hm-6',
+    level: 'fresher',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Newspaper socho: poori khabar ek article hai jo akele bhi padh sakte ho. Khabar ke andar "Pehli innings", "Doosri innings" sections hain. Div sirf ek khaali dabba hai jo cheezein saath rakhne ke kaam aata hai, aur span ek line ke andar ek shabd par highlighter.',
+      en: 'Think of a newspaper: a whole news story is an article you can read on its own. Inside it, "First innings" and "Second innings" are sections. A div is just an empty box to keep things together, and a span is a highlighter on one word inside a line.',
+      bn: 'একটা খবরের কাগজ ভাবো: পুরো একটা খবর হলো article যা আলাদা করেও পড়া যায়। তার ভেতরে "প্রথম ইনিংস", "দ্বিতীয় ইনিংস" হলো section। Div শুধু একটা খালি বাক্স জিনিস একসাথে রাখার জন্য, আর span হলো লাইনের ভেতরে একটা শব্দের ওপর হাইলাইটার।',
+    },
+    question: 'div vs span; and section vs article vs div.',
+    answer: '<div> and <span> are generic containers with no meaning: <div> is block-level by default and used to group larger chunks, <span> is inline and wraps a piece of text. <article> is for self-contained content that could be distributed on its own (a blog post, a product card, a comment). <section> groups thematically related content within a page, and should normally have a heading. Use <div> only when you need a wrapper purely for styling or scripting and no semantic element fits.',
+    points: [
+      'div = generic block container; span = generic inline container',
+      'article: would it make sense alone, e.g. in an RSS feed? → article',
+      'section: a themed part of a document, usually with a heading',
+      'div: no meaning, just a styling/layout hook',
+      'Articles can contain sections and sections can contain articles',
+    ],
+    code: `<article class="post">
+  <h2>IPL 2026 Final Review</h2>
+  <p>Posted by <span class="author">Anita</span></p>
+
+  <section>
+    <h3>First innings</h3>
+    <p>...</p>
+  </section>
+  <section>
+    <h3>Second innings</h3>
+    <p>...</p>
+  </section>
+
+  <div class="share-buttons">
+    <button type="button">Share</button>
+  </div>
+</article>`,
+  },
+  {
+    id: 'hm-7',
+    level: 'junior',
+    topic: 'html',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Form railway reservation counter ka form jaisa hai. Har khaane par label likha hota hai (Naam, Umar), aur clerk turant bol deta hai "PIN code 6 digit ka hona chahiye" — ye browser ki validation hai. Par asli check to computer system (server) phir se karta hai.',
+      en: 'A form is like the railway reservation slip. Each box has a label (Name, Age), and the clerk immediately says "PIN code must be 6 digits" — that\'s browser validation. But the main computer system (the server) checks everything again anyway.',
+      bn: 'Form হলো রেলের রিজার্ভেশন স্লিপের মতো। প্রতিটা ঘরে label লেখা থাকে (নাম, বয়স), আর ক্লার্ক সঙ্গে সঙ্গে বলে দেয় "PIN code ৬ সংখ্যার হতে হবে" — এটাই browser-এর validation। কিন্তু আসল কম্পিউটার সিস্টেম (server) আবার সব চেক করে।',
+    },
+    question: 'HTML forms: input types, labels and built-in validation attributes (required, pattern, min/max, type=email).',
+    answer: 'Input types such as email, number, tel, url, date, password, checkbox and radio give the right mobile keyboard, native pickers and some automatic validation. Every control needs a <label>, either wrapping it or linked with for/id, so clicking the text focuses the field and screen readers announce it. Built-in constraints — required, minlength/maxlength, min/max/step, pattern (a regex that must match the whole value) and type=email/url format checks — block submission and show browser messages; you can style them with :invalid / :user-invalid and customise via setCustomValidity(). Client-side validation is only for UX; the server must always validate again.',
+    points: [
+      'Use the most specific type: email, tel, number, date, url',
+      '<label for="id"> or wrapping label — never placeholder as the only label',
+      'required, minlength, maxlength, min, max, step, pattern',
+      'pattern is matched against the entire value (implicitly anchored)',
+      'novalidate on <form> disables native checks; checkValidity()/reportValidity() in JS',
+      'Always re-validate on the server; client checks can be bypassed',
+      'name attribute is what gets submitted',
+    ],
+    code: `<form action="/register" method="post">
+  <label for="email">Email</label>
+  <input id="email" name="email" type="email" required autocomplete="email">
+
+  <label for="pin">PIN code</label>
+  <input id="pin" name="pin" inputmode="numeric" pattern="[1-9][0-9]{5}"
+         title="6-digit Indian PIN code" required>
+
+  <label for="age">Age</label>
+  <input id="age" name="age" type="number" min="18" max="60">
+
+  <label><input type="checkbox" name="terms" required> I accept the terms</label>
+
+  <button type="submit">Register</button>
+</form>
+<style>
+  input:user-invalid { border-color: crimson; }
+</style>`,
+  },
+  {
+    id: 'hm-8',
+    level: 'junior',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'data-* attribute dukaan mein saaman par lagi price tag jaisa hai. Customer ko zaroorat nahi, par dukaandar (JavaScript) tag padhkar turant jaan leta hai item ka code aur daam.',
+      en: 'A data-* attribute is like the price tag stuck on an item in a shop. The customer may ignore it, but the shopkeeper (JavaScript) reads the tag and instantly knows the item code and price.',
+      bn: 'data-* attribute হলো দোকানে জিনিসের গায়ে লাগানো দামের ট্যাগের মতো। ক্রেতার দরকার নেই, কিন্তু দোকানদার (JavaScript) ট্যাগ পড়ে সঙ্গে সঙ্গে জিনিসের কোড আর দাম জেনে যায়।',
+    },
+    question: 'What are data-* attributes and how do you read them in JavaScript?',
+    answer: 'data-* attributes let you store custom, private data on any HTML element without inventing invalid attributes, e.g. data-product-id="42". In JavaScript you read and write them through element.dataset, where the name after data- is converted from kebab-case to camelCase (data-product-id → dataset.productId), or with getAttribute(\'data-product-id\'). Values are always strings, so convert them when needed. CSS can also target them with attribute selectors like [data-state="open"].',
+    points: [
+      'Name must start with data- and be lowercase after it (no uppercase letters)',
+      'element.dataset.productId ↔ data-product-id',
+      'Values are strings — use Number() or JSON.parse() as needed',
+      'Setting dataset.x = \'y\' adds data-x="y"; delete dataset.x removes it',
+      'Useful for event delegation and CSS state hooks',
+      'Don\'t store sensitive data — it\'s visible in the DOM',
+    ],
+    code: `<button class="add" data-product-id="42" data-price="199.5">Add to cart</button>
+
+<style>
+  button[data-state="added"] { background: green; color: white; }
+</style>
+
+<script>
+  document.querySelector('.add').addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    const id = btn.dataset.productId;          // "42" (string)
+    const price = Number(btn.dataset.price);   // 199.5
+    console.log(id, price);
+    btn.dataset.state = 'added';               // sets data-state="added"
+  });
+</script>`,
+  },
+  {
+    id: 'hm-9',
+    level: 'junior',
+    topic: 'html',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Accessibility ek station jaisa hai jahan ramp, Braille board aur announcement sab hain, taaki har koi train pakad sake. Native HTML wo pakki seedhi aur ramp hai; ARIA sirf ek board hai jo batata hai "yahan ramp hai" — agar ramp hi nahi bana, to board lagane se kuch nahi hoga.',
+      en: 'Accessibility is like a railway station with ramps, Braille boards and announcements, so everyone can catch the train. Native HTML is the real ramp; ARIA is only a sign saying "ramp here" — if no ramp is built, the sign doesn\'t help anyone.',
+      bn: 'Accessibility হলো এমন একটা স্টেশনের মতো যেখানে র‍্যাম্প, ব্রেইল বোর্ড আর ঘোষণা সব আছে, যাতে সবাই ট্রেন ধরতে পারে। Native HTML হলো আসল র‍্যাম্প; ARIA শুধু একটা বোর্ড যেটা বলে "এখানে র‍্যাম্প আছে" — র‍্যাম্পই না থাকলে বোর্ড লাগিয়ে কোনো লাভ নেই।',
+    },
+    question: 'Accessibility in HTML: alt text, labels, landmarks and ARIA — when should you (not) use ARIA?',
+    answer: 'Accessible HTML starts with native semantics: meaningful alt text on informative images (alt="" for decorative ones), a <label> for every form control, a logical heading order, and landmark elements (header, nav, main, aside, footer) so screen-reader users can navigate. Native elements like <button> and <a href> come with keyboard support and roles for free. ARIA (role, aria-* attributes) only changes what assistive technology is told — it adds no behaviour — so the first rule is: don\'t use ARIA if a native element or attribute already does the job. Use it to fill real gaps, such as aria-expanded on a disclosure toggle, aria-live for dynamic announcements, or aria-label on an icon-only button.',
+    points: [
+      'alt describes purpose/content; alt="" for decorative images; never omit alt',
+      'Every input needs an accessible name: <label>, aria-labelledby or aria-label',
+      'Landmarks + heading hierarchy = fast navigation for screen readers',
+      'First rule of ARIA: prefer native HTML; no ARIA is better than bad ARIA',
+      'ARIA doesn\'t add keyboard behaviour — role="button" on a div still needs tabindex and key handlers',
+      'Good uses: aria-expanded, aria-controls, aria-live, aria-describedby, aria-current',
+    ],
+    code: `<!-- Bad: div pretending to be a button -->
+<div role="button" onclick="save()">Save</div>
+
+<!-- Good: native button, keyboard + role for free -->
+<button type="button" onclick="save()">Save</button>
+
+<img src="chart.png" alt="Sales grew 30% from January to March">
+<img src="divider.png" alt="">
+
+<button type="button" aria-label="Close">&times;</button>
+
+<button type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<ul id="menu" hidden>...</ul>
+
+<p aria-live="polite" id="status"></p>`,
+  },
+  {
+    id: 'hm-10',
+    level: 'junior',
+    topic: 'html',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Responsive images chai ke cup ke size jaise hain: chhoti bhookh ke liye cutting chai, zyada ke liye bada glass. Browser screen dekhkar sahi size ki photo mangwata hai. Lazy loading matlab neeche wali photo tab aayegi jab tum scroll karke wahan pahuncho, jaise waiter tabhi roti laata hai jab plate khaali ho.',
+      en: 'Responsive images are like chai sizes: a small cutting chai for a small thirst, a big glass for a big one. The browser looks at the screen and fetches the right-sized photo. Lazy loading means a photo lower down is fetched only when you scroll near it, like a waiter bringing roti only when your plate is empty.',
+      bn: 'Responsive images হলো চায়ের কাপের মাপের মতো: অল্প তেষ্টায় ছোট ভাঁড়, বেশি হলে বড় গ্লাস। Browser স্ক্রিন দেখে সঠিক মাপের ছবি আনায়। Lazy loading মানে নিচের ছবি তখনই আসবে যখন তুমি scroll করে সেখানে পৌঁছাবে, যেমন ওয়েটার প্লেট খালি হলে তবেই রুটি আনে।',
+    },
+    question: 'Responsive images: srcset, sizes, <picture> and loading="lazy".',
+    answer: 'srcset lists candidate files with width descriptors (480w) or pixel-density descriptors (2x), and sizes tells the browser how wide the image will be displayed at different viewport widths, so it can download the smallest suitable file; without sizes, width descriptors assume 100vw. <picture> with <source> elements is for art direction (a different crop at different breakpoints via media) or offering modern formats like AVIF/WebP with a fallback via type; the inner <img> is required and carries alt. loading="lazy" defers off-screen images until the user scrolls near them. Always set width and height to avoid layout shift, and don\'t lazy-load the main above-the-fold (LCP) image — consider fetchpriority="high" for it instead.',
+    points: [
+      'srcset = what files exist; sizes = how big it will be shown',
+      'Browser picks the file; you don\'t control the exact choice',
+      '<picture>: art direction (media) and format fallback (type)',
+      '<img> inside <picture> is mandatory and holds alt/width/height',
+      'loading="lazy" for below-the-fold images; not for the hero/LCP image',
+      'width + height attributes prevent CLS (aspect-ratio reserved)',
+    ],
+    code: `<!-- Resolution switching -->
+<img src="thali-800.jpg"
+     srcset="thali-400.jpg 400w, thali-800.jpg 800w, thali-1600.jpg 1600w"
+     sizes="(max-width: 600px) 100vw, 50vw"
+     width="800" height="600" alt="South Indian thali" loading="lazy">
+
+<!-- Art direction + modern formats -->
+<picture>
+  <source media="(max-width: 600px)" srcset="banner-mobile.avif" type="image/avif">
+  <source srcset="banner.avif" type="image/avif">
+  <source srcset="banner.webp" type="image/webp">
+  <img src="banner.jpg" width="1200" height="400" alt="Diwali sale banner"
+       fetchpriority="high">
+</picture>`,
+  },
+  {
+    id: 'hm-11',
+    level: 'mid',
+    topic: 'html',
+    difficulty: 'medium',
+    simple: {
+      hi: 'SVG rangoli ke liye stencil jaisa hai — har design alag tukda hai, use badla, bada ya rangeen kar sakte ho bina kharab hue. Canvas blackboard par chalk se banana hai — tez aur kuch bhi bana sakte ho, par ek line badalni ho to mitaakar phir se banana padta hai.',
+      en: 'SVG is like a set of rangoli stencils — each shape is a separate piece you can move, resize or recolour without it getting blurry. Canvas is like drawing on a blackboard with chalk — fast and you can draw anything, but to change one line you must erase and redraw.',
+      bn: 'SVG হলো আলপনার স্টেনসিলের মতো — প্রতিটা নকশা আলাদা টুকরো, সরানো, বড় করা বা রং বদলানো যায় ঝাপসা না হয়ে। Canvas হলো ব্ল্যাকবোর্ডে চক দিয়ে আঁকা — দ্রুত আর যা খুশি আঁকা যায়, কিন্তু একটা লাইন বদলাতে হলে মুছে আবার আঁকতে হয়।',
+    },
+    question: 'Canvas vs SVG — differences and when to use which.',
+    answer: '<canvas> is an immediate-mode, pixel-based (raster) drawing surface: you draw with JavaScript (2D context, WebGL or WebGPU) and the browser keeps only the resulting bitmap, with no DOM nodes per shape. SVG is retained-mode vector graphics written as XML elements in the DOM, so each shape can be styled with CSS, receive events, be animated and read by assistive tech, and it scales sharply at any size. Use SVG for icons, logos, diagrams and charts with a moderate number of elements and interactivity; use canvas for games, image processing, heavy real-time animation or visualisations with thousands of objects, where DOM overhead would be too slow.',
+    points: [
+      'Canvas: raster, JS-only, no per-shape DOM, you redraw everything yourself',
+      'SVG: vector, declarative DOM elements, CSS + events per shape',
+      'SVG scales without blur; canvas must be scaled for devicePixelRatio',
+      'SVG slows with many thousands of nodes; canvas handles large counts well',
+      'Canvas content is not accessible by default — provide fallback text or ARIA',
+      'Canvas can be drawn off the main thread with OffscreenCanvas in a worker',
+    ],
+    code: `<!-- SVG: declarative, each circle is a DOM node -->
+<svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Orange circle">
+  <circle cx="60" cy="60" r="50" fill="orange" />
+</svg>
+
+<!-- Canvas: imperative, just pixels -->
+<canvas id="c" width="120" height="120">Orange circle</canvas>
+<script>
+  const ctx = document.getElementById('c').getContext('2d');
+  ctx.fillStyle = 'orange';
+  ctx.beginPath();
+  ctx.arc(60, 60, 50, 0, Math.PI * 2);
+  ctx.fill();
+</script>`,
+  },
+  {
+    id: 'hm-12',
+    level: 'junior',
+    topic: 'html',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Iframe ghar ki deewar mein lagi TV jaisi hai — doosre channel ka program tumhare ghar mein dikhta hai. Sandbox ek parental lock hai: TV dikh to sakta hai, par wo tumhare ghar ka darwaza nahi khol sakta ya almari se kuch nahi utha sakta.',
+      en: 'An iframe is like a TV on your wall — another channel\'s programme shows inside your house. Sandbox is like a parental lock: the TV can play, but it can\'t open your front door or take things from your cupboard.',
+      bn: 'Iframe হলো ঘরের দেওয়ালে লাগানো টিভির মতো — অন্য চ্যানেলের অনুষ্ঠান তোমার ঘরে দেখা যায়। Sandbox হলো parental lock: টিভি চলতে পারে, কিন্তু তোমার ঘরের দরজা খুলতে বা আলমারি থেকে কিছু নিতে পারে না।',
+    },
+    question: 'What is an <iframe>? Uses and security (sandbox, allow).',
+    answer: 'An <iframe> embeds another HTML document (its own browsing context) inside the current page — common for YouTube/Maps embeds, payment widgets, ads and isolating third-party content. The sandbox attribute applies strict restrictions (no scripts, no forms, no popups, unique opaque origin) and you re-enable only what is needed with tokens like allow-scripts or allow-forms; never combine allow-scripts with allow-same-origin for same-origin content, as the frame could then remove its own sandbox. The allow attribute sets the Permissions Policy, deciding which powerful features (camera, geolocation, fullscreen, autoplay) the frame may use. To stop your own site being framed (clickjacking), the server sends CSP frame-ancestors or X-Frame-Options.',
+    points: [
+      'Embeds a separate document; same-origin policy isolates cross-origin frames',
+      'sandbox (empty) = maximum restrictions; add tokens to relax',
+      'allow-scripts + allow-same-origin on same-origin content defeats the sandbox',
+      'allow="fullscreen; camera" — Permissions Policy for the frame',
+      'Give a title attribute for accessibility; loading="lazy" for off-screen frames',
+      'Protect your pages with CSP frame-ancestors / X-Frame-Options; use postMessage for safe cross-frame communication',
+    ],
+    code: `<!-- Third-party video: lazy, limited permissions -->
+<iframe
+  src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+  title="Product demo video"
+  width="560" height="315"
+  loading="lazy"
+  allow="fullscreen; picture-in-picture; encrypted-media"
+  referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
+
+<!-- Untrusted user HTML: scripts allowed, but unique origin -->
+<iframe sandbox="allow-scripts" srcdoc="<p>User content</p>"
+        title="User preview"></iframe>`,
+  },
+  {
+    id: 'hm-13',
+    level: 'mid',
+    topic: 'html',
+    difficulty: 'medium',
+    simple: {
+      hi: 'SEO library mein kitaab ko sahi jagah rakhne jaisa hai. Title kitaab ka naam hai, headings uski index hain, description peeche likha chhota summary, aur canonical batata hai ki "asli copy ye hai, baaki photocopy hain".',
+      en: 'SEO is like getting a book shelved correctly in a library. The title is the book\'s name, headings are its table of contents, the description is the short blurb on the back, and canonical says "this is the original copy, the others are photocopies".',
+      bn: 'SEO হলো লাইব্রেরিতে বইকে ঠিক জায়গায় রাখার মতো। Title হলো বইয়ের নাম, headings হলো সূচিপত্র, description হলো পেছনে লেখা ছোট সারাংশ, আর canonical বলে "আসল কপি এটা, বাকিগুলো ফটোকপি"।',
+    },
+    question: 'SEO basics in HTML: title, heading hierarchy, meta description, canonical, structured data.',
+    answer: 'A unique, descriptive <title> is one of the strongest on-page signals and becomes the headline in search results. Headings should form a logical outline — usually one <h1> describing the page, then <h2>/<h3> without skipping levels — because crawlers and screen readers use that structure. <meta name="description"> doesn\'t directly affect ranking but is often used as the snippet, improving click-through. <link rel="canonical"> tells search engines the preferred URL when the same content is reachable at several URLs (tracking params, filters), and structured data, typically JSON-LD with schema.org types like Product or Article, can unlock rich results such as ratings and prices.',
+    points: [
+      'Unique <title> per page, roughly 50–60 characters, key term first',
+      'One clear h1, logical h2/h3 order — headings for structure, not font size',
+      'Meta description: unique, ~150 characters, written for humans',
+      'rel="canonical" consolidates duplicate URLs',
+      'JSON-LD in <script type="application/ld+json"> using schema.org',
+      'Also: semantic HTML, alt text, crawlable <a href> links, lang attribute, fast pages (Core Web Vitals), meta robots when needed',
+    ],
+    code: `<head>
+  <title>Buy Running Shoes Online | SportyKart</title>
+  <meta name="description" content="Shop lightweight running shoes with free delivery across India.">
+  <link rel="canonical" href="https://sportykart.example/shoes/running">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "AirRun 2",
+    "offers": { "@type": "Offer", "price": "2999", "priceCurrency": "INR" }
+  }
+  </script>
+</head>
+<body>
+  <h1>Running Shoes</h1>
+  <h2>Men</h2>
+  <h2>Women</h2>
+</body>`,
+  },
+  {
+    id: 'hm-14',
+    level: 'junior',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Class mein id roll number jaisa hai — har bachche ka alag, kabhi repeat nahi hota. Class wo house team hai (Red House, Blue House) jismein bahut bachche hote hain. Name exam answer sheet par likha subject hai, jisse teacher jaanti hai ye kis cheez ka jawab hai.',
+      en: 'In a school, id is like a roll number — every student has a different one. Class is like a house team (Red House, Blue House) that many students share. Name is like the subject written on an answer sheet, so the teacher knows what the answer is for.',
+      bn: 'স্কুলে id হলো রোল নম্বরের মতো — প্রত্যেকের আলাদা, কখনো এক হয় না। Class হলো হাউস টিম (রেড হাউস, ব্লু হাউস) যেখানে অনেক ছাত্র থাকে। Name হলো খাতায় লেখা বিষয়ের নাম, যাতে শিক্ষক জানেন উত্তরটা কীসের।',
+    },
+    question: 'id vs class vs name attributes.',
+    answer: 'id is a unique identifier — only one element per document should have a given id — used for fragment links (#section), label for=, ARIA references and getElementById. class is a space-separated list of reusable names that many elements can share, mainly for CSS styling and querySelectorAll. name is mostly for form controls: it becomes the key in the submitted form data, groups radio buttons together, and is also used for things like iframe/window targets and <meta name>.',
+    points: [
+      'id: unique per page; #id in CSS has high specificity',
+      'class: reusable, multiple per element, the usual CSS hook',
+      'name: key sent on form submit; radios with the same name form a group',
+      'An input without name is not submitted',
+      'label for= and aria-labelledby/aria-describedby point to ids',
+      'form.elements[\'email\'] looks up controls by name (or id)',
+    ],
+    code: `<style>
+  .btn { padding: 8px 16px; }
+  .btn-primary { background: navy; color: white; }
+</style>
+
+<form id="signup" action="/signup" method="post">
+  <label for="email">Email</label>
+  <input id="email" name="email" type="email">   <!-- sent as email=... -->
+
+  <label><input type="radio" name="plan" value="free" checked> Free</label>
+  <label><input type="radio" name="plan" value="pro"> Pro</label>
+
+  <button class="btn btn-primary" type="submit">Sign up</button>
+</form>
+<a href="#signup">Jump to form</a>`,
+  },
+  {
+    id: 'hm-15',
+    level: 'fresher',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Ul shopping list jaisi hai — aloo pehle lo ya pyaaz, farak nahi padta. Ol chai banane ki recipe jaisi hai — step ka order zaroori hai. Table cricket scorecard jaisa hai jahan har row ek batsman aur har column runs, balls batata hai.',
+      en: 'A ul is like a shopping list — buying potatoes or onions first doesn\'t matter. An ol is like a chai recipe — the order of steps matters. A table is like a cricket scorecard where each row is a batter and each column shows runs and balls.',
+      bn: 'Ul হলো বাজারের ফর্দের মতো — আগে আলু কেনো না পেঁয়াজ, তাতে কিছু যায় আসে না। Ol হলো চা বানানোর রেসিপির মতো — ধাপের ক্রম জরুরি। Table হলো ক্রিকেট স্কোরকার্ডের মতো যেখানে প্রতিটা row একজন ব্যাটার আর প্রতিটা column রান, বল দেখায়।',
+    },
+    question: 'Lists (ol, ul, dl) and tables — when should you use a table?',
+    answer: '<ul> is an unordered list where order doesn\'t matter (features, nav links), <ol> is an ordered list where sequence matters (steps, rankings) and supports start, reversed and type, and both contain <li> items. <dl> is a description list of term/description pairs using <dt> and <dd>, good for glossaries, FAQs or key–value metadata. Use a <table> only for genuinely tabular data with rows and columns that relate to each other — timetables, price comparisons, scorecards — never for page layout (use CSS Grid/Flexbox). Accessible tables use <caption>, <thead>/<tbody>, and <th> with scope.',
+    points: [
+      'ul: order doesn\'t matter; ol: order matters',
+      'dl > dt + dd for name–value pairs; a div may wrap each group',
+      'Only <li> may be direct children of ul/ol',
+      'Tables are for 2-D data, not layout',
+      '<caption>, <th scope="col|row">, <thead>, <tbody>, <tfoot> for accessibility',
+      'colspan/rowspan merge cells',
+    ],
+    code: `<ol>
+  <li>Boil water</li>
+  <li>Add tea leaves</li>
+</ol>
+
+<dl>
+  <dt>HTML</dt><dd>Structure of a web page</dd>
+  <dt>CSS</dt><dd>Presentation and layout</dd>
+</dl>
+
+<table>
+  <caption>India vs Australia — Scorecard</caption>
+  <thead>
+    <tr><th scope="col">Batter</th><th scope="col">Runs</th><th scope="col">Balls</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Kohli</th><td>82</td><td>64</td></tr>
+    <tr><th scope="row">Gill</th><td>45</td><td>38</td></tr>
+  </tbody>
+</table>`,
+  },
+  {
+    id: 'hm-16',
+    level: 'mid',
+    topic: 'html',
+    difficulty: 'hard',
+    simple: {
+      hi: 'Web Component ek sealed tiffin box jaisa hai jismein apne dabbe (shadow DOM) hain — andar ka masala bahar nahi girta aur bahar ka andar nahi aata. Template wo khaali dabba hai jo baar-baar bhara ja sakta hai, aur slot wo khaana hai jo maa (tum) apni marzi se andar rakhti hai.',
+      en: 'A Web Component is like a sealed tiffin box with its own compartments (shadow DOM) — the masala inside doesn\'t spill out and nothing from outside gets in. The template is the empty box design you can fill again and again, and slots are the spots where mum (you) puts whatever food you choose.',
+      bn: 'Web Component হলো আলাদা খোপওয়ালা একটা সিল করা টিফিন বাক্সের মতো (shadow DOM) — ভেতরের মশলা বাইরে পড়ে না, বাইরের কিছু ভেতরে ঢোকে না। Template হলো খালি বাক্সের ছাঁচ যা বারবার ভরা যায়, আর slot হলো সেই খোপ যেখানে মা (তুমি) নিজের পছন্দের খাবার রাখো।',
+    },
+    question: 'What are Web Components (custom elements, shadow DOM, <template>, slots)?',
+    answer: 'Web Components are a set of native browser standards for building reusable, encapsulated elements that work in any framework or none. Custom elements let you define a new tag (the name must contain a hyphen) by extending HTMLElement and registering it with customElements.define(), with lifecycle callbacks like connectedCallback, disconnectedCallback and attributeChangedCallback (for attributes listed in static observedAttributes). Shadow DOM, created with attachShadow({ mode: \'open\' }), gives the element a private DOM subtree whose styles don\'t leak out and outside styles don\'t leak in. <template> holds inert markup that is cloned when needed, and <slot> elements in the shadow tree are placeholders where the user\'s light-DOM children are projected, with named slots via slot="name".',
+    points: [
+      'Custom element names must contain a hyphen, e.g. <user-card>',
+      'Lifecycle: constructor, connectedCallback, disconnectedCallback, attributeChangedCallback, adoptedCallback',
+      'Shadow DOM = style and DOM encapsulation; style via CSS custom properties and ::part()',
+      '<template> content is parsed but not rendered or executed until cloned',
+      '<slot> projects light-DOM children; named slots via slot="title"',
+      'Declarative shadow DOM: <template shadowrootmode="open"> enables server-rendering',
+      'Angular can output them via @angular/elements and uses emulated or ShadowDom ViewEncapsulation',
+    ],
+    code: `<user-card>
+  <span slot="name">Priya Sharma</span>
+  <p>Frontend developer, Pune</p>
+</user-card>
+
+<template id="user-card-tpl">
+  <style>.card { border: 1px solid #ccc; padding: 12px; border-radius: 8px; }</style>
+  <div class="card">
+    <h3><slot name="name">Anonymous</slot></h3>
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+  class UserCard extends HTMLElement {
+    connectedCallback() {
+      if (this.shadowRoot) return;
+      const tpl = document.getElementById('user-card-tpl');
+      this.attachShadow({ mode: 'open' }).append(tpl.content.cloneNode(true));
+    }
+  }
+  customElements.define('user-card', UserCard);
+</script>`,
+  },
+  {
+    id: 'hm-17',
+    level: 'junior',
+    topic: 'html',
+    difficulty: 'easy',
+    simple: {
+      hi: 'HTML5 purane phone se smartphone par aane jaisa tha. Pehle video ke liye alag player (Flash) chahiye tha; ab camera, gaana, video sab ek hi phone mein built-in hai — waise hi video, audio, drawing aur smart forms seedhe HTML mein aa gaye.',
+      en: 'HTML5 was like moving from an old keypad phone to a smartphone. Earlier you needed a separate player (Flash) for videos; now camera, music and video are all built in — in the same way video, audio, drawing and smart forms came directly into HTML.',
+      bn: 'HTML5 হলো পুরনো বোতাম-ফোন থেকে স্মার্টফোনে আসার মতো। আগে ভিডিওর জন্য আলাদা প্লেয়ার (Flash) লাগত; এখন ক্যামেরা, গান, ভিডিও সব ফোনেই আছে — তেমনি ভিডিও, অডিও, আঁকা আর স্মার্ট ফর্ম সরাসরি HTML-এ চলে এসেছে।',
+    },
+    question: 'What features did HTML5 introduce?',
+    answer: 'HTML5 (finalised by W3C in 2014, now continued as the WHATWG HTML Living Standard) brought a simple <!DOCTYPE html> and <meta charset>, semantic elements (header, nav, main, article, section, aside, footer, figure, time), native <audio> and <video>, <canvas> and inline SVG/MathML. Forms gained new input types (email, date, number, range, color, url, tel) and built-in validation attributes (required, pattern, placeholder, autofocus). It also defined a precise, error-tolerant parsing algorithm, and came with a family of JavaScript APIs often grouped under "HTML5": Web Storage (localStorage/sessionStorage), History API (pushState), drag and drop, Web Workers, WebSockets, Geolocation and offline features.',
+    points: [
+      'Short doctype and <meta charset="utf-8">',
+      'Semantic sectioning elements',
+      '<audio>/<video> without plugins (end of Flash)',
+      '<canvas>, inline SVG and MathML',
+      'New input types + constraint validation',
+      'Related APIs: localStorage/sessionStorage, History API, Web Workers, WebSockets, Geolocation, drag and drop',
+      'Today there is no \'HTML6\' — HTML is a Living Standard updated continuously',
+    ],
+    code: `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>HTML5 features</title></head>
+<body>
+  <header><h1>Match Highlights</h1></header>
+  <main>
+    <video src="highlights.mp4" controls width="480"></video>
+    <input type="date" aria-label="Match date">
+    <input type="range" min="0" max="10" aria-label="Rating">
+    <canvas id="score" width="200" height="100"></canvas>
+  </main>
+  <script>
+    localStorage.setItem('lastVisit', new Date().toISOString());
+  </script>
+</body>
+</html>`,
+  },
+  {
+    id: 'hm-18',
+    level: 'mid',
+    topic: 'html',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Dialog school ke principal ke office jaisa hai — jab bulaya, tab baaki sab ruk jaata hai jab tak tum baahar na aao. Details/summary almari ka darwaza hai — label dikhta hai, kholo to andar ka saaman. Popover dukaan ka chhota sa menu card hai jo dikhaya aur kahin aur click karte hi wapas chala gaya.',
+      en: 'A dialog is like being called to the principal\'s office — everything else stops until you come out. Details/summary is like a cupboard door — you see the label and open it to see what\'s inside. A popover is like a small menu card the waiter shows you, which goes away as soon as you tap elsewhere.',
+      bn: 'Dialog হলো প্রিন্সিপালের অফিসে ডাক পড়ার মতো — তুমি বেরিয়ে না আসা পর্যন্ত বাকি সব থেমে থাকে। Details/summary হলো আলমারির দরজার মতো — বাইরে লেবেল দেখা যায়, খুললে ভেতরের জিনিস। Popover হলো ওয়েটারের দেখানো ছোট মেনু কার্ডের মতো, অন্য কোথাও ছুঁলেই সরে যায়।',
+    },
+    question: 'Built-in interactive elements: <dialog>, <details>/<summary> and the popover attribute.',
+    answer: '<dialog> is a native dialog box: showModal() opens it as a modal in the top layer with a ::backdrop, makes the rest of the page inert, traps focus and closes on Esc, while show() opens it non-modally; a <form method="dialog"> inside closes it and sets returnValue. <details> with a <summary> is a native disclosure widget (accordion/FAQ) that toggles open without JavaScript, fires a toggle event, and details elements sharing the same name attribute behave as an exclusive accordion. The popover attribute turns any element into a popover shown in the top layer, triggered declaratively by a button with popovertarget; popover="auto" gives light dismiss (click outside or Esc) and closes other auto popovers, while popover="manual" stays open until explicitly hidden. These replace a lot of custom JS and come with built-in keyboard and accessibility behaviour.',
+    points: [
+      'dialog.showModal() = modal + backdrop + inert page + Esc; dialog.show() = non-modal',
+      '<form method="dialog"> closes the dialog; dialog.returnValue holds the button value',
+      'details/summary: no-JS toggle, open attribute, toggle event, name for exclusive accordion',
+      'popover + popovertarget: declarative, no JS needed; showPopover()/hidePopover()/togglePopover() in JS',
+      'popover="auto" light-dismisses; popover="manual" doesn\'t',
+      'Dialogs and popovers render in the top layer — no z-index fights',
+      'Use dialog for modal decisions; popover for menus, tooltips, toasts',
+    ],
+    code: `<button type="button" onclick="document.getElementById('confirm').showModal()">Delete</button>
+<dialog id="confirm">
+  <form method="dialog">
+    <p>Delete this order?</p>
+    <button value="cancel">Cancel</button>
+    <button value="yes">Yes, delete</button>
+  </form>
+</dialog>
+<script>
+  const dlg = document.getElementById('confirm');
+  dlg.addEventListener('close', () => console.log(dlg.returnValue));
+</script>
+
+<details name="faq" open>
+  <summary>What is the return policy?</summary>
+  <p>7-day easy returns.</p>
+</details>
+<details name="faq">
+  <summary>Is COD available?</summary>
+  <p>Yes, across India.</p>
+</details>
+
+<button type="button" popovertarget="menu">Menu</button>
+<div id="menu" popover>Profile · Orders · Logout</div>`,
+  },
+  {
+    id: 'cb-1',
+    level: 'fresher',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    simple: {
+      hi: 'HTML ek ghar ka dhaancha hai aur CSS uska paint aur sajavat. External CSS poore school ka rulebook hai, internal class ka notice board, aur inline teacher ka seedha ek bachche ko bola gaya instruction — aur seedha bola gaya instruction hi sabse pehle maana jaata hai.',
+      en: 'HTML is the frame of a house and CSS is its paint and decoration. External CSS is the whole school\'s rulebook, internal is the class notice board, and inline is the teacher telling one student directly — and the direct instruction is the one that gets followed.',
+      bn: 'HTML হলো বাড়ির কাঠামো আর CSS হলো তার রং আর সাজসজ্জা। External CSS পুরো স্কুলের নিয়মের বই, internal ক্লাসের নোটিশ বোর্ড, আর inline হলো টিচার সরাসরি একজন ছাত্রকে যা বলেন — আর সরাসরি বলা কথাটাই মানা হয়।',
+    },
+    question: 'What is CSS? The ways to add CSS (inline, internal, external) — which one wins?',
+    answer: 'CSS (Cascading Style Sheets) is the language that describes how HTML elements look and are laid out: colours, fonts, spacing, layout, animations. You can add it inline with the style attribute, internally with a <style> block in the page, or externally with a <link rel="stylesheet"> to a .css file. An inline style beats any normal (non-!important) rule from a stylesheet; between internal and external there is no fixed winner — the cascade compares specificity, and if that is equal, the rule that appears later in the document wins.',
+    points: [
+      'CSS separates presentation from structure (HTML) and behaviour (JS)',
+      'External stylesheets are preferred: reusable, cacheable by the browser, easy to maintain',
+      'Inline styles beat stylesheet rules, but an !important stylesheet rule beats a normal inline style',
+      'Internal vs external: same specificity means the later one in source order wins',
+      'Inline styles are hard to override and cannot use media queries or pseudo-classes',
+    ],
+    code: `<!-- external: best for real projects -->
+<link rel="stylesheet" href="styles.css">
+
+<!-- internal -->
+<style>
+  p { color: blue; }
+</style>
+
+<!-- inline: wins over the p rule above -->
+<p style="color: red;">I am red</p>
+
+/* styles.css */
+p { color: green; } /* loses to the later <style> block (same specificity) */`,
+  },
+  {
+    id: 'cb-2',
+    level: 'fresher',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Box model ek mithai ke dabbe jaisa hai. Andar ki mithai content hai, mithai ke aas-paas ka kaagaz padding hai, dabba khud border hai, aur dukaan ki shelf par do dabbon ke beech ki khaali jagah margin hai.',
+      en: 'The box model is like a sweet box from a mithai shop. The sweet inside is the content, the paper around it is the padding, the box itself is the border, and the empty gap between two boxes on the shop shelf is the margin.',
+      bn: 'Box model একটা মিষ্টির বাক্সের মতো। ভেতরের মিষ্টি হলো content, মিষ্টির চারপাশের কাগজ padding, বাক্সটা নিজে border, আর দোকানের তাকে দুটো বাক্সের মাঝের ফাঁকা জায়গা margin।',
+    },
+    diagram: 'box-model',
+    question: 'Explain the CSS box model (content, padding, border, margin).',
+    answer: 'Every element is rendered as a rectangular box made of four layers: the content area (text, images), padding (space inside the border), the border, and margin (space outside the border that separates it from other boxes). Padding takes the element\'s background; margin is always transparent. By default (box-sizing: content-box) width and height apply only to the content, so padding and border are added on top of them.',
+    points: [
+      'Order from inside out: content → padding → border → margin',
+      'Background colour/image extends under padding and border, not margin',
+      'Padding cannot be negative; margin can be negative',
+      'Vertical margins between blocks can collapse; padding never collapses',
+      'DevTools \'Computed\' panel shows the box model visually',
+    ],
+    code: `.box {
+  width: 200px;
+  padding: 20px;
+  border: 5px solid #333;
+  margin: 10px;
+}
+/* content-box (default):
+   visible width = 200 + 20*2 + 5*2 = 250px
+   space taken   = 250 + 10*2      = 270px */`,
+  },
+  {
+    id: 'cb-3',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    simple: {
+      hi: 'content-box mein aap kehte ho \'khaane ki jagah 20 cm ho\', phir dabbe ki deewar aur padding bahar se judti hai aur tiffin bag mein fit nahi hota. border-box mein aap kehte ho \'poora tiffin bahar se 20 cm ho\', toh padding aur border andar adjust ho jaate hain aur bag mein perfect fit hota hai.',
+      en: 'With content-box you say \'the food space must be 20 cm\', then the box walls and padding get added outside, so the tiffin no longer fits in the bag. With border-box you say \'the whole tiffin must be 20 cm from outside\', so padding and border adjust inside and it fits perfectly.',
+      bn: 'content-box-এ তুমি বলো \'খাবারের জায়গা ২০ সেমি হবে\', তারপর বাক্সের দেয়াল আর padding বাইরে থেকে যোগ হয়, তাই টিফিন ব্যাগে ঢোকে না। border-box-এ তুমি বলো \'পুরো টিফিনটা বাইরে থেকে ২০ সেমি হবে\', তাই padding আর border ভেতরে মানিয়ে নেয় আর ব্যাগে ঠিকঠাক ঢুকে যায়।',
+    },
+    diagram: 'box-model',
+    question: 'box-sizing: content-box vs border-box.',
+    answer: 'box-sizing decides what width and height measure. With content-box (the default) they size only the content, so padding and border are added on top and the box grows. With border-box they size the whole box including padding and border, and the content area shrinks to fit, which makes layouts (like two 50% columns with padding) predictable. Most projects apply border-box globally in their reset.',
+    points: [
+      'content-box is the initial value; border-box is the common practice',
+      'border-box: rendered width = declared width (padding + border go inside)',
+      'Margin is never included in either model',
+      'Set it on *, *::before, *::after so pseudo-elements behave the same',
+      'Makes percentage widths with padding easy (no overflow)',
+    ],
+    code: `.a { box-sizing: content-box; width: 200px; padding: 20px; border: 5px solid; }
+/* rendered width: 250px */
+
+.b { box-sizing: border-box; width: 200px; padding: 20px; border: 5px solid; }
+/* rendered width: 200px, content width: 150px */
+
+/* common global reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}`,
+  },
+  {
+    id: 'cb-4',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Specificity school ke order jaisi hai: monitor (element) ki baat se class teacher (class) ki baat zyada maani jaati hai, aur principal (id) ki baat sabse zyada. Agar do log ek hi level ke hain, toh jo baad mein bola wahi chalega.',
+      en: 'Specificity is like orders in school: the class teacher (class) is obeyed over the monitor (element), and the principal (id) is obeyed over both. If two people of the same level give orders, whoever spoke last wins.',
+      bn: 'Specificity স্কুলের নির্দেশের মতো: মনিটরের (element) চেয়ে ক্লাস টিচারের (class) কথা বেশি মানা হয়, আর প্রিন্সিপালের (id) কথা সবচেয়ে বেশি। একই স্তরের দুজন বললে, যে পরে বলেছে তার কথাই চলবে।',
+    },
+    diagram: 'specificity',
+    question: 'What is specificity and how is it calculated? Give examples.',
+    answer: 'Specificity is the weight the browser gives a selector to decide which of several matching rules wins. It is a three-part value (A, B, C): A = number of ID selectors, B = classes, attribute selectors and pseudo-classes, C = type selectors and pseudo-elements; values are compared column by column from left, so one ID beats any number of classes. The universal selector *, combinators and :where() add nothing, while :is(), :not() and :has() take the specificity of their most specific argument. If specificity ties, the rule that comes later wins; inline styles beat all selectors, and !important beats normal declarations.',
+    points: [
+      'Format (IDs, classes/attributes/pseudo-classes, elements/pseudo-elements)',
+      'Compared left to right — not a base-10 number; 11 classes never beat 1 ID',
+      '* , >, +, ~ and space add 0',
+      'Tie → later rule in source order wins',
+      'Keep specificity low and flat (prefer classes, avoid IDs in CSS)',
+    ],
+    code: `p                      { } /* (0,0,1) */
+p.note                 { } /* (0,1,1) */
+.card .note            { } /* (0,2,0) */
+#intro p               { } /* (1,0,1) */
+a[href^='https']:hover { } /* (0,2,1) */
+ul > li::first-line    { } /* (0,0,3) */
+* + *                  { } /* (0,0,0) */
+
+/* #intro p (1,0,1) beats .card .note .text .x (0,4,0) */`,
+  },
+  {
+    id: 'cb-5',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Inheritance family jaisa hai: bachche ko maa-baap se surname aur bhasha (color, font) milti hai, par unke kapde aur jagah (margin, border) nahi. !important meeting mein chillane jaisa hai — ek baar kaam karta hai, par sab chillane lage toh kisi ki baat samajh nahi aati.',
+      en: 'Inheritance is like a family: a child gets the surname and language (color, font) from parents, but not their clothes or space (margin, border). !important is like shouting in a meeting — it works once, but when everyone shouts, nobody can be understood.',
+      bn: 'Inheritance পরিবারের মতো: সন্তান বাবা-মায়ের কাছ থেকে পদবি আর ভাষা (color, font) পায়, কিন্তু তাদের জামাকাপড় বা জায়গা (margin, border) পায় না। !important মিটিংয়ে চিৎকার করার মতো — একবার কাজ করে, কিন্তু সবাই চিৎকার করলে কারো কথাই বোঝা যায় না।',
+    },
+    question: 'The cascade and inheritance; !important and why to avoid it.',
+    answer: 'The cascade is the algorithm that picks one value when several declarations target the same property: it checks origin and importance (user-agent, user, author; !important flips the order), then inline style, then cascade layers (@layer), then specificity, and finally source order. Inheritance is separate: some properties like color, font-* and line-height pass from parent to child when the child has no value, while box properties like margin, padding, border and background do not. !important jumps a declaration above all normal ones, so overriding it needs another !important with higher specificity — this causes specificity wars and hard-to-debug CSS, so prefer better selectors or @layer.',
+    points: [
+      'Cascade order: origin & importance → inline → @layer → specificity → source order',
+      'Inherited: color, font, line-height, visibility; not inherited: margin, padding, border, background, width',
+      'Keywords inherit, initial, unset, revert control inheritance explicitly',
+      '!important inside layers reverses layer priority (earlier layer wins)',
+      'Acceptable uses: utility classes, overriding third-party inline styles, reduced-motion overrides',
+    ],
+    code: `@layer base, components;
+
+@layer base {
+  body { color: #222; font-family: system-ui; } /* inherited by children */
+}
+
+@layer components {
+  .card { border: 1px solid #ddd; } /* NOT inherited by children */
+  .card a { color: inherit; }        /* force inheritance */
+}
+
+/* unlayered styles beat layered ones (normal declarations) */
+.title { color: teal; }
+
+/* avoid: everyone now needs !important to override */
+.title { color: red !important; }`,
+  },
+  {
+    id: 'cb-6',
+    level: 'fresher',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Selectors school assembly mein bachchon ko bulane jaise hain: \'saare students\' (element), \'Red house waale\' (class), \'Roll no. 12\' (id), \'jinke paas chashma hai\' (attribute). \'+\' matlab line mein Ravi ke theek baad waala, aur \'~\' matlab Ravi ke baad waale sab.',
+      en: 'Selectors are like calling students in assembly: \'all students\' (element), \'Red house\' (class), \'Roll no. 12\' (id), \'those wearing glasses\' (attribute). \'+\' means the one standing right after Ravi, and \'~\' means everyone after Ravi in the line.',
+      bn: 'Selectors স্কুলের অ্যাসেম্বলিতে ছাত্রদের ডাকার মতো: \'সব ছাত্র\' (element), \'Red house-এর সবাই\' (class), \'রোল নং ১২\' (id), \'যাদের চশমা আছে\' (attribute)। \'+\' মানে লাইনে রবির ঠিক পরের জন, আর \'~\' মানে রবির পরের সবাই।',
+    },
+    question: 'CSS selectors: element, class, id, attribute, descendant, child, sibling (+ and ~).',
+    answer: 'Selectors choose which elements a rule applies to. Basic ones are element (p), class (.btn), id (#header) and attribute ([type=\'email\'], with ^= starts-with, $= ends-with, *= contains). Combinators relate elements: a space means descendant at any depth, > means direct child, + means the immediately next sibling, and ~ means any later sibling with the same parent. Classes are the workhorse in real projects; ids are unique per page and too specific for styling.',
+    points: [
+      'div p = any p inside div; div > p = only direct children',
+      'h2 + p = the p right after an h2; h2 ~ p = all following sibling p\'s',
+      'Attribute variants: [attr], [attr=\'v\'], ^=, $=, *=, add i for case-insensitive',
+      'Sibling combinators only look forward, never at previous siblings',
+      'Group selectors with commas: h1, h2, h3 { }',
+    ],
+    code: `p { }                     /* element */
+.btn { }                  /* class */
+#header { }               /* id */
+input[type='email'] { }   /* attribute */
+a[href$='.pdf'] { }       /* href ends with .pdf */
+
+nav a { }                 /* descendant (any depth) */
+ul > li { }               /* direct child */
+h2 + p { }                /* next sibling only */
+h2 ~ p { }                /* all following siblings */
+
+<nav><ul><li><a href='/'>Home</a></li></ul></nav>`,
+  },
+  {
+    id: 'cb-7',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Pseudo-class kisi ki haalat batata hai, jaise \'jo bachcha haath utha raha hai\' (:hover) ya \'line mein teesra bachcha\' (:nth-child). Pseudo-element kisi cheez ka hissa ya extra sticker hai, jaise notebook par naam ke pehle chipkaya star sticker (::before).',
+      en: 'A pseudo-class describes a state, like \'the student raising a hand\' (:hover) or \'the third student in the line\' (:nth-child). A pseudo-element is a part of something or an extra sticker, like a star sticker stuck before the name on a notebook (::before).',
+      bn: 'Pseudo-class কারো অবস্থা বোঝায়, যেমন \'যে ছাত্র হাত তুলেছে\' (:hover) বা \'লাইনের তৃতীয় ছাত্র\' (:nth-child)। Pseudo-element কোনো জিনিসের একটা অংশ বা বাড়তি স্টিকার, যেমন খাতায় নামের আগে লাগানো একটা তারার স্টিকার (::before)।',
+    },
+    question: 'Pseudo-classes vs pseudo-elements (:hover, :focus, :nth-child, ::before, ::after).',
+    answer: 'A pseudo-class (single colon) selects an existing element based on its state or position, like :hover, :focus, :focus-visible, :checked, :first-child or :nth-child(2n+1). A pseudo-element (double colon) styles a part of an element or a virtual box that is not in the HTML, like ::before, ::after, ::first-line, ::placeholder or ::selection. ::before and ::after need the content property to render, are inserted as the first/last child inside the element, and do not work on replaced elements like <img> or <input>.',
+    points: [
+      'Pseudo-class = state/position (specificity like a class); pseudo-element = part (specificity like an element)',
+      ':nth-child(odd), :nth-child(3n+1), :nth-child(2 of .item) for filtered counting',
+      ':nth-child counts all siblings; :nth-of-type counts only same tag',
+      'Use :focus-visible for keyboard focus rings instead of removing outlines',
+      '::before/::after content is decorative — screen readers may read it, so don\'t put essential info there',
+    ],
+    code: `a:hover { text-decoration: underline; }
+button:focus-visible { outline: 2px solid royalblue; }
+li:nth-child(odd) { background: #f5f5f5; }
+li:first-child { font-weight: bold; }
+
+.required::after {
+  content: ' *';
+  color: crimson;
+}
+p::first-line { font-variant: small-caps; }
+input::placeholder { color: #999; }
+
+<label class='required'>Email</label>`,
+  },
+  {
+    id: 'cb-8',
+    level: 'fresher',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    simple: {
+      hi: 'px ek fixed scale jaisa hai. rem poore school ke ek standard (root font) se naapta hai, em apne size (ya bade bhai yaani parent) se, aur % parent ke dabbe ka hissa hai. vw/vh poori screen ka hissa hai, jaise cinema screen ka aadha.',
+      en: 'px is like a fixed ruler. rem measures against the whole school\'s standard (root font), em against your own size (or your elder brother, the parent), and % is a share of the parent box. vw/vh are a share of the whole screen, like half of a cinema screen.',
+      bn: 'px একটা নির্দিষ্ট স্কেলের মতো। rem পুরো স্কুলের একটা মান (root font) দিয়ে মাপে, em নিজের মাপ (বা বড় দাদা মানে parent) দিয়ে, আর % হলো parent বাক্সের একটা ভাগ। vw/vh পুরো স্ক্রিনের ভাগ, যেমন সিনেমার পর্দার অর্ধেক।',
+    },
+    question: 'CSS units: px, em, rem, %, vw, vh — when to use which?',
+    answer: 'px is an absolute (CSS pixel) unit, good for borders, shadows and fine details. rem is relative to the root <html> font-size, ideal for font sizes and spacing because it respects the user\'s browser font setting; em is relative to the element\'s own font-size (for font-size itself, the parent\'s), so it compounds when nested and is handy for padding that scales with a button\'s text. % is relative to the parent/containing block (e.g. width), and vw/vh are 1% of the viewport width/height — on mobile prefer dvh/svh because 100vh can be taller than the visible area when browser toolbars show.',
+    points: [
+      'rem for typography and spacing (accessible, no compounding)',
+      'em for components that should scale with their own text size',
+      '% for fluid widths relative to the parent',
+      'vw/vh for full-screen sections; dvh/svh/lvh fix mobile toolbar issues',
+      'Combine with clamp() for fluid type: clamp(1.5rem, 4vw, 3rem)',
+    ],
+    code: `html { font-size: 100%; }             /* usually 16px, respects user setting */
+h1 { font-size: 2rem; }                /* 32px */
+.btn {
+  font-size: 1.125rem;
+  padding: 0.5em 1em;                  /* scales with the button's font */
+}
+.card { border: 1px solid #ddd; }      /* px for hairlines */
+.col { width: 50%; }                   /* half of parent */
+.hero { min-height: 100dvh; }          /* full visible screen on mobile */
+.title { font-size: clamp(1.5rem, 4vw, 3rem); }`,
+  },
+  {
+    id: 'cb-9',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'display: none matlab bachcha class mein aaya hi nahi aur uski seat bhi hata di. visibility: hidden matlab bachcha nahi hai par uski seat khaali rakhi hai. opacity: 0 matlab bachcha baitha hai par invisible hai — use touch karo (click) toh wo jawab bhi deta hai.',
+      en: 'display: none means the student never came and even the seat was removed. visibility: hidden means the student is absent but the seat is kept empty. opacity: 0 means the student is sitting there but invisible — tap them (click) and they still respond.',
+      bn: 'display: none মানে ছাত্রটা ক্লাসে আসেইনি আর তার বেঞ্চও সরিয়ে দেওয়া হয়েছে। visibility: hidden মানে ছাত্র নেই কিন্তু তার জায়গা ফাঁকা রাখা আছে। opacity: 0 মানে ছাত্র বসে আছে কিন্তু অদৃশ্য — ছুঁলে (click) সে সাড়াও দেয়।',
+    },
+    question: 'display: none vs visibility: hidden vs opacity: 0.',
+    answer: 'display: none removes the element from layout completely — it takes no space, gets no events, and is removed from the accessibility tree. visibility: hidden hides it but keeps its space; it cannot be clicked or focused and is hidden from screen readers, and a child can override it with visibility: visible. opacity: 0 only makes it transparent — it still takes space, still receives clicks and focus, and is still read by screen readers, so it is mainly used for fade animations.',
+    points: [
+      'Space kept: none → no; hidden → yes; opacity 0 → yes',
+      'Clickable/focusable: only opacity: 0',
+      'Screen readers: only opacity: 0 is still announced',
+      'opacity animates smoothly; display/visibility switch discretely',
+      'For \'visually hidden but readable\' text use a .sr-only clip pattern, not these',
+    ],
+    code: `.gone      { display: none; }      /* no box, no space */
+.invisible { visibility: hidden; } /* space kept, not clickable */
+.ghost     { opacity: 0; }         /* space kept, STILL clickable */
+
+/* fade out then make non-interactive */
+.toast { transition: opacity 0.3s, visibility 0.3s; }
+.toast.hide { opacity: 0; visibility: hidden; }
+
+/* readable by screen readers only */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}`,
+  },
+  {
+    id: 'cb-10',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Margin collapsing line mein khade do logon jaisa hai: ek kehta hai \'mujhse 1 meter door raho\', doosra kehta hai \'2 meter\'. Dono ki khaali jagah overlap ho jaati hai, toh beech mein 3 nahi, sirf 2 meter ka gap hota hai — bada waala jeet jaata hai.',
+      en: 'Margin collapsing is like two people in a ticket queue: one says \'stay 1 metre away from me\', the other says \'2 metres\'. Their empty spaces overlap, so the gap between them is 2 metres, not 3 — the bigger one wins.',
+      bn: 'Margin collapsing টিকিটের লাইনে দাঁড়ানো দুজনের মতো: একজন বলে \'আমার থেকে ১ মিটার দূরে থাকো\', অন্যজন বলে \'২ মিটার\'। দুজনের ফাঁকা জায়গা মিশে যায়, তাই মাঝে ৩ নয়, শুধু ২ মিটার ফাঁক থাকে — বড়টাই জেতে।',
+    },
+    question: 'What is margin collapsing and when does it happen?',
+    answer: 'Margin collapsing is when the vertical (block-direction) margins of block boxes in normal flow combine into a single margin equal to the largest one, instead of adding up. It happens between adjacent siblings, between a parent and its first/last child when no border, padding, inline content or new formatting context separates them (the child\'s margin \'leaks\' out of the parent), and for empty blocks whose top and bottom margins touch. It does not happen for horizontal margins, or for flex/grid items, floats, absolutely positioned or inline-block elements, or across a parent that creates a block formatting context (e.g. display: flow-root).',
+    points: [
+      'Only vertical margins of blocks in normal flow collapse',
+      'Siblings: 30px + 20px → 30px gap (the larger wins)',
+      'With negative margins: largest positive + most negative',
+      'Fix parent-child leak with padding, border, display: flow-root, or make the parent flex/grid',
+      'Using gap in flex/grid layouts avoids the issue entirely',
+    ],
+    code: `.a { margin-bottom: 30px; }
+.b { margin-top: 20px; }
+/* gap between .a and .b = 30px, not 50px */
+
+.parent { background: #eee; }
+.parent h2 { margin-top: 40px; }
+/* h2's margin escapes and pushes the whole .parent down */
+
+.parent.fixed { display: flow-root; } /* new BFC: margin stays inside */
+
+.stack { display: flex; flex-direction: column; gap: 20px; } /* no collapsing */
+
+<div class='parent fixed'><h2>Title</h2></div>`,
+  },
+  {
+    id: 'cb-11',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'CSS variable school ke board par likhe \'aaj ka rang\' jaisa hai. Sab log board dekh kar wahi rang pehente hain, toh board par ek word badlo (jaise dark theme) aur poora school ek saath badal jaata hai.',
+      en: 'A CSS variable is like \'today\'s colour\' written on the school board. Everyone checks the board and wears that colour, so change one word on the board (like a dark theme) and the whole school changes together.',
+      bn: 'CSS variable স্কুলের বোর্ডে লেখা \'আজকের রং\'-এর মতো। সবাই বোর্ড দেখে সেই রং পরে, তাই বোর্ডে একটা শব্দ বদলালেই (যেমন dark theme) পুরো স্কুল একসঙ্গে বদলে যায়।',
+    },
+    question: 'CSS custom properties (variables) and using them for theming.',
+    answer: 'Custom properties are author-defined properties starting with -- (e.g. --brand: #4f46e5) that you read with var(--brand, fallback). Unlike Sass variables they are live at runtime: they cascade and inherit through the DOM, can change inside media queries or on a selector like [data-theme=\'dark\'], and can be read or set from JavaScript. For theming you define tokens on :root, override them for a dark theme or a component, and every rule that uses var() updates automatically.',
+    points: [
+      'Names are case-sensitive; defined with --name, used with var(--name, fallback)',
+      'They inherit, so scoping to a component (.card { --gap: 1rem }) works',
+      'Change at runtime: element.style.setProperty(\'--brand\', \'red\')',
+      'Use prefers-color-scheme plus a data-theme attribute for user choice',
+      '@property can register a typed variable (e.g. <color>) so it can be animated',
+    ],
+    code: `:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --brand: #4f46e5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) { --bg: #121212; --text: #eeeeee; }
+}
+:root[data-theme='dark'] { --bg: #121212; --text: #eeeeee; }
+
+body { background: var(--bg); color: var(--text); }
+.btn {
+  background: var(--btn-bg, var(--brand)); /* fallback chain */
+  color: white;
+}
+.btn.danger { --btn-bg: crimson; }
+
+/* JS: document.documentElement.dataset.theme = 'dark'; */`,
+  },
+  {
+    id: 'cb-12',
+    level: 'mid',
+    topic: 'css-basics',
+    difficulty: 'hard',
+    simple: {
+      hi: ':is() matlab \'class A ya class B ka koi bhi\', :where() bhi wahi hai par uski baat ka koi extra wazan (specificity) nahi. :has() matlab \'woh team jiske paas cricket bat hai\', aur :not() matlab \'monitor ko chhod kar sab\'.',
+      en: ':is() means \'anyone from class A or class B\', and :where() means the same but its word carries no extra weight (specificity). :has() means \'the team that has a cricket bat\', and :not() means \'everyone except the monitors\'.',
+      bn: ':is() মানে \'ক্লাস A বা ক্লাস B-এর যে কেউ\', :where()-ও একই, কিন্তু তার কথার কোনো বাড়তি ওজন (specificity) নেই। :has() মানে \'যে দলের কাছে ক্রিকেট ব্যাট আছে\', আর :not() মানে \'মনিটর ছাড়া সবাই\'।',
+    },
+    question: ':is(), :where(), :has() and :not() — with specificity differences.',
+    answer: ':is() and :where() both match an element if it matches any selector in their list, letting you shorten long selector groups; the difference is specificity — :is() takes the specificity of its most specific argument, while :where() always adds zero, which makes it ideal for easily overridable base or library styles. :not() matches elements that do not match its list, and :has() is a relational \'parent/previous\' selector that matches an element if it contains (or is followed by) something, e.g. .card:has(img). Both :not() and :has() also take the specificity of their most specific argument, and all four are supported in current evergreen browsers.',
+    points: [
+      ':is(#a, .b) gives ID-level specificity even when matching via .b — a common gotcha',
+      ':where() = 0 specificity, perfect for resets and design-system defaults',
+      ':is() and :where() use forgiving lists (an invalid selector is ignored); :not() and :has() do not',
+      ':has() enables parent selection and form-state styling without JS',
+      ':has() cannot be nested inside another :has()',
+    ],
+    code: `:is(header, footer) a:hover { }   /* (0,1,2) */
+:where(header, footer) a:hover { } /* (0,1,1) — :where adds 0 */
+
+:is(#hero, .card) p { }            /* (1,0,1) even for .card p! */
+:where(#hero, .card) p { }         /* (0,0,1) */
+
+button:not(.primary, .ghost) { }   /* (0,1,1) */
+
+.card:has(img) { padding: 0; }     /* (0,1,1) card that contains an img */
+label:has(+ input:invalid) { color: crimson; } /* label followed by invalid input */
+form:has(:focus-visible) { outline: 1px dashed; }`,
+  },
+  {
+    id: 'cb-13',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Har browser blackboard par apne alag-alag chalk ke nishaan chhod deta hai. Reset poora board saaf kar deta hai, aur normalize sirf tedhe-medhe nishaan theek karta hai aur kaam ki cheezein rehne deta hai, taaki har class ek jaise board se shuru ho.',
+      en: 'Every browser leaves its own different chalk marks on the blackboard. A reset wipes the whole board clean, while normalize only fixes the uneven marks and keeps the useful ones, so every class starts with the same board.',
+      bn: 'প্রত্যেক browser ব্ল্যাকবোর্ডে নিজের মতো আলাদা চকের দাগ রেখে যায়। Reset পুরো বোর্ড মুছে পরিষ্কার করে, আর normalize শুধু এলোমেলো দাগগুলো ঠিক করে আর কাজের জিনিস রেখে দেয়, যাতে প্রতিটা ক্লাস একই রকম বোর্ড দিয়ে শুরু হয়।',
+    },
+    question: 'What is a CSS reset or normalize, and why use one?',
+    answer: 'Every browser ships a user-agent stylesheet with default margins, font sizes, list styles and form styles that differ slightly between browsers. A classic reset (like Eric Meyer\'s) strips almost all of these to zero so you start from a blank slate, while Normalize.css keeps useful defaults and only fixes inconsistencies between browsers. Today most teams use a small \'modern reset\' — border-box sizing, removing default margins, responsive media and inheriting fonts in form controls — for consistent, predictable styling.',
+    points: [
+      'Reset = remove defaults; normalize = make defaults consistent',
+      'Modern resets are tiny and opinionated (box-sizing, margin: 0, img max-width)',
+      'Form controls don\'t inherit font by default — font: inherit fixes it',
+      'Don\'t remove focus outlines in a reset — it breaks keyboard accessibility',
+      'Frameworks include one (e.g. Tailwind\'s Preflight, based on modern-normalize)',
+    ],
+    code: `*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+body {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select { font: inherit; }
+
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }`,
+  },
+  {
+    id: 'cb-14',
+    level: 'mid',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Bade hostel mein saamaan mix na ho, isliye rules chahiye. BEM har dabbe par saaf naam likhna hai (card__title--big), utility-first chhote ready stickers (\'red\', \'bada\') lagana hai, aur CSS Modules/scoped styles har room ka apna locker hai jisme kisi aur ka saamaan nahi aata.',
+      en: 'In a big hostel you need rules so things don\'t get mixed up. BEM is writing a clear full name on every box (card__title--big), utility-first is sticking many small ready-made labels (\'red\', \'big\'), and CSS Modules/scoped styles are each room\'s own locker where nobody else\'s things can go.',
+      bn: 'বড় হোস্টেলে জিনিসপত্র যাতে মিশে না যায়, তাই নিয়ম দরকার। BEM হলো প্রতিটা বাক্সে পরিষ্কার পুরো নাম লেখা (card__title--big), utility-first হলো ছোট ছোট তৈরি স্টিকার (\'red\', \'বড়\') লাগানো, আর CSS Modules/scoped styles হলো প্রতিটা ঘরের নিজের লকার, যেখানে অন্য কারো জিনিস ঢোকে না।',
+    },
+    question: 'BEM and other CSS architecture approaches (utility-first, CSS modules, scoped styles).',
+    answer: 'CSS is global by default, so large apps need a strategy to avoid name clashes and specificity fights. BEM (Block__Element--Modifier) is a naming convention that keeps every selector a single flat class, e.g. .card__title--large. Utility-first (Tailwind) composes small single-purpose classes in the markup; CSS Modules hash class names at build time so styles are locally scoped per file; and framework scoped styles (Angular\'s default ViewEncapsulation.Emulated, Vue\'s scoped) add generated attributes so a component\'s CSS only hits its own template. Native features like @layer and @scope also help organise and limit the reach of styles.',
+    points: [
+      'BEM: low, flat specificity and self-documenting names; verbose',
+      'Utility-first: fast to build, tiny CSS via purging, markup gets long',
+      'CSS Modules / scoped styles: automatic isolation, no naming discipline needed',
+      'Angular: Emulated (default), ShadowDom, or None encapsulation; global styles go in styles.css',
+      '@layer controls priority (reset < base < components < utilities) regardless of specificity',
+      'Other methodologies: OOCSS, SMACSS, ITCSS',
+    ],
+    code: `/* BEM */
+.card { }
+.card__title { }
+.card__title--large { }
+.card--featured { }
+
+<article class='card card--featured'>
+  <h2 class='card__title card__title--large'>Offer</h2>
+</article>
+
+<!-- utility-first (Tailwind) -->
+<div class='flex items-center gap-4 p-4 rounded-lg shadow'>...</div>
+
+/* layered architecture */
+@layer reset, base, components, utilities;
+@layer utilities { .mt-0 { margin-top: 0; } }
+
+/* Angular emulated encapsulation compiles .title to roughly:
+   .title[_ngcontent-abc-c12] { } */`,
+  },
+  {
+    id: 'cb-15',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Sass ek shortcut recipe book jaisa hai — variables, nesting aur mixins se khaana jaldi banta hai, par plate mein (browser mein) hamesha normal CSS hi jaati hai. Ab normal kitchen (CSS) mein bhi variables aur nesting aa gaye hain, isliye Sass ki zaroorat pehle se kam hai.',
+      en: 'Sass is like a shortcut recipe book — variables, nesting and mixins help you cook faster, but what goes on the plate (the browser) is always normal CSS. Now the normal kitchen (CSS) also has variables and nesting, so Sass is needed less than before.',
+      bn: 'Sass একটা শর্টকাট রেসিপি বইয়ের মতো — variables, nesting আর mixins দিয়ে তাড়াতাড়ি রান্না হয়, কিন্তু থালায় (browser-এ) সবসময় সাধারণ CSS-ই যায়। এখন সাধারণ রান্নাঘরেও (CSS) variables আর nesting এসে গেছে, তাই Sass-এর দরকার আগের চেয়ে কম।',
+    },
+    question: 'Sass/SCSS: variables, nesting, mixins — is a preprocessor still needed today?',
+    answer: 'Sass is a preprocessor that compiles to plain CSS; SCSS is its CSS-like syntax. It adds $variables, nesting with &, @mixin/@include for reusable blocks, functions, loops, maps, partials and a module system (@use/@forward — @import is deprecated). Modern CSS now covers many of these natively: custom properties, nesting, calc()/clamp(), color-mix(), @layer and container queries. So Sass is no longer required for most projects, but it is still useful for mixins, loops, maps and compile-time logic, and Angular CLI supports SCSS out of the box.',
+    points: [
+      '$variables are compile-time; CSS custom properties are runtime and can change with themes/media queries',
+      'Native CSS nesting works in evergreen browsers, but cannot concatenate names like &__title',
+      'Use @use and namespaced modules (sass:math, sass:color) instead of @import and global functions',
+      'Mixins/loops/maps still have no broadly supported native equivalent',
+      'Avoid deep nesting — it inflates specificity',
+    ],
+    code: `@use 'sass:math';
+
+$brand: #4f46e5;
+
+@mixin flex-center($gap: 8px) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+.card {
+  padding: math.div(32px, 2);      // 16px
+  &__title { color: $brand; }      // .card__title
+  &:hover { box-shadow: 0 2px 8px rgb(0 0 0 / 0.2); }
+  .actions { @include flex-center(12px); }
+}
+
+/* native CSS today */
+.card {
+  --brand: #4f46e5;
+  &:hover { outline: 1px solid var(--brand); }
+}`,
+  },
+  {
+    id: 'cb-16',
+    level: 'junior',
+    topic: 'css-basics',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Station ka board chhota hai aur train ka naam bahut lamba. white-space: nowrap naam ko ek hi line mein rakhta hai, overflow: hidden extra hissa chhupa deta hai, aur text-overflow: ellipsis end mein \'...\' laga deta hai taaki pata chale naam aage bhi hai.',
+      en: 'The station board is small and the train\'s name is very long. white-space: nowrap keeps the name on one line, overflow: hidden hides the extra part, and text-overflow: ellipsis adds \'...\' at the end so you know the name continues.',
+      bn: 'স্টেশনের বোর্ড ছোট আর ট্রেনের নাম অনেক লম্বা। white-space: nowrap নামটাকে এক লাইনে রাখে, overflow: hidden বাড়তি অংশ লুকিয়ে দেয়, আর text-overflow: ellipsis শেষে \'...\' বসিয়ে দেয়, যাতে বোঝা যায় নামটা আরও আছে।',
+    },
+    question: 'overflow, text-overflow: ellipsis and white-space — truncating text.',
+    answer: 'overflow controls what happens when content is bigger than its box: visible (default), hidden, clip, scroll or auto. white-space controls wrapping and whitespace (normal, nowrap, pre, pre-wrap, pre-line). For single-line truncation you need all three together on a block or inline-block with a constrained width: white-space: nowrap, overflow: hidden and text-overflow: ellipsis. For multi-line truncation use -webkit-line-clamp with display: -webkit-box and -webkit-box-orient: vertical, which works in all modern browsers.',
+    points: [
+      'text-overflow does nothing alone — it needs overflow other than visible and no wrapping',
+      'Inside flex items add min-width: 0, otherwise the item won\'t shrink and no ellipsis appears',
+      'overflow: auto shows scrollbars only when needed; scroll always reserves them',
+      'Long URLs/words: overflow-wrap: anywhere or word-break: break-word',
+      'Show the full text via a title attribute or tooltip for accessibility',
+    ],
+    code: `.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.row { display: flex; gap: 8px; }
+.row .name { min-width: 0; } /* lets the flex item shrink */
+
+<div class='row'>
+  <img src='a.png' alt='' width='32'>
+  <span class='name truncate' title='Rajdhani Express New Delhi to Howrah'>
+    Rajdhani Express New Delhi to Howrah
+  </span>
+</div>`,
+  },
+  {
+    id: 'cl-1',
+    level: 'junior',
+    topic: 'css-layout',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Static matlab class mein apni seat par baitha bachcha. Relative matlab seat wahi hai par thoda sa khisak gaya. Absolute matlab bachcha seat chhod kar teacher ke table ke hisaab se khada hai, fixed matlab blackboard par chipka poster jo kabhi nahi hilta, aur sticky matlab train ki khidki se chipka sticker jo apne dibbe ke saath hi rehta hai.',
+      en: 'Static is a student sitting in their own seat. Relative is the same seat, just shifted a little. Absolute is a student who left the seat and stands relative to the teacher\'s desk, fixed is a poster stuck on the wall that never moves, and sticky is a sticker that stays in view only while its own train coach is passing.',
+      bn: 'Static মানে ক্লাসে নিজের সিটে বসে থাকা ছাত্র। Relative মানে সিট একই, শুধু একটু সরে বসেছে। Absolute মানে সিট ছেড়ে টিচারের টেবিলের হিসেবে দাঁড়িয়েছে, fixed মানে দেওয়ালে সাঁটা পোস্টার যা কখনো নড়ে না, আর sticky মানে এমন স্টিকার যা শুধু নিজের ট্রেনের কামরা যতক্ষণ সামনে আছে ততক্ষণ দেখা যায়।',
+    },
+    question: 'Explain position: static, relative, absolute, fixed and sticky.',
+    answer: 'static is the default: the element sits in normal flow and top/left/z-index do nothing. relative keeps the element in flow but lets you nudge it visually with offsets, and it becomes the containing block for absolutely positioned children. absolute removes the element from flow and positions it against the nearest positioned ancestor (or the initial containing block); fixed positions it against the viewport so it stays put while scrolling. sticky behaves like relative until a scroll threshold (e.g. top: 0) is reached, then sticks within its parent\'s bounds.',
+    points: [
+      'static = default, offsets ignored',
+      'relative = stays in flow, offset visually, anchors absolute children',
+      'absolute = out of flow, relative to nearest positioned ancestor',
+      'fixed = relative to the viewport (unless an ancestor has transform/filter, which becomes its containing block)',
+      'sticky needs a threshold like top: 0 and breaks if an ancestor has overflow: hidden/auto in the wrong place',
+    ],
+    code: `.card { position: relative; }
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;   /* relative to .card */
+}
+.toolbar {
+  position: sticky;
+  top: 0;       /* sticks once it hits the top */
+}
+.chat-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;  /* relative to the viewport */
+}`,
+  },
+  {
+    id: 'cl-2',
+    level: 'mid',
+    topic: 'css-layout',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Socho school mein alag-alag classes hain. Class 5 ka topper (z-index 9999) bhi Class 10 ke sabse kamzor bachche se senior nahi ho sakta, kyunki pehle class compare hoti hai. Stacking context wahi class hai — andar ka rank sirf class ke andar chalta hai.',
+      en: 'Think of classes in a school. The topper of Class 5 (z-index 9999) is still junior to the weakest student of Class 10, because the classes are compared first. A stacking context is that class — a rank only counts inside it.',
+      bn: 'ভাবো স্কুলে আলাদা আলাদা ক্লাস আছে। ক্লাস ৫-এর টপার (z-index 9999) ক্লাস ১০-এর সবচেয়ে দুর্বল ছাত্রের চেয়েও জুনিয়র, কারণ আগে ক্লাস তুলনা হয়। Stacking context হলো সেই ক্লাস — ভিতরের র‍্যাঙ্ক শুধু ক্লাসের ভিতরেই চলে।',
+    },
+    question: 'z-index and stacking contexts — why does my z-index: 9999 not work?',
+    answer: 'z-index only compares elements inside the same stacking context. If the parent of your element creates its own stacking context (e.g. it has opacity < 1, transform, filter, isolation: isolate, or position + z-index), the child\'s 9999 only ranks it among its siblings inside that parent; the parent as a whole is ranked against others with its own z-index. Also, z-index has no effect on position: static elements unless they are flex or grid items. Fix it by raising the z-index of the ancestor that forms the context, removing the property that creates it, or moving the element (e.g. a modal) to the body level.',
+    points: [
+      'z-index works on positioned elements and on flex/grid items',
+      'Stacking contexts are created by: position + z-index, opacity < 1, transform, filter, will-change, isolation: isolate, position fixed/sticky, contain: paint',
+      'A child can never escape its parent\'s stacking context',
+      'Debug by walking up the ancestors to find which one creates the context',
+      'isolation: isolate creates a context on purpose without side effects',
+    ],
+    code: `.header { position: relative; z-index: 1; }
+.page   { transform: translateZ(0); }  /* creates a stacking context */
+.page .dropdown {
+  position: absolute;
+  z-index: 9999; /* only wins inside .page */
+}
+/* .page itself has z-index auto, but it's still a context below
+   .header (z-index 1) if they overlap, so the dropdown is hidden. */
+
+/* Fix: give the context a higher level */
+.page { position: relative; z-index: 2; }`,
+  },
+  {
+    id: 'cl-3',
+    level: 'junior',
+    topic: 'css-layout',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Flexbox ek line mein khade bachchon jaisa hai. Main axis woh direction hai jismein line lagi hai, justify-content batata hai line mein bachchon ke beech kitni jagah ho. Align-items batata hai ki sab lambai mein kaise aligned hon — sab seedhe, beech mein ya upar.',
+      en: 'Flexbox is like children standing in a queue. The main axis is the direction of the queue, and justify-content decides the spacing between them along it. align-items decides how they line up across it — stretched, centred or at the top.',
+      bn: 'Flexbox হলো লাইনে দাঁড়ানো বাচ্চাদের মতো। Main axis হলো লাইনের দিক, আর justify-content ঠিক করে লাইনে তাদের মধ্যে কতটা ফাঁক থাকবে। align-items ঠিক করে আড়াআড়ি তারা কীভাবে সাজবে — টানটান, মাঝখানে বা উপরে।',
+    },
+    diagram: 'flexbox',
+    question: 'Flexbox basics: main axis vs cross axis, justify-content vs align-items.',
+    answer: 'In a flex container the main axis follows flex-direction (row = horizontal, column = vertical) and the cross axis is perpendicular to it. justify-content distributes items along the main axis (start, center, space-between…), while align-items aligns them on the cross axis (stretch by default, center, flex-start…). If you switch flex-direction to column, the two properties swap visual directions. align-content only matters when items wrap onto multiple lines.',
+    points: [
+      'display: flex makes children flex items',
+      'Main axis = flex-direction; cross axis = perpendicular',
+      'justify-content → main axis, align-items → cross axis',
+      'Default align-items is stretch (equal heights in a row)',
+      'flex-wrap + align-content controls multiple lines; gap adds spacing',
+    ],
+    code: `.navbar {
+  display: flex;
+  flex-direction: row;          /* main axis = horizontal */
+  justify-content: space-between; /* spread along main axis */
+  align-items: center;          /* center on cross axis */
+  gap: 1rem;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;       /* main axis is now vertical */
+  justify-content: flex-start;
+}`,
+  },
+  {
+    id: 'cl-4',
+    level: 'junior',
+    topic: 'css-layout',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Socho teen dost pizza baant rahe hain. flex-basis matlab har ek ko pehle se mila slice, flex-grow matlab bacha hua pizza kitna hissa lenge, aur flex-shrink matlab kam pade to kaun kitna chhodega. flex: 1 matlab sab barabar baantenge.',
+      en: 'Imagine three friends sharing a pizza. flex-basis is the slice each one gets first, flex-grow is how much of the leftover pizza they take, and flex-shrink is how much they give back if there isn\'t enough. flex: 1 means everyone shares equally.',
+      bn: 'ভাবো তিন বন্ধু পিৎজা ভাগ করছে। flex-basis মানে প্রথমে প্রত্যেকের পাওয়া স্লাইস, flex-grow মানে বাকি পিৎজার কতটা ভাগ নেবে, আর flex-shrink মানে কম পড়লে কে কতটা ছাড়বে। flex: 1 মানে সবাই সমান ভাগ পাবে।',
+    },
+    question: 'flex-grow, flex-shrink, flex-basis and the flex shorthand.',
+    answer: 'flex-basis is the item\'s starting size on the main axis before free space is shared out. flex-grow says how much of the leftover positive space an item takes (as a ratio), and flex-shrink says how much it gives up when there isn\'t enough space. The shorthand flex: <grow> <shrink> <basis> is preferred: flex: 1 means 1 1 0%, flex: auto means 1 1 auto, flex: none means 0 0 auto, and the initial value is 0 1 auto.',
+    points: [
+      'flex-basis = starting size (auto uses width/content)',
+      'flex-grow = share of extra space, 0 = don\'t grow',
+      'flex-shrink = share of shrinking, 0 = never shrink',
+      'flex: 1 → 1 1 0% (equal columns regardless of content)',
+      'Flex items have min-width: auto, so add min-width: 0 to let long content shrink',
+    ],
+    code: `.row { display: flex; gap: 1rem; }
+.sidebar { flex: 0 0 240px; }  /* fixed 240px, never grow/shrink */
+.main    { flex: 1; min-width: 0; } /* takes all remaining space */
+
+/* 1:2 ratio of free space */
+.a { flex: 1; }
+.b { flex: 2; }`,
+  },
+  {
+    id: 'cl-5',
+    level: 'junior',
+    topic: 'css-layout',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Grid ek classroom ki benches jaisa hai — rows aur columns dono pehle se tay. fr matlab bachi hui jagah ka hissa, jaise 1fr 2fr mein doosri bench pehli se double lambi. gap benches ke beech ka raasta hai.',
+      en: 'Grid is like the benches in a classroom — rows and columns are both planned in advance. fr is a share of the leftover space, so in 1fr 2fr the second bench is twice as long. gap is the walkway between benches.',
+      bn: 'Grid হলো ক্লাসরুমের বেঞ্চের মতো — সারি আর কলাম দুটোই আগে থেকে ঠিক করা। fr মানে বাকি জায়গার ভাগ, তাই 1fr 2fr-এ দ্বিতীয় বেঞ্চ প্রথমটার দ্বিগুণ লম্বা। gap হলো বেঞ্চের মাঝের রাস্তা।',
+    },
+    question: 'CSS Grid basics: grid-template-columns, the fr unit, gap, repeat() and minmax().',
+    answer: 'display: grid turns an element into a two-dimensional grid. grid-template-columns (and -rows) define the tracks; the fr unit means a fraction of the remaining free space after fixed tracks and gaps are taken out. repeat(n, size) avoids repeating yourself, and minmax(min, max) gives a track a flexible size range. gap sets spacing between rows and columns without margins.',
+    points: [
+      'Grid is two-dimensional: rows and columns together',
+      'fr = share of leftover space (after fixed sizes and gaps)',
+      'repeat(3, 1fr) = three equal columns',
+      'minmax(200px, 1fr) = never smaller than 200px, can grow',
+      'gap / row-gap / column-gap replace margin hacks',
+    ],
+    code: `.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr 2fr; /* fixed + 1/3 + 2/3 of the rest */
+  gap: 16px;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 150px;
+  gap: 1rem;
+}
+.feature { grid-column: span 2; }`,
+  },
+  {
+    id: 'cl-6',
+    level: 'mid',
+    topic: 'css-layout',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Flexbox ek line mein khade logon ke liye hai, jaise ration ki queue. Grid poore cinema hall ki seating jaisa hai jahan row aur seat number dono hain. Ghar ka naksha Grid se banao, aur ek kamre ki shelf Flexbox se sajao.',
+      en: 'Flexbox is for a single line of people, like a ration-shop queue. Grid is like the seating in a cinema hall, with both row and seat numbers. Plan the house with Grid, and arrange one room\'s shelf with Flexbox.',
+      bn: 'Flexbox হলো এক লাইনের মানুষের জন্য, যেমন রেশন দোকানের লাইন। Grid হলো সিনেমা হলের বসার ব্যবস্থা, যেখানে সারি আর সিট নম্বর দুটোই আছে। বাড়ির নকশা Grid দিয়ে, আর একটা ঘরের তাক Flexbox দিয়ে সাজাও।',
+    },
+    question: 'Flexbox vs Grid — when do you use which?',
+    answer: 'Flexbox is one-dimensional and content-out: items lay out in a row or column and their sizes are driven by their content, which is ideal for navbars, toolbars, button groups and centring. Grid is two-dimensional and layout-in: you define rows and columns first and place items into them, which suits page layouts, card grids and anything that must align in both directions. They are complementary — a Grid page layout with Flexbox inside components is very common.',
+    points: [
+      'Flexbox = 1D (row OR column), Grid = 2D (rows AND columns)',
+      'Flexbox sizes from content; Grid sizes from the track definition',
+      'Use Grid when items must line up across rows (e.g. card grid, forms)',
+      'Use Flexbox for components with unknown item counts/widths that should wrap naturally',
+      'Both support gap and the same alignment properties',
+      'Mix them: Grid for the page, Flex inside cards/headers',
+    ],
+    code: `/* Page skeleton: Grid */
+.page {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+}
+/* Header contents: Flexbox */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}`,
+  },
+  {
+    id: 'cl-7',
+    level: 'fresher',
+    topic: 'css-layout',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Div ko center karna matlab photo frame ko deewar ke bilkul beech mein lagana. Grid ya Flexbox ek helper jaisa hai jo naap kar khud beech mein laga deta hai. Purana tareeka tha 50% khiska kar aadha wapas khinchna (translate).',
+      en: 'Centring a div is like hanging a photo frame exactly in the middle of a wall. Grid or Flexbox is a helper who measures and hangs it in the middle for you. The older trick moves it 50% across and then pulls it back by half its own size (translate).',
+      bn: 'Div-কে center করা মানে ছবির ফ্রেম দেওয়ালের ঠিক মাঝখানে টাঙানো। Grid বা Flexbox হলো এমন সাহায্যকারী যে মেপে নিজেই মাঝখানে টাঙিয়ে দেয়। পুরনো কৌশল ছিল 50% সরিয়ে তারপর নিজের অর্ধেক পিছনে টানা (translate)।',
+    },
+    question: 'How do you center a div horizontally and vertically? (show several ways)',
+    answer: 'The simplest modern ways are Flexbox (display: flex; justify-content: center; align-items: center) or Grid (display: grid; place-items: center) on the parent; the parent needs a height for vertical centring to be visible. For an overlay, position: absolute with inset: 0 and margin: auto (with a set width/height) or top: 50%; left: 50%; transform: translate(-50%, -50%) also works. margin: 0 auto only centres a block with a width horizontally.',
+    points: [
+      'Grid: place-items: center (shortest)',
+      'Flex: justify-content + align-items: center',
+      'Absolute + translate(-50%, -50%) for unknown sizes',
+      'margin-inline: auto centres horizontally only',
+      'Parent must have a height (e.g. min-height: 100dvh) to centre vertically',
+    ],
+    code: `/* 1. Grid */
+.parent { display: grid; place-items: center; min-height: 100dvh; }
+
+/* 2. Flexbox */
+.parent { display: flex; justify-content: center; align-items: center; }
+
+/* 3. Absolute + transform */
+.parent { position: relative; }
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 4. Horizontal only */
+.child { width: 300px; margin: 0 auto; }`,
+  },
+  {
+    id: 'cl-8',
+    level: 'junior',
+    topic: 'css-layout',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Float ek newspaper ki photo jaisa hai jiske chaaron taraf khabar ka text bahta hai. Isse poora page ka layout banana aisa tha jaise sab bachchon ko ek taraf dhakel kar class sajana — gadbad ho jaati thi. Ab Flexbox aur Grid yeh kaam saaf tareeke se karte hain.',
+      en: 'A float is like a photo in a newspaper with the story text flowing around it. Building a whole page layout with floats was like arranging a class by pushing every student to one side — it got messy. Flexbox and Grid now do that job cleanly.',
+      bn: 'Float হলো খবরের কাগজের ছবির মতো, যার চারপাশে লেখা বয়ে যায়। Float দিয়ে পুরো পেজের layout বানানো ছিল সব ছাত্রকে এক দিকে ঠেলে ক্লাস সাজানোর মতো — গোলমাল হয়ে যেত। এখন Flexbox আর Grid এই কাজ পরিষ্কারভাবে করে।',
+    },
+    question: 'Floats and clearfix — why are floats rarely used for layout now?',
+    answer: 'float was designed to let text wrap around an image; it takes the element out of normal flow and pushes it left or right. Because floated children don\'t contribute to the parent\'s height, the parent collapses, which is why the clearfix hack (a ::after pseudo-element with clear: both) was invented. Floats were abused for column layouts, but they are fragile (source-order dependent, no vertical alignment, no equal heights), so Flexbox and Grid replaced them; today floats are mainly used for wrapping text around images.',
+    points: [
+      'Original purpose: text wrapping around images',
+      'Floated children don\'t add to parent height → parent collapses',
+      'clearfix: ::after { content: \'\'; display: table; clear: both; }',
+      'Modern fix: display: flow-root on the parent creates a new block formatting context',
+      'Flexbox/Grid give alignment, equal heights and gap that floats can\'t',
+    ],
+    code: `.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Modern equivalent */
+.container { display: flow-root; }
+
+/* What floats are still good for */
+.article img {
+  float: left;
+  margin: 0 1rem 1rem 0;
+}`,
+  },
+  {
+    id: 'cl-9',
+    level: 'mid',
+    topic: 'css-layout',
+    difficulty: 'medium',
+    simple: {
+      hi: 'grid-template-areas ghar ka naksha kaagaz par likhne jaisa hai: upar \'hall\', beech mein \'bedroom kitchen\', neeche \'balcony\'. Har kamre ko uska naam de do, wo apni jagah chala jaata hai. Mobile ke liye bas naya naksha bana do.',
+      en: 'grid-template-areas is like drawing a house plan on paper: \'hall\' on top, \'bedroom kitchen\' in the middle, \'balcony\' at the bottom. Give each room its name and it moves into place. For mobile, just draw a new plan.',
+      bn: 'grid-template-areas হলো কাগজে বাড়ির নকশা আঁকার মতো: উপরে \'hall\', মাঝে \'bedroom kitchen\', নিচে \'balcony\'। প্রতিটা ঘরকে তার নাম দাও, সে নিজের জায়গায় চলে যায়। মোবাইলের জন্য শুধু নতুন নকশা এঁকে দাও।',
+    },
+    question: 'grid-template-areas — build a header / sidebar / main / footer layout.',
+    answer: 'grid-template-areas lets you draw the layout with named strings, one string per row, and each child is placed with grid-area: <name>. Every area must be a rectangle and each row must have the same number of cells; a dot (.) leaves a cell empty. It makes responsive changes easy because you just redraw the areas inside a media query without touching the HTML.',
+    points: [
+      'Name each child with grid-area',
+      'One quoted string per row; repeated names span cells',
+      'Areas must be rectangular; \'.\' = empty cell',
+      'Redefine areas in a media query for mobile',
+      'Visual order changes don\'t change DOM/tab order — keep source order logical for accessibility',
+    ],
+    code: `.page {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+}
+header { grid-area: header; }
+aside  { grid-area: sidebar; }
+main   { grid-area: main; }
+footer { grid-area: footer; }
+
+@media (width < 768px) {
+  .page {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas: "header" "sidebar" "main" "footer";
+  }
+}`,
+  },
+  {
+    id: 'cl-10',
+    level: 'junior',
+    topic: 'css-layout',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Sticky footer school bag ki sabse neeche wali pocket jaisa hai — bag khaali ho tab bhi neeche hi rehti hai, aur kitaabein badhein to aur neeche khisak jaati hai. Equal-height columns aise hain jaise ek almirah ke saare khaane barabar lambe.',
+      en: 'A sticky footer is like the bottom pocket of a school bag — it stays at the bottom even when the bag is empty, and moves further down when you add books. Equal-height columns are like the shelves of one cupboard, all the same height.',
+      bn: 'Sticky footer হলো স্কুলব্যাগের সবচেয়ে নিচের পকেটের মতো — ব্যাগ খালি থাকলেও নিচেই থাকে, আর বই বাড়লে আরও নিচে নেমে যায়। Equal-height columns হলো একটা আলমারির সব তাক সমান উঁচু হওয়ার মতো।',
+    },
+    question: 'How do you make a sticky footer and equal-height columns?',
+    answer: 'A sticky footer sits at the bottom of the viewport when content is short but is pushed down when content is long. Make the body (or wrapper) at least the viewport height and let main take the remaining space: either a flex column with main { flex: 1 } or a grid with grid-template-rows: auto 1fr auto. Equal-height columns come for free in Flexbox (align-items defaults to stretch) and Grid (items stretch to fill the row).',
+    points: [
+      'Wrapper min-height: 100vh or 100dvh (dvh handles mobile browser bars)',
+      'Flex column + main { flex: 1 }',
+      'or Grid: grid-template-rows: auto 1fr auto',
+      'Equal heights: flex/grid items stretch by default',
+      'Don\'t set a fixed height on the columns or stretch won\'t apply',
+    ],
+    code: `body {
+  margin: 0;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* header, main, footer */
+}
+
+/* Equal-height columns */
+.columns {
+  display: flex;
+  gap: 1rem;
+  /* align-items: stretch is the default */
+}
+.columns > * { flex: 1; }`,
+  },
+  {
+    id: 'cl-11',
+    level: 'mid',
+    topic: 'css-layout',
+    difficulty: 'hard',
+    simple: {
+      hi: 'Subgrid aisa hai jaise school ki har class ek hi time-table follow kare — sab ki lunch break ek saath, isliye sab line mein dikhti hain. place-items batata hai har bachcha apni seat mein kahan baithe, aur place-content batata hai poori class room mein kahan baithe.',
+      en: 'Subgrid is like every class in a school following the same timetable — lunch break happens together, so everything lines up. place-items says where each student sits inside their own seat, and place-content says where the whole class sits in the room.',
+      bn: 'Subgrid হলো স্কুলের প্রতিটা ক্লাস একই রুটিন মেনে চলার মতো — টিফিন সবার একসঙ্গে, তাই সব এক লাইনে মেলে। place-items বলে প্রতিটা ছাত্র নিজের সিটের কোথায় বসবে, আর place-content বলে পুরো ক্লাস ঘরের কোথায় বসবে।',
+    },
+    question: 'Subgrid and the place-items / place-content shorthands.',
+    answer: 'Normally a nested grid has its own independent tracks, so content in sibling cards (titles, prices, buttons) can\'t align across cards. With grid-template-rows: subgrid (or columns), a child grid adopts the tracks of its parent grid, so its children line up with the parent\'s lines; subgrid is supported in all evergreen browsers. place-items is the shorthand for align-items + justify-items (how items sit inside their cells), and place-content is align-content + justify-content (how the whole set of tracks sits inside the container).',
+    points: [
+      'Subgrid: child uses the parent\'s track sizes (grid-template-rows/columns: subgrid)',
+      'The child must span the parent tracks it wants to share (e.g. grid-row: span 3)',
+      'Classic use: cards whose title/body/footer align across a row',
+      'place-items: <align-items> <justify-items>',
+      'place-content: <align-content> <justify-content>; place-self for one item',
+    ],
+    code: `.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.card {
+  display: grid;
+  grid-row: span 3;              /* title, body, button */
+  grid-template-rows: subgrid;   /* share parent's rows */
+}
+
+.center { display: grid; place-items: center; }
+.board  {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  place-content: center space-between;
+}`,
+  },
+  {
+    id: 'cl-12',
+    level: 'junior',
+    topic: 'css-layout',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Yeh shaadi mein lagi kursiyon jaisa hai: hall bada to ek row mein zyada kursiyan, chhota to kam — par har kursi kam se kam itni chaudi zaroor. Kisi ko naap kar batana nahi padta, apne aap adjust ho jaata hai.',
+      en: 'It\'s like arranging chairs at a wedding: a big hall fits more chairs per row, a small one fits fewer — but every chair is at least a certain width. Nobody has to measure each time; it adjusts on its own.',
+      bn: 'এটা বিয়েবাড়িতে চেয়ার সাজানোর মতো: হল বড় হলে এক সারিতে বেশি চেয়ার, ছোট হলে কম — কিন্তু প্রতিটা চেয়ার অন্তত একটা নির্দিষ্ট চওড়া। কাউকে মাপতে হয় না, নিজে থেকেই মানিয়ে নেয়।',
+    },
+    question: 'A responsive card grid without media queries (repeat(auto-fit, minmax())).',
+    answer: 'grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) creates as many columns as fit, each at least 250px wide, and stretches them to fill the row; as the container shrinks, cards wrap to fewer columns automatically. auto-fill does the same but keeps empty column tracks, so a few items won\'t stretch across the whole row; auto-fit collapses empty tracks so items expand. Wrap the minimum in min(250px, 100%) so a single card never overflows a very narrow screen.',
+    points: [
+      'auto-fit collapses empty tracks → items stretch',
+      'auto-fill keeps empty tracks → items keep their size',
+      'minmax(250px, 1fr) = minimum width, then share space',
+      'min(250px, 100%) prevents overflow on tiny screens',
+      'Responds to the container width, not just the viewport',
+    ],
+    code: `.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: 1.5rem;
+}
+
+<!-- HTML -->
+<div class="cards">
+  <article class="card">...</article>
+  <article class="card">...</article>
+  <article class="card">...</article>
+</div>`,
+  },
+  {
+    id: 'ca-1',
+    level: 'fresher',
+    topic: 'css-advanced',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Media query ek darzi jaisa hai jo naap dekh kar kapda adjust karta hai. Mobile-first matlab pehle bachche ke size ka kurta silo, phir bade logon ke liye badhao. Desktop-first matlab pehle bada kurta, phir kaat-chhaant kar chhota karo.',
+      en: 'A media query is like a tailor who adjusts clothes after checking measurements. Mobile-first means first stitching a kurta in a child\'s size and then making it bigger for adults. Desktop-first means stitching a big one first and then cutting it down.',
+      bn: 'Media query হলো এমন দর্জি যে মাপ দেখে জামা ঠিক করে। Mobile-first মানে আগে বাচ্চার মাপের পাঞ্জাবি সেলাই, তারপর বড়দের জন্য বাড়ানো। Desktop-first মানে আগে বড়টা বানিয়ে তারপর কেটে ছোট করা।',
+    },
+    question: 'What are media queries? Mobile-first vs desktop-first.',
+    answer: 'Media queries apply CSS only when conditions about the device or viewport are true, such as width, orientation, hover capability or user preferences. Mobile-first means writing base styles for small screens and adding min-width queries to enhance for larger screens; desktop-first starts with the large layout and uses max-width queries to override for small screens. Mobile-first is usually preferred because small screens get the simplest CSS and layouts progressively enhance.',
+    points: [
+      '@media (min-width: 768px) { ... } applies at 768px and wider',
+      'Mobile-first = base styles + min-width queries',
+      'Desktop-first = base styles + max-width queries',
+      'Modern range syntax: @media (width >= 768px)',
+      'Can also query features: (hover: hover), (orientation: landscape), (prefers-color-scheme: dark)',
+    ],
+    code: `/* Mobile-first */
+.grid { display: grid; grid-template-columns: 1fr; }
+
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (width >= 1200px) {          /* range syntax */
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (hover: hover) {
+  .btn:hover { background: navy; }
+}`,
+  },
+  {
+    id: 'ca-2',
+    level: 'junior',
+    topic: 'css-advanced',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Responsive design paani jaisa hai — glass mein dalo to glass ka shape, bottle mein dalo to bottle ka. Website bhi phone, tablet ya laptop ke hisaab se apna shape badal leti hai. Viewport meta tag phone ko batata hai ki \'mujhe chhota karke mat dikhao, asli size mein dikhao\'.',
+      en: 'Responsive design is like water — pour it into a glass and it takes the glass\'s shape, into a bottle and it takes the bottle\'s. A website likewise changes shape for a phone, tablet or laptop. The viewport meta tag tells the phone, \'don\'t shrink me, show me at real size\'.',
+      bn: 'Responsive design হলো জলের মতো — গ্লাসে ঢাললে গ্লাসের আকার, বোতলে ঢাললে বোতলের। ওয়েবসাইটও ফোন, ট্যাবলেট বা ল্যাপটপ অনুযায়ী আকার বদলায়। Viewport meta tag ফোনকে বলে, \'আমাকে ছোট করে দেখিও না, আসল মাপে দেখাও\'।',
+    },
+    question: 'Principles of responsive design (fluid layouts, flexible images, breakpoints, viewport meta).',
+    answer: 'Responsive design means one codebase that adapts to any screen. Its pillars are the viewport meta tag (so mobile browsers don\'t render a zoomed-out desktop page), fluid layouts using relative units, Flexbox and Grid instead of fixed pixel widths, flexible media (max-width: 100%; height: auto) and breakpoints chosen where the content breaks rather than for specific devices. Modern additions include fluid sizing with clamp(), container queries and responsive images with srcset/sizes.',
+    points: [
+      '<meta name="viewport" content="width=device-width, initial-scale=1">',
+      'Relative units: %, fr, rem, em, vw/dvh',
+      'img { max-width: 100%; height: auto; }',
+      'Breakpoints based on content, not device names',
+      'srcset/sizes and <picture> for right-sized images',
+      'Test on real devices and with zoom, not just a resized window',
+    ],
+    code: `<!-- in <head> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<img src="hero-800.jpg"
+     srcset="hero-400.jpg 400w, hero-800.jpg 800w, hero-1600.jpg 1600w"
+     sizes="(min-width: 900px) 50vw, 100vw" alt="Hero">
+
+<style>
+  img { max-width: 100%; height: auto; }
+  .container { width: min(100% - 2rem, 1100px); margin-inline: auto; }
+  h1 { font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem); }
+</style>`,
+  },
+  {
+    id: 'ca-3',
+    level: 'mid',
+    topic: 'css-advanced',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Media query poore ghar ka size dekhta hai, container query sirf us almirah ka jismein saaman rakhna hai. Ek hi tiffin box chhote bag mein alag tarah rakhoge aur bade bag mein alag — container query wahi samajhdari component ko deti hai.',
+      en: 'A media query looks at the size of the whole house; a container query looks only at the cupboard the item goes in. You pack the same tiffin box differently in a small bag and a big bag — container queries give components that same sense.',
+      bn: 'Media query পুরো বাড়ির মাপ দেখে, container query শুধু সেই আলমারির যেখানে জিনিস রাখা হবে। একই টিফিন বাক্স ছোট ব্যাগে একভাবে আর বড় ব্যাগে অন্যভাবে রাখো — container query component-কে সেই বুদ্ধিটা দেয়।',
+    },
+    question: 'Container queries vs media queries.',
+    answer: 'Media queries respond to the viewport (or device), so a component can\'t know how much space it actually has — a card in a narrow sidebar and in a wide main column sees the same viewport. Container queries let a component respond to the size of its nearest ancestor marked as a container (container-type: inline-size), so the same card can switch layout wherever it is placed. Use media queries for page-level layout and user preferences, and container queries for reusable components; container query units like cqi size things relative to the container.',
+    points: [
+      'Media query → viewport; container query → parent container',
+      'Declare a container: container-type: inline-size (optionally container-name)',
+      '@container (min-width: 400px) { ... }',
+      'Units: cqw, cqi, cqh relative to the container',
+      'A container can\'t be styled by its own query — only its descendants',
+      'Great for design-system components reused in many layouts',
+    ],
+    code: `.card-wrapper {
+  container-type: inline-size;
+  container-name: card;
+}
+.card { display: grid; gap: 1rem; }
+
+@container card (min-width: 400px) {
+  .card {
+    grid-template-columns: 150px 1fr; /* image beside text */
+  }
+  .card h2 { font-size: clamp(1rem, 5cqi, 1.5rem); }
+}`,
+  },
+  {
+    id: 'ca-4',
+    level: 'junior',
+    topic: 'css-advanced',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Transition switch dabane par pankhe ka dheere-dheere tez hona hai — ek trigger, ek shuruaat aur ek ant. Animation ek cricket bowler ka poora run-up aur action hai jismein kai steps hain, aur woh baar-baar dohraya ja sakta hai.',
+      en: 'A transition is a fan slowly speeding up when you press the switch — one trigger, a start and an end. An animation is a cricket bowler\'s whole run-up and action, with many steps, and it can repeat again and again.',
+      bn: 'Transition হলো সুইচ টিপলে পাখা ধীরে ধীরে জোরে ঘোরা — একটা trigger, একটা শুরু আর একটা শেষ। Animation হলো ক্রিকেট বোলারের পুরো রান-আপ আর অ্যাকশন, যাতে অনেক ধাপ আছে আর বারবার করা যায়।',
+    },
+    question: 'Transitions vs animations (@keyframes).',
+    answer: 'A transition animates a property smoothly from its old value to its new value when a state changes, such as on :hover or a class toggle; it needs a trigger and only has a start and an end. An animation uses @keyframes to define multiple steps, can run on its own when the page loads, loop (animation-iteration-count: infinite), alternate direction and pause. Use transitions for simple interactive state changes and animations for loaders, attention effects or multi-step motion.',
+    points: [
+      'transition: property duration timing-function delay',
+      'Transition = A → B on a state change, needs a trigger',
+      'Animation = @keyframes with many steps, can autoplay and loop',
+      'animation-fill-mode: forwards keeps the final state',
+      'Avoid transition: all — list specific properties',
+      'Prefer animating transform and opacity',
+    ],
+    code: `.btn {
+  background: #2563eb;
+  transition: background-color 200ms ease, transform 200ms ease;
+}
+.btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.loader {
+  animation: spin 1s linear infinite;
+}`,
+  },
+  {
+    id: 'ca-5',
+    level: 'junior',
+    topic: 'css-advanced',
+    difficulty: 'medium',
+    simple: {
+      hi: 'transform ek photo ko projector par bada-chhota ya ghumana hai — kamre ka furniture nahi hilta. Lekin left/width badalna aisa hai jaise har second poore kamre ka furniture dobara sajaana, isliye woh dheema padta hai.',
+      en: 'transform is like enlarging or rotating a photo on a projector — the furniture in the room doesn\'t move. Changing left/width is like rearranging all the room\'s furniture every second, which is why it\'s slow.',
+      bn: 'transform হলো প্রজেক্টরে ছবি বড়-ছোট করা বা ঘোরানো — ঘরের আসবাব নড়ে না। কিন্তু left/width বদলানো মানে প্রতি সেকেন্ডে পুরো ঘরের আসবাব নতুন করে সাজানো, তাই সেটা ধীর হয়।',
+    },
+    question: 'transform (translate, scale, rotate) — and why it is better for animation performance.',
+    answer: 'transform visually moves, scales, rotates or skews an element without changing its place in the layout, so surrounding elements are not affected. Changing transform (and opacity) usually skips layout and paint and can be handled by the compositor, often on the GPU, which keeps animations smooth at 60fps. Animating top/left/width/height instead forces the browser to recalculate layout and repaint on every frame, which causes jank.',
+    points: [
+      'translate(), scale(), rotate(), skew(); individual translate/scale/rotate properties also exist',
+      'Doesn\'t affect document flow — neighbours don\'t move',
+      'transform + opacity are compositor-friendly (no layout/paint)',
+      'Animating left/top/width triggers layout every frame',
+      'transform creates a stacking context and a containing block for fixed children',
+      'transform-origin controls the pivot point',
+    ],
+    code: `/* Bad: triggers layout every frame */
+.box-bad { position: relative; transition: left 300ms; }
+.box-bad.open { left: 200px; }
+
+/* Good: compositor-only */
+.box { transition: transform 300ms ease; }
+.box.open { transform: translateX(200px) scale(1.05); }
+
+/* Individual transform properties */
+.icon:hover { rotate: 15deg; scale: 1.1; }`,
+  },
+  {
+    id: 'ca-6',
+    level: 'mid',
+    topic: 'css-advanced',
+    difficulty: 'hard',
+    simple: {
+      hi: 'Ghar banane jaisa socho: deewar khiskana (layout) sabse mehnga, sirf rang karna (paint) usse sasta, aur ek parda idhar-udhar karna (composite) sabse sasta. will-change painter ko pehle se bata dena hai ki \'yeh parda hilne wala hai\', par har cheez ke liye bologe to woh thak jaayega.',
+      en: 'Think of building a house: moving a wall (layout) is the most expensive, just repainting (paint) is cheaper, and sliding a curtain (composite) is cheapest. will-change tells the workers in advance \'this curtain will move\', but if you say it about everything they get overloaded.',
+      bn: 'বাড়ি বানানোর মতো ভাবো: দেওয়াল সরানো (layout) সবচেয়ে খরচের, শুধু রং করা (paint) তার চেয়ে সস্তা, আর পর্দা সরানো (composite) সবচেয়ে সস্তা। will-change হলো মিস্ত্রিকে আগে থেকে বলা \'এই পর্দাটা নড়বে\', কিন্তু সব কিছুর জন্য বললে সে হাঁপিয়ে যাবে।',
+    },
+    question: 'CSS performance: which properties trigger layout, paint or composite? will-change.',
+    answer: 'The browser renders in stages: style → layout (geometry) → paint (pixels) → composite (combining layers). Changing geometry properties like width, height, margin, padding, top/left or font-size triggers layout and then paint and composite, the most expensive path; visual-only properties like color, background or box-shadow skip layout but still repaint; transform and opacity can usually be handled by the compositor alone. will-change: transform hints the browser to promote an element to its own layer ahead of time, but it costs memory and creates a stacking context, so apply it sparingly and only to elements that are about to animate.',
+    points: [
+      'Layout: width, height, margin, padding, top/left, font-size, display',
+      'Paint only: color, background, box-shadow, border-color, visibility',
+      'Composite only: transform, opacity (usually filter too)',
+      'Reading layout values (offsetHeight) after writing styles forces synchronous layout (layout thrashing)',
+      'will-change is a last resort, not a default; remove it after the animation',
+      'contain / content-visibility: auto limit the scope of layout/paint work',
+    ],
+    code: `.modal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 200ms, transform 200ms; /* compositor-friendly */
+}
+.modal.open { opacity: 1; transform: none; }
+
+/* Hint only for elements about to animate */
+.drawer.is-animating { will-change: transform; }
+
+/* Skip rendering work for off-screen sections */
+.long-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}`,
+  },
+  {
+    id: 'ca-7',
+    level: 'mid',
+    topic: 'css-advanced',
+    difficulty: 'medium',
+    simple: {
+      hi: 'clamp() AC ke thermostat jaisa hai — kamra garam ho ya thanda, temperature 18 se kam aur 26 se zyada kabhi nahi jaata. Beech mein woh mausam ke hisaab se badalta hai, waise hi font screen ke hisaab se badhta hai par limit ke andar.',
+      en: 'clamp() is like an AC thermostat — however hot or cold it gets, the temperature never goes below 18 or above 26. In between it adjusts to the weather, just as the font grows with the screen but stays within limits.',
+      bn: 'clamp() হলো AC-এর থার্মোস্ট্যাটের মতো — যত গরম বা ঠান্ডাই হোক, তাপমাত্রা ১৮-র নিচে বা ২৬-এর উপরে যায় না। মাঝে আবহাওয়া অনুযায়ী বদলায়, ঠিক যেমন font স্ক্রিন অনুযায়ী বাড়ে কিন্তু সীমার মধ্যে থাকে।',
+    },
+    question: 'clamp(), min() and max() — fluid typography and spacing.',
+    answer: 'min() returns the smallest of its values and max() the largest, and both can mix units, e.g. width: min(100%, 1200px). clamp(MIN, PREFERRED, MAX) returns the preferred value but never below MIN or above MAX, which is perfect for font sizes and spacing that scale smoothly with the viewport without breakpoints. Combine rem with vw in the preferred value (e.g. 1rem + 2vw) so text still responds to browser zoom and user font settings, which a pure vw value would not.',
+    points: [
+      'min(a, b) → smaller value; good for max widths',
+      'max(a, b) → larger value; good for minimum sizes',
+      'clamp(min, preferred, max) = max(min, min(preferred, max))',
+      'Mix units: rem + vw/cqi keeps zoom accessibility',
+      'Replaces many breakpoint-based font-size rules',
+    ],
+    code: `h1 {
+  font-size: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+}
+.container {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
+.section {
+  padding-block: clamp(2rem, 5vw, 6rem);
+}
+.sidebar {
+  width: max(250px, 20%);
+}`,
+  },
+  {
+    id: 'ca-8',
+    level: 'junior',
+    topic: 'css-advanced',
+    difficulty: 'easy',
+    simple: {
+      hi: 'CSS variables ghar ke switchboard jaisi hain: ek jagah se saari lights badal do. prefers-color-scheme dekhta hai ki phone raat wale mode mein hai ya din wale, aur usi hisaab se dark mode ki \'night bulb\' jala deta hai.',
+      en: 'CSS variables are like a home switchboard: change all the lights from one place. prefers-color-scheme checks whether the phone is in night or day mode and switches on the \'night bulb\' theme to match.',
+      bn: 'CSS variables হলো বাড়ির সুইচবোর্ডের মতো: এক জায়গা থেকে সব আলো বদলাও। prefers-color-scheme দেখে ফোন রাতের মোডে আছে না দিনের, আর সেই অনুযায়ী dark mode-এর \'নাইট বাল্ব\' জ্বালিয়ে দেয়।',
+    },
+    question: 'Dark mode with prefers-color-scheme and CSS variables.',
+    answer: 'Define your colours as CSS custom properties on :root, use those variables everywhere, and override them inside @media (prefers-color-scheme: dark) so the theme follows the operating system setting. Add color-scheme: light dark so native UI like form controls and scrollbars also switch. To let users override the OS choice, toggle a data-theme attribute on <html> (saved in localStorage) and redefine the variables for it; the light-dark() function is a newer shortcut that picks a value based on the active color-scheme.',
+    points: [
+      'Store colours in custom properties (--bg, --text)',
+      '@media (prefers-color-scheme: dark) overrides them',
+      'color-scheme: light dark updates native controls/scrollbars',
+      'Manual toggle: [data-theme="dark"] selector + localStorage',
+      'Don\'t just invert colours — check contrast in both themes',
+      'light-dark(lightValue, darkValue) needs color-scheme set',
+    ],
+    code: `:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --text: #1f2937;
+  --accent: #2563eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f172a;
+    --text: #e5e7eb;
+    --accent: #60a5fa;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f172a; --text: #e5e7eb; --accent: #60a5fa;
+}
+body { background: var(--bg); color: var(--text); }
+a { color: var(--accent); }`,
+  },
+  {
+    id: 'ca-9',
+    level: 'mid',
+    topic: 'css-advanced',
+    difficulty: 'hard',
+    simple: {
+      hi: '@layer school ke bell schedule jaisa hai: pehle assembly, phir class, phir games — order pehle se tay hai. Baad wali layer ki baat chalegi, chahe pehli layer wala kitna bhi bada monitor (specificity) kyun na ho.',
+      en: '@layer is like a school bell schedule: assembly, then class, then games — the order is fixed in advance. The later layer gets its way, no matter how senior the monitor (specificity) in an earlier layer is.',
+      bn: '@layer হলো স্কুলের ঘণ্টার রুটিনের মতো: আগে প্রার্থনা, তারপর ক্লাস, তারপর খেলা — ক্রম আগে থেকে ঠিক। পরের layer-এর কথাই চলবে, আগের layer-এর মনিটর (specificity) যত বড়ই হোক।',
+    },
+    question: 'Cascade layers (@layer).',
+    answer: '@layer lets you group styles into named layers whose order you declare up front, e.g. @layer reset, base, components, utilities. When normal declarations conflict, a rule in a later layer wins over an earlier layer regardless of specificity, so you stop fighting specificity wars with third-party or framework CSS. Unlayered styles beat all layered styles, and for !important declarations the layer order is reversed (earlier layers win).',
+    points: [
+      'Declare order once: @layer reset, base, components, utilities;',
+      'Later layer beats earlier layer, specificity only matters within a layer',
+      'Unlayered CSS beats layered CSS (normal declarations)',
+      '!important reverses layer priority',
+      'Import third-party CSS into a low layer: @import url(lib.css) layer(vendor);',
+      'Layers can be nested (components.buttons)',
+    ],
+    code: `@layer reset, vendor, components, utilities;
+
+@import url("bootstrap.css") layer(vendor);
+
+@layer components {
+  #app .card .title { color: navy; } /* high specificity */
+}
+@layer utilities {
+  .text-red { color: red; }         /* still wins: later layer */
+}
+
+/* Unlayered: beats every layer */
+.title { font-weight: 700; }`,
+  },
+  {
+    id: 'ca-10',
+    level: 'mid',
+    topic: 'css-advanced',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Nesting ek tiffin box ke andar chhote dabbe rakhne jaisa hai — roti, sabzi, achaar sab ek hi tiffin ke andar. & matlab \'yahi tiffin\', jaise &:hover matlab \'jab yahi tiffin khola jaaye\'.',
+      en: 'Nesting is like keeping small containers inside one tiffin box — roti, sabzi and pickle all inside the same tiffin. & means \'this very tiffin\', so &:hover means \'when this tiffin is opened\'.',
+      bn: 'Nesting হলো একটা টিফিন বাক্সের ভিতরে ছোট ছোট কৌটো রাখার মতো — রুটি, তরকারি, আচার সব একই টিফিনে। & মানে \'এই টিফিনটাই\', তাই &:hover মানে \'যখন এই টিফিনটা খোলা হয়\'।',
+    },
+    question: 'Native CSS nesting.',
+    answer: 'Native CSS nesting lets you write child rules inside a parent rule, like Sass, and it is supported in all evergreen browsers without a build step. & refers to the parent selector and is needed for compound selectors like &:hover or &.active; a nested descendant selector like .title can be written with or without &. Unlike Sass, & is not string concatenation, so BEM-style &__element does not work, and nested selectors are matched like :is(), which can affect specificity.',
+    points: [
+      '& = parent selector; &:hover, &.active, & + &',
+      'Nested descendant: .card { .title { } } → .card .title',
+      'Media/container queries can be nested inside rules',
+      'No string concatenation (&__elem is not BEM like Sass)',
+      'Parent with a selector list behaves like :is() — specificity of the most specific item',
+      'Avoid deep nesting; it raises specificity and couples to markup',
+    ],
+    code: `.card {
+  padding: 1rem;
+  border-radius: 8px;
+
+  .title { font-size: 1.25rem; }  /* .card .title */
+
+  &:hover { box-shadow: 0 4px 12px rgb(0 0 0 / 0.15); }
+  &.featured { border: 2px solid gold; }
+
+  @media (width >= 768px) {
+    padding: 2rem;
+  }
+}`,
+  },
+  {
+    id: 'ca-11',
+    level: 'junior',
+    topic: 'css-advanced',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Focus style andhere mein torch jaisa hai — keyboard se chalne wale ko dikhta hai ki woh kahan khada hai. Reduced motion un logon ke liye hai jinhe chalti bus mein chakkar aata hai, unke liye zyada hilna-dulna band. Contrast matlab blackboard par safed chalk, peeli chalk nahi.',
+      en: 'A focus style is like a torch in the dark — keyboard users can see where they are standing. Reduced motion is for people who feel dizzy on a moving bus, so the shaking is turned off for them. Contrast means white chalk on a blackboard, not yellow chalk on a yellow wall.',
+      bn: 'Focus style হলো অন্ধকারে টর্চের মতো — keyboard ব্যবহারকারী দেখতে পায় সে কোথায় আছে। Reduced motion তাদের জন্য যাদের চলন্ত বাসে মাথা ঘোরে, তাদের জন্য নড়াচড়া বন্ধ। Contrast মানে ব্ল্যাকবোর্ডে সাদা চক, হলুদ দেওয়ালে হলুদ চক নয়।',
+    },
+    question: 'Accessibility in CSS: visible focus styles, prefers-reduced-motion, colour contrast.',
+    answer: 'Never remove focus outlines without a replacement, because keyboard users need to see where they are; use :focus-visible to show a clear ring for keyboard focus without showing it on mouse clicks. Respect @media (prefers-reduced-motion: reduce) by disabling or toning down large animations and parallax for users who get motion sickness. Meet WCAG contrast: at least 4.5:1 for normal text and 3:1 for large text and for UI components like borders and focus indicators.',
+    points: [
+      'Don\'t do outline: none without an alternative',
+      'Use :focus-visible for keyboard-only focus rings',
+      'prefers-reduced-motion: reduce → shorten/remove motion',
+      'WCAG AA contrast: 4.5:1 normal text, 3:1 large text & UI parts',
+      'Don\'t convey meaning with colour alone',
+      'Hide visually but keep for screen readers with a .sr-only class, not display: none',
+    ],
+    code: `button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}`,
+  },
+  {
+    id: 'ca-12',
+    level: 'mid',
+    topic: 'css-advanced',
+    difficulty: 'medium',
+    simple: {
+      hi: 'Har component ka CSS apne ghar ke andar ki paint jaisa hai — padosi ki deewar par nahi lagta (Emulated). :host matlab ghar ki bahar wali deewar, aur ::ng-deep padosi ke ghar mein ghus kar paint karna hai, jo ab galat maana jaata hai. Global styles.css poori colony ka common rule hai.',
+      en: 'Each component\'s CSS is like paint inside its own house — it doesn\'t go onto the neighbour\'s wall (Emulated). :host is the outer wall of the house, and ::ng-deep is entering the neighbour\'s house to paint, which is now discouraged. Global styles.css is the common rule for the whole colony.',
+      bn: 'প্রতিটা component-এর CSS হলো নিজের বাড়ির ভিতরের রঙের মতো — প্রতিবেশীর দেওয়ালে লাগে না (Emulated)। :host মানে বাড়ির বাইরের দেওয়াল, আর ::ng-deep মানে প্রতিবেশীর বাড়িতে ঢুকে রং করা, যা এখন ঠিক নয় বলে ধরা হয়। Global styles.css হলো পুরো পাড়ার সাধারণ নিয়ম।',
+    },
+    question: 'How CSS works in Angular components: ViewEncapsulation, :host, ::ng-deep and global styles.',
+    answer: 'By default Angular uses ViewEncapsulation.Emulated: it adds unique attributes (like _ngcontent-xyz) to the component\'s elements and rewrites its selectors so styles only apply inside that component\'s template. ViewEncapsulation.None makes the component\'s styles global, and ShadowDom uses the browser\'s real Shadow DOM. :host styles the component\'s own host element, :host-context() styles it based on an ancestor, and ::ng-deep pierces encapsulation into child components but is deprecated, so prefer global styles in styles.css, CSS custom properties that cascade into children, or inputs for theming.',
+    points: [
+      'Emulated (default) scopes styles via generated attributes',
+      'None = global styles; ShadowDom = native shadow root',
+      'styles / styleUrl in @Component for component CSS',
+      'styles.css (angular.json \'styles\') for global CSS',
+      '::ng-deep is deprecated — prefer CSS variables or global styles',
+      'Styles don\'t leak into child components, even with Emulated',
+    ],
+    code: `import { Component, ViewEncapsulation } from '@angular/core';
+
+@Component({
+  selector: 'app-card',
+  template: \`<h2 class="title">{{ title }}</h2><ng-content />\`,
+  styles: \`
+    :host { display: block; padding: 1rem; border: 1px solid var(--card-border, #ddd); }
+    :host(.featured) { border-color: gold; }
+    :host-context(.dark) .title { color: white; }
+    .title { margin: 0; }   /* scoped to this component only */
+  \`,
+  encapsulation: ViewEncapsulation.Emulated, // default
+})
+export class CardComponent {
+  title = 'Hello';
+}`,
+  },
+  {
+    id: 'ca-13',
+    level: 'senior',
+    topic: 'css-advanced',
+    difficulty: 'hard',
+    simple: {
+      hi: 'Critical CSS shaadi mein mehmaan aate hi pehle unhe paani aur mithai dena hai, poora khana baad mein aata hai. Agar sab kuch ek saath tayyar hone ka intezaar karoge (render-blocking), to mehmaan khaali haath khade rahenge.',
+      en: 'Critical CSS is like serving guests water and sweets the moment they arrive at a wedding, while the full meal comes later. If you wait for everything to be ready at once (render-blocking), the guests stand around empty-handed.',
+      bn: 'Critical CSS হলো বিয়েবাড়িতে অতিথি আসামাত্র আগে জল আর মিষ্টি দেওয়া, পুরো খাবার পরে আসে। সব কিছু একসঙ্গে তৈরি হওয়ার অপেক্ষা করলে (render-blocking), অতিথিরা খালি হাতে দাঁড়িয়ে থাকবে।',
+    },
+    question: 'Critical CSS, render-blocking stylesheets and CSS loading strategies.',
+    answer: 'Stylesheets in the <head> are render-blocking: the browser won\'t paint until it has downloaded and parsed them, because it needs the CSSOM to avoid a flash of unstyled content. Critical CSS means inlining the minimal styles needed for above-the-fold content in a <style> tag and loading the rest asynchronously (e.g. preload with an onload swap, or media="print" switched to all), which improves First Contentful Paint and LCP. Other strategies: split CSS per route/component, use media attributes for conditional sheets, remove unused CSS, avoid @import chains, preconnect to font/CDN origins and use font-display: swap; Angular\'s production build can inline critical CSS for you.',
+    points: [
+      'CSS blocks rendering (and blocks scripts that follow it)',
+      'Inline critical above-the-fold CSS, defer the rest',
+      'rel=preload as=style + onload, or media=print trick, with <noscript> fallback',
+      'media attribute: non-matching sheets don\'t block rendering',
+      'Avoid @import inside CSS (serial requests); bundle/split instead',
+      'Measure with Lighthouse/WebPageTest: FCP, LCP, CLS',
+    ],
+    code: `<head>
+  <style>
+    /* critical: header + hero only */
+    body { margin: 0; font-family: system-ui, sans-serif; }
+    .hero { min-height: 60vh; display: grid; place-items: center; }
+  </style>
+
+  <link rel="preload" href="/main.css" as="style"
+        onload="this.onload=null; this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/main.css"></noscript>
+
+  <!-- only blocks when printing -->
+  <link rel="stylesheet" href="/print.css" media="print">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>`,
+  },
+  {
+    id: 'ca-14',
+    level: 'junior',
+    topic: 'css-advanced',
+    difficulty: 'easy',
+    simple: {
+      hi: 'Tailwind Lego blocks jaisa hai — har chhota block ek kaam karta hai aur tum unhe jod kar kuch bhi bana lete ho. Fayda: jaldi banta hai aur sab ek jaisa dikhta hai. Nuksaan: bahut saare blocks ek saath dekh kar samajhna thoda mushkil ho jaata hai.',
+      en: 'Tailwind is like Lego blocks — each small block does one job and you join them to build anything. The plus: it\'s quick and everything looks consistent. The minus: seeing so many blocks together can be hard to read.',
+      bn: 'Tailwind হলো Lego ব্লকের মতো — প্রতিটা ছোট ব্লক একটা কাজ করে আর জুড়ে যা খুশি বানানো যায়। সুবিধা: তাড়াতাড়ি তৈরি হয় আর সব একরকম দেখায়। অসুবিধা: এত ব্লক একসঙ্গে দেখে বোঝা একটু কঠিন হয়ে যায়।',
+    },
+    question: 'Utility-first CSS (Tailwind) — pros and cons.',
+    answer: 'Utility-first CSS styles elements with many small single-purpose classes (flex, p-4, text-lg) directly in the markup instead of writing custom class names and stylesheets. Pros: fast development, a consistent design system of spacing/colour tokens, no naming headaches, no dead CSS because the build only generates classes you use, and styles are local to the markup so changes are safe. Cons: long and noisy class lists, a learning curve, coupling style to markup, and repetition unless you extract components (or use @apply sparingly).',
+    points: [
+      'Small single-purpose classes composed in HTML',
+      'Pro: consistency via design tokens (theme)',
+      'Pro: tiny production CSS — only used classes are generated',
+      'Pro: no naming or specificity conflicts; responsive/state variants like md: and hover:',
+      'Con: verbose markup, harder to scan',
+      'Con: reuse requires components (Angular/React) rather than CSS classes',
+    ],
+    code: `<!-- Utility-first (Tailwind) -->
+<button class="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 md:px-6">
+  Save
+</button>
+
+<!-- Equivalent traditional CSS -->
+<button class="btn-primary">Save</button>
+<style>
+  .btn-primary { border-radius: .5rem; background: #2563eb;
+                 padding: .5rem 1rem; color: #fff; }
+  .btn-primary:hover { background: #1d4ed8; }
+  @media (min-width: 768px) { .btn-primary { padding-inline: 1.5rem; } }
+</style>`,
+  },
+];

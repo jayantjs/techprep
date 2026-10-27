@@ -1,0 +1,230 @@
+@switch (phase()) {
+  @case ('setup') {
+    <header class="page-head">
+      <span class="monogram monogram-lg">🎤</span>
+      <div>
+        <h1>Mock interview · {{ track().title }}</h1>
+        <p class="muted">
+          One question at a time, against the clock. Answer out loud (or type), then compare with the
+          model answer and rate yourself honestly.
+        </p>
+      </div>
+    </header>
+
+    <div class="panel">
+      <label class="field">
+        <span>Round</span>
+        <select class="input" (change)="topic.set(inputValue($event))">
+          <option value="all" [selected]="topic() === 'all'">Full round — all {{ track().title }} topics</option>
+          @for (t of topics(); track t.id) {
+            <option [value]="t.id" [selected]="topic() === t.id">{{ t.title }}</option>
+          }
+        </select>
+      </label>
+
+      <div class="field">
+        <span>Questions</span>
+        <div class="chips">
+          @for (c of counts; track c) {
+            <button type="button" class="chip" [class.is-active]="count() === c" (click)="count.set(c)">{{ c }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="field">
+        <span>Time per question</span>
+        <div class="chips">
+          @for (t of timeOptions; track t.value) {
+            <button type="button" class="chip" [class.is-active]="seconds() === t.value" (click)="seconds.set(t.value)">
+              {{ t.label }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="field mock-options">
+        <label class="check">
+          <input type="checkbox" [checked]="includeTalk()" (change)="includeTalk.set(!includeTalk())" />
+          Start with "Tell me about yourself" &amp; project walkthrough, end with "Any questions for us?"
+        </label>
+        <label class="check">
+          <input type="checkbox" [checked]="preferWeak()" (change)="preferWeak.set(!preferWeak())" />
+          Prefer questions I haven't marked as known
+        </label>
+        @if (canSpeak) {
+          <label class="check">
+            <input type="checkbox" [checked]="autoRead()" (change)="autoRead.set(!autoRead())" />
+            Interviewer reads each question aloud
+          </label>
+        }
+      </div>
+
+      <button type="button" class="btn btn-primary" [disabled]="!size()" (click)="start()">
+        Start interview · {{ size() }} questions
+      </button>
+      @if (!size()) {
+        <p class="muted">No questions for this round at your experience level — try "All levels".</p>
+      }
+    </div>
+
+    @if (history().length) {
+      <h2>Past mock interviews</h2>
+      <ul class="history">
+        @for (h of history(); track h.date) {
+          <li>
+            <span>{{ topicName(h.topic) }} <small class="muted">· {{ h.questions }} questions</small></span>
+            <span class="muted">{{ h.date | date: 'd MMM, h:mm a' }}</span>
+            <strong>{{ h.pct }}%</strong>
+          </li>
+        }
+      </ul>
+    }
+  }
+
+  @case ('live') {
+    @if (current(); as item) {
+      <div class="deck-progress">
+        <span>
+          @if (item.kind === 'question') {
+            Question {{ questionNo() }} of {{ questionItems().length }}
+          } @else {
+            Warm-up round
+          }
+        </span>
+        <span class="mock-top-actions">
+          @if (item.kind === 'question' && seconds() && !revealed()) {
+            <span class="timer" [class.is-low]="timeLeft() <= 15">⏱ {{ mmss(timeLeft()) }}</span>
+          }
+          <button type="button" class="btn btn-sm btn-ghost" (click)="finish()">End interview</button>
+        </span>
+        <div class="bar"><div class="bar-fill" [style.width.%]="pctDone()"></div></div>
+      </div>
+
+      <div class="panel mock-card">
+        <p class="mock-bubble">
+          <span class="mock-avatar" aria-hidden="true">👔</span>
+          {{ item.kind === 'question' ? interviewerLine() : 'Interviewer' }}
+        </p>
+
+        @if (item.kind === 'question') {
+          <div class="fc-meta">
+            <span class="badge" [attr.data-level]="item.question.difficulty">{{ item.question.difficulty }}</span>
+            <span class="q-topic">{{ topicMap[item.question.topic].title }}</span>
+          </div>
+        }
+        <h2 class="mock-question">{{ questionText(item) }}</h2>
+
+        @if (canSpeak) {
+          <button type="button" class="btn btn-sm btn-ghost" (click)="speak(questionText(item))">🔊 Read aloud</button>
+        }
+
+        @if (item.kind === 'talk') {
+          <div class="simple">
+            <span class="simple-label">How to answer</span>
+            <p>{{ item.prompt.tip[progress.lang()] }}</p>
+          </div>
+        }
+
+        @if (!revealed() || item.kind === 'talk') {
+          <label class="field mock-answer">
+            <span>Your answer <small class="muted">— say it out loud, or note the key points</small></span>
+            <textarea
+              class="input"
+              rows="4"
+              [value]="answerText()"
+              (input)="answerText.set(inputValue($event))"
+              placeholder="Type key points here…"
+            ></textarea>
+          </label>
+          @if (canListen) {
+            <button type="button" class="btn btn-sm" [class.btn-review]="listening()" (click)="toggleListening()">
+              {{ listening() ? '■ Stop listening' : '🎤 Speak your answer' }}
+            </button>
+            <small class="muted mock-note">Speech-to-text uses your browser's online speech service.</small>
+          }
+        }
+
+        @if (item.kind === 'talk') {
+          <div class="fc-actions">
+            <button type="button" class="btn btn-primary" (click)="next()">
+              {{ isLast() ? 'Finish interview' : 'Next →' }}
+            </button>
+          </div>
+        } @else if (!revealed()) {
+          <div class="fc-actions">
+            <button type="button" class="btn btn-primary" (click)="reveal()">I'm done — show the answer</button>
+            <button type="button" class="btn btn-ghost" (click)="skip()">Skip (count as missed)</button>
+          </div>
+        } @else {
+          @if (timedOut()) {
+            <p class="timer is-low mock-timeout">⏱ Time's up!</p>
+          }
+          @if (answerText()) {
+            <div class="mock-yours">
+              <span class="answer-label">Your answer</span>
+              <p>{{ answerText() }}</p>
+            </div>
+          }
+          <div class="q-body mock-model">
+            <app-answer [question]="item.question" />
+          </div>
+          <p class="mock-rate-label">How did you do compared to the model answer?</p>
+          <div class="fc-actions">
+            <button type="button" class="btn btn-known" (click)="rate('nailed')">✓ Nailed it</button>
+            <button type="button" class="btn btn-review" (click)="rate('partly')">~ Partly</button>
+            <button type="button" class="btn btn-wrong" (click)="rate('missed')">✗ Missed it</button>
+          </div>
+        }
+      </div>
+    }
+  }
+
+  @case ('result') {
+    <div class="result-card">
+      <p class="eyebrow">{{ track().title }} · {{ topicName(topic()) }}</p>
+      <p class="result-score">{{ score() }}%</p>
+      <p class="mock-verdict" [attr.data-tone]="verdict().tone">{{ verdict().title }}</p>
+      <p class="muted">
+        ✓ {{ tally().nailed }} nailed · ~ {{ tally().partly }} partly · ✗ {{ tally().missed }} missed
+        @if (avgTime()) {
+          · avg {{ mmss(avgTime()) }} per answer
+        }
+      </p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" (click)="start()">Retry with new questions</button>
+        <button type="button" class="btn" (click)="phase.set('setup')">Change setup</button>
+      </div>
+    </div>
+
+    @if (byTopic().length > 1) {
+      <h2>By topic</h2>
+      <div class="panel mock-topics">
+        @for (t of byTopic(); track t.id) {
+          <a class="mock-topic-row" [routerLink]="['/topic', t.id]">
+            <span>{{ t.title }}</span>
+            <span class="bar"><span class="bar-fill" [style.width.%]="t.pct"></span></span>
+            <strong>{{ t.pct }}%</strong>
+          </a>
+        }
+      </div>
+    }
+
+    @if (toRevise().length) {
+      <h2>Revise these</h2>
+      <p class="muted">They are now in your "To revise" list.</p>
+      <div class="q-list">
+        @for (r of toRevise(); track r.item.id) {
+          <a class="panel mistake mock-revise" [routerLink]="['/topic', r.item.question.topic]">
+            <span class="pill" [class.pill-review]="r.rating === 'partly'" [class.pill-wrong]="r.rating === 'missed'">
+              {{ r.rating === 'partly' ? 'Partly' : 'Missed' }}
+            </span>
+            <strong>{{ r.item.question.question }}</strong>
+            <small class="muted">{{ topicMap[r.item.question.topic].title }}</small>
+          </a>
+        }
+      </div>
+    } @else if (tally().nailed) {
+      <p class="empty">You nailed every question — try a harder level or a full round. 🚀</p>
+    }
+  }
+}

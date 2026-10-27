@@ -1,0 +1,57 @@
+@let q = question();
+
+@if (simple(); as text) {
+  <div class="simple" [attr.lang]="language().htmlLang">
+    <span class="simple-label">{{ language().boxTitle }}</span>
+    <p>{{ text }}</p>
+  </div>
+}
+
+@if (q.diagram) {
+  <app-diagram [id]="q.diagram" />
+}
+
+<span class="answer-label">{{ q.topic === 'coding' ? 'Approach' : 'Interview answer' }}</span>
+<p>{{ q.answer }}</p>
+@if (q.points; as points) {
+  <ul>
+    @for (point of points; track $index) {
+      <li>{{ point }}</li>
+    }
+  </ul>
+}
+
+@if (q.correction; as correction) {
+  <div class="correction">
+    <span class="correction-label">Update for Angular 21</span>
+    <p>{{ correction }}</p>
+  </div>
+}
+
+@if (q.code; as code) {
+  <span class="answer-label">{{ q.topic === 'coding' ? 'Solution' : 'Code' }}</span>
+  <pre class="code"><code>{{ code }}</code></pre>
+}
+
+@for (note of q.fromNotes ?? []; track note.id) {
+  <details class="from-notes" open>
+    <summary>📝 From your notes · p.{{ note.notePage }} · Q{{ note.noteNo }} — {{ note.question }}</summary>
+    <p>{{ note.answer }}</p>
+    @if (note.points; as points) {
+      <ul>
+        @for (point of points; track $index) {
+          <li>{{ point }}</li>
+        }
+      </ul>
+    }
+    @if (note.code; as code) {
+      <pre class="code"><code>{{ code }}</code></pre>
+    }
+    @if (note.correction; as correction) {
+      <div class="correction">
+        <span class="correction-label">Update for Angular 21</span>
+        <p>{{ correction }}</p>
+      </div>
+    }
+  </details>
+}

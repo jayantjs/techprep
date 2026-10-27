@@ -1,0 +1,60 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" routerLink="/">
+      <span class="brand-mark">T</span>
+      <span>TechPrep</span>
+    </a>
+    <nav class="nav">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+    <div class="topbar-controls">
+      <select
+        class="input track-select"
+        aria-label="Technology"
+        (change)="setTrack($event)"
+      >
+        @for (t of tracks; track t.id) {
+          <option [value]="t.id" [selected]="progress.track() === t.id">{{ t.title }}</option>
+        }
+      </select>
+      <select
+        class="input lang-select"
+        aria-label="Explanation language"
+        title="Language of the simple explanation"
+        (change)="setLang($event)"
+      >
+        @for (language of languages; track language.id) {
+          <option [value]="language.id" [selected]="progress.lang() === language.id">
+            {{ language.label }}
+          </option>
+        }
+      </select>
+      <select
+        class="input exp-select"
+        aria-label="Your experience"
+        (change)="setExperience($event)"
+      >
+        <option value="all" [selected]="!progress.experience()">All levels</option>
+        @for (level of levels; track level.id) {
+          <option [value]="level.id" [selected]="progress.experience() === level.id">
+            {{ level.label }} · {{ level.years }}
+          </option>
+        }
+      </select>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <router-outlet />
+</main>
+
+<footer class="footer">Progress is saved in this browser only.</footer>

@@ -1,0 +1,58 @@
+<header class="page-head">
+  <div>
+    <h1>Practice questions</h1>
+    <p class="muted">Search, filter and mark questions as you go. Click a question to reveal the answer.</p>
+  </div>
+</header>
+
+<div class="filters">
+  <input
+    class="input"
+    type="search"
+    placeholder="Search e.g. switchMap, OnPush, interceptor…"
+    [value]="search()"
+    (input)="search.set(inputValue($event))"
+  />
+  <select class="input" [value]="topic()" (change)="topic.set(inputValue($event))" aria-label="Topic">
+    <option value="all" [selected]="topic() === 'all'">All topics</option>
+    @for (t of topics(); track t.id) {
+      <option [value]="t.id" [selected]="topic() === t.id">{{ t.title }}</option>
+    }
+  </select>
+  <select
+    class="input"
+    [value]="difficulty()"
+    (change)="difficulty.set($any(inputValue($event)))"
+    aria-label="Difficulty"
+  >
+    <option value="all">Any difficulty</option>
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+</div>
+
+<div class="chips" role="group" aria-label="Filter by status">
+  @for (f of statusFilters; track f.value) {
+    <button
+      type="button"
+      class="chip"
+      [class.is-active]="statusFilter() === f.value"
+      (click)="statusFilter.set(f.value)"
+    >
+      {{ f.label }}
+    </button>
+  }
+  <span class="result-count">{{ results().length }} questions</span>
+</div>
+
+<div class="q-list">
+  @for (q of results(); track q.id) {
+    <app-question-card [question]="q" [showTopic]="true" />
+  } @empty {
+    <div class="empty">
+      <p>No questions match these filters.</p>
+      <button type="button" class="btn" (click)="clear()">Clear filters</button>
+    </div>
+  }
+</div>

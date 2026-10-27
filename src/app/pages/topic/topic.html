@@ -1,0 +1,65 @@
+@if (topic(); as t) {
+  <a class="back-link" routerLink="/">← All topics</a>
+  <header class="page-head">
+    <span class="monogram monogram-lg">{{ t.short }}</span>
+    <div>
+      <h1>{{ t.title }}</h1>
+      <p class="muted">
+        {{ t.description }} · {{ known() }}/{{ total() }} known
+        @if (levelLabel(); as l) {
+          · {{ l }}
+        }
+      </p>
+    </div>
+  </header>
+
+  <div class="hero-actions topic-actions">
+    <a class="btn btn-primary" routerLink="/mock" [queryParams]="{ topic: t.id }">🎤 Mock interview on {{ t.title }}</a>
+  </div>
+
+  <div class="chips" role="group" aria-label="Filter by difficulty">
+    @for (level of levels; track level) {
+      <button
+        type="button"
+        class="chip"
+        [class.is-active]="difficulty() === level"
+        (click)="difficulty.set(level)"
+      >
+        {{ level }}
+      </button>
+    }
+  </div>
+
+  <div class="q-list">
+    @for (q of questions(); track q.id) {
+      <app-question-card [question]="q" />
+    } @empty {
+      @if (loading()) {
+        <p class="empty">Loading questions…</p>
+      } @else {
+      <div class="empty">
+        <p>No {{ difficulty() === 'all' ? '' : difficulty() + ' ' }}questions in this topic for your level.</p>
+        @if (levelLabel()) {
+          <button type="button" class="btn" (click)="progress.experience.set(null)">Show all levels</button>
+        }
+      </div>
+      }
+    }
+  </div>
+
+  <nav class="pager">
+    @if (prev(); as p) {
+      <a class="btn" [routerLink]="['/topic', p.id]">← {{ p.title }}</a>
+    } @else {
+      <span></span>
+    }
+    @if (next(); as n) {
+      <a class="btn" [routerLink]="['/topic', n.id]">{{ n.title }} →</a>
+    }
+  </nav>
+} @else {
+  <div class="empty">
+    <h1>Topic not found</h1>
+    <a class="btn btn-primary" routerLink="/">Go home</a>
+  </div>
+}

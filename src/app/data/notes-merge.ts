@@ -1,0 +1,75 @@
+/**
+ * Handwritten-note questions that duplicate a question in the bank. The note is
+ * shown inside the bank question ("From your notes") instead of as a second copy.
+ * Notes not listed here stay as their own questions in their topic.
+ */
+export const NOTE_MERGES: Record<string, string> = {
+  // Fundamentals
+  'nt-p1-2': 'fu-10',
+  'nt-p3-6': 'fu-2',
+  'nt-p4-7': 'fu-2',
+  'nt-p5-9': 'fu-8',
+  'nt-p8-14': 'fu-1',
+  'nt-p21-14': 'fu-3',
+  'nt-p4-8': 'fu-3',
+  'nt-p24-2': 'fu-3',
+  'nt-p6-11': 'fu-9',
+  'nt-p12-23': 'fu-9',
+  'nt-p2-4': 'fu-6',
+  'nt-p3-5': 'fu-6',
+  'nt-p23-19': 'fu-6',
+  'nt-p7-12': 'fu-4',
+  'nt-p9-16': 'fu-4',
+  'nt-p10-17': 'fu-4',
+  'nt-p26-8': 'fu-4',
+  // Templates & directives
+  'nt-p5-10': 'td-1',
+  'nt-p40-10': 'td-1',
+  'nt-p19-7': 'td-3',
+  'nt-p27-9': 'td-3',
+  'nt-p27-10': 'td-3',
+  'nt-p27-11': 'td-3',
+  'nt-p50-7': 'td-3',
+  // Lifecycle, communication, DI, change detection, signals
+  'nt-p8-13': 'lh-1',
+  'nt-p18-6': 'lh-1',
+  'nt-p15-3': 'cc-1',
+  'nt-p20-12': 'cc-1',
+  'nt-p12-22': 'di-1',
+  'nt-p51-8': 'di-1',
+  'nt-p23-17': 'di-5',
+  'nt-p20-11': 'cd-1',
+  'nt-p22-16': 'si-1',
+  // Routing, HTTP, forms
+  'nt-p16-4': 'ro-1',
+  'nt-p24-3': 'ro-2',
+  'nt-p23-20': 'ro-4',
+  'nt-p13-26': 'ax-39',
+  'nt-p41-12': 'ax-34',
+  'nt-p20-10': 'ht-2',
+  'nt-p25-4': 'fo-1',
+  'nt-p22-15': 'fo-2',
+  'nt-p40-11': 'fo-2',
+  'nt-p25-5': 'fo-3',
+  // Performance & architecture
+  'nt-p19-9': 'pe-1',
+  'nt-p47-4': 'pe-1',
+  'nt-p19-8': 'pe-3',
+  'nt-p49-5': 'pe-3',
+  'nt-p26-6': 'ar-2',
+  'nt-p50-6': 'ar-2',
+  'nt-p42-13': 'ar-4',
+  // JavaScript
+  'nt-p32-2': 'jb-7',
+  'nt-p33-3': 'jb-6',
+  'nt-p32-1': 'jf-3',
+  'nt-p34-4': 'jf-2',
+  'nt-p35-5': 'ja-4',
+  'nt-p36-6': 'jd-2',
+  'nt-p37-7': 'jd-3',
+  // HTML & CSS
+  'nt-p38-6': 'cb-2',
+  'nt-p38-7': 'cb-9',
+  'nt-p39-9': 'cb-7',
+  'nt-p39-8': 'ca-1',
+};

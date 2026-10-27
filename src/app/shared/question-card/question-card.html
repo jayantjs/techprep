@@ -1,0 +1,53 @@
+<article class="q-card" [class.is-open]="open()" [attr.data-status]="status()">
+  <button class="q-head" type="button" (click)="open.set(!open())" [attr.aria-expanded]="open()">
+    <span class="q-meta">
+      <span class="badge" [attr.data-level]="question().difficulty">{{ question().difficulty }}</span>
+      <span class="pill pill-exp">{{ level().years }}</span>
+      @if (showTopic()) {
+        <span class="q-topic">{{ topic().title }}</span>
+      }
+      @if (status() === 'known') {
+        <span class="pill pill-known">Known</span>
+      } @else if (status() === 'review') {
+        <span class="pill pill-review">Revise</span>
+      }
+      @if (bookmarked()) {
+        <span class="pill pill-mark">★ Saved</span>
+      }
+    </span>
+    <span class="q-title">{{ question().question }}</span>
+    <span class="q-chevron" aria-hidden="true">›</span>
+  </button>
+
+  @if (open()) {
+    <div class="q-body">
+      <app-answer [question]="question()" />
+      <div class="q-actions">
+        <button
+          type="button"
+          class="btn btn-sm"
+          [class.btn-known]="status() === 'known'"
+          (click)="progress.toggleStatus(question().id, 'known')"
+        >
+          ✓ I know this
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm"
+          [class.btn-review]="status() === 'review'"
+          (click)="progress.toggleStatus(question().id, 'review')"
+        >
+          ↻ Revise later
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-ghost"
+          [class.is-active]="bookmarked()"
+          (click)="progress.toggleBookmark(question().id)"
+        >
+          {{ bookmarked() ? '★ Saved' : '☆ Save' }}
+        </button>
+      </div>
+    </div>
+  }
+</article>
