@@ -3,6 +3,8 @@
 An Angular 21 app for interview preparation across **Angular, React, JavaScript, HTML & CSS, .NET / C#,
 Java & Spring, Python and PHP & Laravel** — fresher to senior.
 
+🌐 **Live site:** https://jayantjs.github.io/techprep/
+
 - Questions by technology, topic and experience level, with interview-ready answers and code
 - "In simple words" explanations in English, Hindi (Hinglish) and Bengali, plus diagrams
 - Practice with search and filters, flashcards, MCQ quiz and a KBC-style quiz mode
